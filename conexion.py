@@ -21,6 +21,27 @@ try:
 except Error as e:
     print("Error al conectar a MySQL", e)
 
+cursor = connection.cursor()
+
+# Consulta SQL para seleccionar datos
+sql = "SELECT * FROM material"
+cursor.execute(sql)
+
+# Obtiene todos los resultados
+resultados = cursor.fetchall()
+
+if len(resultados) > 0:
+    # Muestra los resultados en formato de tabla
+    print("ID\tNombre\tSerie o Modelo\tCantidad\tPrecio Individual\tPrecio Total")
+    for row in resultados:
+        print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}\t{row[5]}")
+else:
+    print("0 resultados")
+
+"""# Cierra el cursor y la conexión
+cursor.close()
+connection.close()"""
+
 """finally:
     if connection.is_connected():
         cursor.close()
