@@ -8,20 +8,20 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema clinica_dental
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `clinica_dental` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema clinica_dental
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `clinica_dental` DEFAULT CHARACTER SET utf8 ;
+USE `clinica_dental` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Dentista`
+-- Table `clinica_dental`.`Dentista`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Dentista` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Dentista` (
   `idDentista` INT NOT NULL AUTO_INCREMENT,
   `nombre_completo` VARCHAR(45) NOT NULL,
   `numero_telefono` VARCHAR(45) NULL,
@@ -32,9 +32,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Material`
+-- Table `clinica_dental`.`Material`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Material` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Material` (
   `idMaterial` INT NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(45) NOT NULL,
   `serie/modelo` VARCHAR(45) NULL,
@@ -46,9 +46,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Material_Tratamiento`
+-- Table `clinica_dental`.`Material_Tratamiento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Tratamiento` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Tratamiento` (
   `idTratamiento` INT NOT NULL AUTO_INCREMENT,
   `detalle` VARCHAR(45) NOT NULL,
   `cantidad_citas` INT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Tratamiento` (
   PRIMARY KEY (`idTratamiento`),
   CONSTRAINT `fk_dentista_id`
     FOREIGN KEY (`idDentista`)
-    REFERENCES `mydb`.`Dentista` (`idDentista`)
+    REFERENCES `clinica_dental`.`Dentista` (`idDentista`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -65,9 +65,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Paciente`
+-- Table `clinica_dental`.`Paciente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Paciente` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Paciente` (
   `idPaciente` INT NOT NULL AUTO_INCREMENT,
   `nombre_completo` VARCHAR(45) NOT NULL,
   `edad` INT NULL,
@@ -79,9 +79,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Paciente_Tratamiento`
+-- Table `clinica_dental`.`Paciente_Tratamiento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Paciente_Tratamiento` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Paciente_Tratamiento` (
   `fk_tratamiento_id` INT NOT NULL,
   `fk_paciente_id` INT NOT NULL,
   `cantidad_material` INT NULL,
@@ -90,26 +90,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Paciente_Tratamiento` (
   INDEX `cantidad_material_idx` (`cantidad_material` ASC) VISIBLE,
   CONSTRAINT `fk_tratamiento_id`
     FOREIGN KEY (`fk_tratamiento_id`)
-    REFERENCES `mydb`.`Tratamiento` (`idTratamiento`)
+    REFERENCES `clinica_dental`.`Tratamiento` (`idTratamiento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_paciente_id`
     FOREIGN KEY (`fk_paciente_id`)
-    REFERENCES `mydb`.`Paciente` (`idPaciente`)
+    REFERENCES `clinica_dental`.`Paciente` (`idPaciente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `cantidad_material`
     FOREIGN KEY (`cantidad_material`)
-    REFERENCES `mydb`.`Material` (`idMaterial`)
+    REFERENCES `clinica_dental`.`Material` (`idMaterial`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Tratamiento`
+-- Table `clinica_dental`.`Tratamiento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Tratamiento` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Tratamiento` (
   `idTratamiento` INT NOT NULL AUTO_INCREMENT,
   `detalle` VARCHAR(45) NOT NULL,
   `cantidad_citas` INT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Tratamiento` (
   PRIMARY KEY (`idTratamiento`),
   CONSTRAINT `fk_dentista_id`
     FOREIGN KEY (`idTratamiento`)
-    REFERENCES `mydb`.`Dentista` (`idDentista`)
+    REFERENCES `clinica_dental`.`Dentista` (`idDentista`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
