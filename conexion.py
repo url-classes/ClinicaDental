@@ -6,7 +6,7 @@ try:
     connection = mysql.connector.connect(
         host='localhost',       
         user='root',           
-        password='root',   
+        password='MALUGUCK57',   
         database='clinica_dental'    
     )
 
@@ -32,9 +32,9 @@ resultados = cursor.fetchall()
 
 if len(resultados) > 0:
     # Muestra los resultados en formato de tabla
-    print("ID\tNombre\tSerie o Modelo\tCantidad\tPrecio Individual\tPrecio Total")
+    print("ID\t\t\tNombre\t\t\tSerie o Modelo\t\t\tCantidad\t\t\tPrecio Individual\t\t\tPrecio Total")
     for row in resultados:
-        print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}\t{row[5]}")
+        print(f"{str(row[0]).ljust(15)}{str(row[1]).ljust(20)}{str(row[2]).ljust(25)}{str(row[3]).ljust(15)}{str(row[4]).ljust(20)}{str(row[5])}")
 else:
     print("0 resultados")
 
