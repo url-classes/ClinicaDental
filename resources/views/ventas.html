@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Ventas - Clínica Dental</title>
+  <link rel="style_ventas" href="style_ventas.css">
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="title-container">
+        <h1>Gestión de Ventas - Clínica Dental</h1>
+      </div>
+      <div id="services-container">
+        <!-- Botones de servicios predeterminados -->
+        <button class="service-btn" onclick="addSale('Limpieza')">Limpieza Dental</button>
+        <button class="service-btn" onclick="addSale('Extracción')">Relleno Dental</button>
+        <button class="service-btn" onclick="addSale('Blanqueamiento')">Ortodoncia</button>
+        <button class="service-btn" onclick="addSale('Blanqueamiento')">Corona Dental</button>
+        <button class="service-btn" onclick="addSale('Blanqueamiento')">Puente Dental</button>
+        <!-- Botones de servicios agregados por el usuario se añadirán aquí -->
+      </div>
+      <div id="add-service-form">
+        <input type="text" id="new-service-input" placeholder="Nombre del Nuevo Servicio">
+        <button onclick="addCustomService()">Agregar Servicio</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
