@@ -1,5 +1,5 @@
 // Array para almacenar los servicios
-let services = ['Limpieza', 'Extracción', 'Blanqueamiento'];
+let services = ['Limpieza Dental', 'Relleno Dental', 'Ortodoncia', 'Corona Dental', 'Puente Dental'];
 
 // Función para agregar un nuevo servicio
 function addCustomService() {
