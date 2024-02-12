@@ -22,6 +22,33 @@
             <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </nav>
+    <h1>MÓDULOS DEL PROGRAMA</h1>
+    <div class="carrusel">
+        <div class="atras">
+            <img id="atras" src="img/atras.svg" alt="atras" loading="lazy">
+        </div>
+
+        <div class="imagenes">
+            <div id="img">
+                <img class="img" src="img/inventario.webp" alt="imagen 1" loading="lazy">
+            </div>
+            
+            <div id="texto" class="texto">
+                <h3>INVENTARIO</h3>
+                <p>
+                    La parte de inventario fue hecha con la finalidad de poder llevar un control
+                    sobre los materiales que se encuentran en la clínica.
+                </p>
+            </div>
+        </div>
+
+        <div class="adelante" id="adelante">
+            <img src="img/adelante.svg" alt="adelante" loading="lazy">
+        </div>
+    </div>
+
+    <div class="puntos" id="puntos"></div>
+
     <script src="{% static 'js/scriptIndex.js' %}"></script>
 </body>
 </html>
