@@ -1,24 +1,24 @@
 let imagenes = [
     {
-        "url": "img/inventario.webp",
+        "url": baseUrlStatic + "img/inventario.webp",
         "nombre": "Inventario",
         "descripcion": "Creado para controlar el manejo de material e instrumentos en la clínica"
 
     },
     {
-        "url": "img/Ventas.webp",
+        "url": baseUrlStatic + "img/Ventas.webp",
         "nombre": "Ventas",
         "descripcion": "Optimizar los procesos que conlleva el brindar un servicio."
 
     },
     {
-        "url": "img/rh.webp",
+        "url": baseUrlStatic + "img/rh.webp",
         "nombre": "Recursos Humano",
         "descripcion": "Implementado para mejorar y replantear Recursos humanos"
 
     },
     {
-        "url": "img/financiero.webp",
+        "url": baseUrlStatic + "img/financiero.webp",
         "nombre": "Financiero",
         "descripcion": "Módulo implementado para manejar las finanzas e impuestos."
 

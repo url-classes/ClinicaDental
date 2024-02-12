@@ -19,7 +19,7 @@
             <li><a href="{% url 'ventas' %}">Ventas</a></li>
             <li><a href="{% url 'recursosHumanos' %}">Recursos Humanos</a></li>
             <li><a href="{% url 'financiero' %}">Financiero</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="{% url 'signin' %}">Logout</a></li>
         </ul>
     </nav>
     <h1>MÓDULOS DEL PROGRAMA</h1>
@@ -48,7 +48,10 @@
     </div>
 
     <div class="puntos" id="puntos"></div>
-
+    <script>
+        // Definir la base de la URL estática
+        const baseUrlStatic = "{% static '' %}";
+    </script>
     <script src="{% static 'js/scriptIndex.js' %}"></script>
 </body>
 </html>

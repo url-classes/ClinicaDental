@@ -5,12 +5,18 @@
 
 {{error}}
 
-<form action="/signup/" method="POST">
+<form action="/signup/" method="POST" class="form_signup">
     {% csrf_token %}
     {{form.as_p}}
 
     <button>
-        Signup
-    </buttom>
+        Sign up
+    </button>
+    <div class="login-link">
+        <span>¿Ya tienes cuenta?</span> 
+        <a href="{% url 'signin' %}" class="form_login">Log in</a>
+    </div>
+    </form>
+
 </form>
 {% endblock %}

@@ -2,7 +2,7 @@
 
 {% load static %}
 
-<h1>Login</h1>
+<link rel="stylesheet" href="{% static 'css/styleLogin.css' %}">
 
 {{error}}
 
@@ -12,6 +12,11 @@
     <button>
         Login
     </button>
+    <div class="signup-link">
+        <span>¿No tienes cuenta?</span> 
+        <a href="{% url 'signup' %}" class="form_signup">Sign up</a>
+    </div>
+    </form>
 </form>
 
 {% endblock %}
