@@ -1,0 +1,22 @@
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/styleLogin.css' %}">
+
+{{error}}
+
+<form action="/login/" method=POST>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>
+        Login
+    </button>
+    <div class="signup-link">
+        <span>¿No tienes cuenta?</span> 
+        <a href="{% url 'signup' %}" class="form_signup">Sign up</a>
+    </div>
+    </form>
+</form>
+
+{% endblock %}
