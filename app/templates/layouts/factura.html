@@ -1,0 +1,64 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+    <link rel="stylesheet" href="../../static/css/styleFactura.css">
+</head>
+<body>
+    <div class="invoice">
+        <div class="invoice-header">
+            <div class="logo">
+                <img scr="{% static 'img/la-paz-logo-standar.png' %}">
+            </div>
+            <div class="company-info">
+                <h1>Clínica de Especialidades La Paz</h1>
+                <p>Dirección: 4ta calle 23-61 zona 3</p>
+                <p>Quetzaltenango</p>
+                <p>Teléfono: +123456789</p>
+                <p>Email: info@empresa.com</p>
+            </div>
+        </div>
+        <div class="invoice-details">
+            <div class="customer-info">
+                <h2>Cliente:</h2>
+                <p>Nombre del Cliente:</p>
+                <p>Dirección del Client:e</p>
+                <p>Ciudad, País:</p>
+                <p>Email: cliente@example.com</p>
+            </div>
+        </div>
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Producto 1</td>
+                    <td>2</td>
+                    <td>Q.00.00</td>
+                    <td>Q.00.00</td>
+                </tr>
+                <tr>
+                    <td>Producto 2</td>
+                    <td>1</td>
+                    <td>Q.00.00</td>
+                    <td>Q.00.00</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="invoice-total">
+            <p>Total: Q.OO.00</p>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
