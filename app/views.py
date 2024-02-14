@@ -28,6 +28,9 @@ def financiero(request):
 def recursosHumanos(request):
     return render(request, "layouts/recursosHumanos.html")
 
+def factura(request):
+    return render(request, "layouts/factura.html")
+
 
 def signup(request):
 
