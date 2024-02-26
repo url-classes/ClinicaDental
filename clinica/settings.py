@@ -76,12 +76,8 @@ WSGI_APPLICATION = 'clinica.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # Motor de base de datos para MySQL
-        'NAME': 'clinica_dental',  # Nombre de la base de datos
-        'USER': 'root',  # Usuario de la base de datos
-        'PASSWORD': 'MALUGUCK57',  # Contraseña del usuario de la base de datos
-        'HOST': 'localhost',  # Dirección del servidor de base de datos
-        'PORT': '3306',  # Puerto del servidor de base de datos
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
