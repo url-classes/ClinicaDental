@@ -13,7 +13,7 @@ class Alergia(models.Model):
     descripcion = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'alergia'
 
 
@@ -22,7 +22,7 @@ class AlergiaHasPaciente(models.Model):
     paciente_idpaciente = models.ForeignKey('Paciente', models.DO_NOTHING, db_column='Paciente_idPaciente')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'alergia_has_paciente'
         unique_together = (('alergia_idalergia', 'paciente_idpaciente'),)
 
@@ -36,7 +36,7 @@ class Asistente(models.Model):
     usuario_idusuario = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='Usuario_idUsuario')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'asistente'
 
 
@@ -45,7 +45,7 @@ class Cita(models.Model):
     fecha_propuesta = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'cita'
 
 
@@ -59,7 +59,7 @@ class Dentista(models.Model):
     tipo_especialidad_idtipo_especialidad = models.ForeignKey('TipoEspecialidad', models.DO_NOTHING, db_column='Tipo_Especialidad_idTipo_Especialidad')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dentista'
 
 
@@ -68,7 +68,7 @@ class DentistaHasTratamiento(models.Model):
     tratamiento_idtratamientno = models.ForeignKey('Tratamiento', models.DO_NOTHING, db_column='Tratamiento_idTratamientno')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dentista_has_tratamiento'
         unique_together = (('dentista_iddentista', 'tratamiento_idtratamientno'),)
 
@@ -82,7 +82,7 @@ class Factura(models.Model):
     tratamiento_idtratamientno = models.ForeignKey('Tratamiento', models.DO_NOTHING, db_column='Tratamiento_idTratamientno')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'factura'
 
 
@@ -94,7 +94,7 @@ class Material(models.Model):
     precio_individual = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'material'
 
 
@@ -108,7 +108,7 @@ class Paciente(models.Model):
     cita_idcita = models.ForeignKey(Cita, models.DO_NOTHING, db_column='Cita_idCita')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'paciente'
 
 
@@ -117,7 +117,7 @@ class TipoEspecialidad(models.Model):
     descripcion = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipo_especialidad'
 
 
@@ -127,7 +127,7 @@ class TipoUsuario(models.Model):
     permisos = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipo_usuario'
 
 
@@ -140,7 +140,7 @@ class Tratamiento(models.Model):
     asistente_idasistente = models.ForeignKey(Asistente, models.DO_NOTHING, db_column='Asistente_idAsistente')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tratamiento'
 
 
@@ -149,7 +149,7 @@ class TratamientoHasMaterial(models.Model):
     material_idmaterial = models.ForeignKey(Material, models.DO_NOTHING, db_column='Material_idMaterial')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tratamiento_has_material'
         unique_together = (('tratamiento_idtratamientno', 'material_idmaterial'),)
 
@@ -162,5 +162,5 @@ class Usuario(models.Model):
     tipo_usuario_idtipo_usuario = models.ForeignKey(TipoUsuario, models.DO_NOTHING, db_column='Tipo_Usuario_idTipo_Usuario')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'usuario'

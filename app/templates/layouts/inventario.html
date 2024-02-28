@@ -12,6 +12,14 @@
     </head>
 
     <body>
+
+        <h1>Lista de Materiales</h1>
+        <ul>
+            {% for m in materiales %}
+                <li>{{ m.idmaterial }} - {{ m.descripcion }} - {{ m.serie_modelo}} - {{ m.cantidad}} - {{ m.precio_individual}}</li>
+            {% endfor %}
+        </ul>
+
         <div class="button-container">
             <h1>INVENTARIO</h1>
             <p>¿Qué desear hacer?</p>
