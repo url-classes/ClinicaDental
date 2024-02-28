@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clínica Médica - Carrusel de Trabajadores</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+
+  .title-container {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+  }
+
+  .carousel-container {
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carousel-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .card {
+    width: 300px;
+    margin-right: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: bold;
+  }
+
+  .form-group input[type="text"],
+  .form-group textarea {
+    width: calc(100% - 40px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .form-group button {
+    width: calc(50% - 5px);
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .form-group button.delete {
+    background-color: #dc3545;
+  }
+
+  .add-delete-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .file-input {
+    display: none;
+  }
+
+  .file-label {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .file-label:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+
+<div class="title-container">
+  <h1>Recursos Humanos</h1>
+</div>
+
+<div class="add-delete-container">
+  <button onclick="agregarTrabajador()">Agregar Trabajador</button>
+  <button onclick="eliminarTrabajador()">Eliminar Trabajador</button>
+</div>
+
+<div class="carousel-container">
+  <div class="carousel-wrapper" id="carousel-wrapper">
+    <!-- Los trabajadores se agregan aquí dinámicamente con JavaScript -->
+  </div>
+</div>
+
+<script>
+// Obtener datos de trabajadores almacenados en el local storage
+const trabajadores = JSON.parse(localStorage.getItem('trabajadores')) || [];
+
+// Función para cargar los trabajadores guardados en el local storage
+function cargarTrabajadores() {
+  const wrapper = document.getElementById('carousel-wrapper');
+  wrapper.innerHTML = '';
+  
+  trabajadores.forEach((trabajador, index) => {
+    const card = crearCard(trabajador, index);
+    wrapper.appendChild(card);
+  });
+}
+
+// Función para agregar un nuevo trabajador
+function agregarTrabajador() {
+  const nuevoTrabajador = {
+    nombre: '',
+    telefono: '',
+    especialidad: '',
+    descripcion: '',
+    foto: ''
+  };
+  trabajadores.push(nuevoTrabajador);
+  localStorage.setItem('trabajadores', JSON.stringify(trabajadores));
+  cargarTrabajadores();
+}
+
+// Función para eliminar el último trabajador
+function eliminarTrabajador() {
+  trabajadores.pop();
+  localStorage.setItem('trabajadores', JSON.stringify(trabajadores));
+  cargarTrabajadores();
+}
+
+// Función para crear una tarjeta de trabajador
+function crearCard(trabajador, index) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.innerHTML = `
+    <img src="${trabajador.foto || 'https://via.placeholder.com/300x200.png'}" alt="Empleado ${index + 1}">
+    <div class="card-content">
+      <label for="file-input-${index}" class="file-label">Agregar Foto</label>
+      <input type="file" id="file-input-${index}" class="file-input" accept="image/*" onchange="actualizarFoto(${index}, this)">
+      <div class="form-group">
+        <label for="nombre${index}">Nombre completo:</label>
+        <input type="text" id="nombre${index}" value="${trabajador.nombre || ''}" onchange="actualizarTrabajador(${index}, 'nombre', this.value)">
+      </div>
+      <div class="form-group">
+        <label for="telefono${index}">Teléfono:</label>
+        <input type="text" id="telefono${index}" value="${trabajador.telefono || ''}" onchange="actualizarTrabajador(${index}, 'telefono', this.value)">
+      </div>
+      <div class="form-group">
+        <label for="especialidad${index}">Especialidad:</label>
+        <input type="text" id="especialidad${index}" value="${trabajador.especialidad || ''}" onchange="actualizarTrabajador(${index}, 'especialidad', this.value)">
+      </div>
+      <div class="form-group">
+        <label for="descripcion${index}">Descripción:</label>
+        <textarea id="descripcion${index}" onchange="actualizarTrabajador(${index}, 'descripcion', this.value)">${trabajador.descripcion || ''}</textarea>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+// Función para actualizar los datos de un trabajador
+function actualizarTrabajador(index, campo, valor) {
+  trabajadores[index][campo] = valor;
+  localStorage.setItem('trabajadores', JSON.stringify(trabajadores));
+}
+
+// Función para actualizar la foto de un trabajador
+function actualizarFoto(index, input) {
+  const file = input.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function(e) {
+    const img = document.querySelector(`#carousel-wrapper .card:nth-child(${index + 1}) img`);
+    img.src = e.target.result;
+    trabajadores[index].foto = e.target.result;
+    localStorage.setItem('trabajadores', JSON.stringify(trabajadores));
+  }
+  
+  reader.readAsDataURL(file);
+}
+
+// Cargar trabajadores al cargar la página
+cargarTrabajadores();
+</script>
+
+</body>
+</html>
