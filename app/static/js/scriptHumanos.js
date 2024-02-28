@@ -1,33 +1,3 @@
-{% block content %}
-
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clínica Médica - Carrusel de Trabajadores</title>
-<link rel="stylesheet" href="{% static 'css/styleRecursosHumanos.css' %}">
-</head>
-<body>
-
-<div class="title-container">
-  <h1>Recursos Humanos</h1>
-</div>
-
-<div class="add-delete-container">
-  <button onclick="agregarTrabajador()">Agregar Trabajador</button>
-  <button onclick="eliminarTrabajador()">Eliminar Trabajador</button>
-</div>
-
-<div class="carousel-container">
-  <div class="carousel-wrapper" id="carousel-wrapper">
-    <!-- Los trabajadores se agregan aquí dinámicamente con JavaScript -->
-  </div>
-</div>
-
-<script>
 // Obtener datos de trabajadores almacenados en el local storage
 const trabajadores = JSON.parse(localStorage.getItem('trabajadores')) || [];
 
@@ -116,9 +86,3 @@ function actualizarFoto(index, input) {
 
 // Cargar trabajadores al cargar la página
 cargarTrabajadores();
-</script>
-
-</body>
-</html>
-
-{% endblock %}
