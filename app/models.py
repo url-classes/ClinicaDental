@@ -7,7 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.hashers import check_password as django_check_password
-
+from django.utils.timezone import now
 
 class Alergia(models.Model):
     idalergia = models.AutoField(db_column='idAlergia', primary_key=True)  # Field name made lowercase.
@@ -198,16 +198,27 @@ class Usuario(models.Model):
     idusuario = models.AutoField(db_column='idUsuario', primary_key=True)  # Field name made lowercase.
     nombre_usuario = models.CharField(max_length=45)
     password = models.CharField(max_length=128, blank=True, null=True)
+    last_login = models.DateTimeField(default=now, blank=True, null=True)
     dentista_iddentista = models.ForeignKey(Dentista, models.DO_NOTHING, db_column='Dentista_idDentista')  # Field name made lowercase.
     tipo_usuario_idtipo_usuario = models.ForeignKey(TipoUsuario, models.DO_NOTHING, db_column='Tipo_Usuario_idTipo_Usuario')  # Field name made lowercase.
     asistente_idasistente = models.ForeignKey(Asistente, models.DO_NOTHING, db_column='Asistente_idAsistente')  # Field name made lowercase.
-
+    
+    
     class Meta:
         managed = True
         db_table = 'usuario'
         
     def check_password(self, raw_password):
         return django_check_password(raw_password, self.password)
+    
+    def is_authenticated(self):
+        return True
+    
+    def has_permiso(self, permiso_requerido):
+        if self.tipo_usuario_idtipo_usuario.permisos:
+            permisos_usuario_lista = self.tipo_usuario_idtipo_usuario.permisos.split(',')
+            return permiso_requerido.strip() in permisos_usuario_lista
+        return False
         
     def __str__(self):
         return f"{self.idusuario} {self.nombre_usuario} {self.password} {self.dentista_iddentista} {self.tipo_usuario_idtipo_usuario} {self.asistente_idasistente}"

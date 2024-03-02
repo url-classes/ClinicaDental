@@ -243,6 +243,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`usuario` (
   `idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre_usuario` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NULL DEFAULT NULL,
+  `last_login` DATETIME NULL,
   `Dentista_idDentista` INT(11) NULL,
   `Tipo_Usuario_idTipo_Usuario` INT(11) NOT NULL,
   `Asistente_idAsistente` INT(11) NULL,
