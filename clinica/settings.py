@@ -68,6 +68,11 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'app.backends.UsuarioBackend',
+]
+
+
 WSGI_APPLICATION = 'clinica.wsgi.application'
 
 

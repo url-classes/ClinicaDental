@@ -6,6 +6,10 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .models import Material, Usuario, TipoUsuario
 from django.contrib.auth.hashers import make_password
+from .forms import UsuarioSignupForm
+from .backends import UsuarioBackend
+from .forms import UsuarioLoginForm
+
 
 # Create your views here.
 
@@ -36,43 +40,32 @@ def factura(request):
 
 def signup(request):
     if request.method == "GET":
-        # Aquí debes pasar tu formulario personalizado si tienes uno
-        return render(request, "layouts/signup.html", {"form": UserCreationForm})
+        return render(request, "layouts/signup.html", {"form": UsuarioSignupForm()})
     else:
-        if request.POST["password1"] == request.POST["password2"]:
-            try:
-                # Asumimos que TipoUsuario ya está definido, por ejemplo, "Usuario Regular"
-                tipo_usuario = TipoUsuario.objects.get(descripcion="Usuario Regular")
-                
-                usuario = Usuario(
-                    nombre_usuario=request.POST["username"],
-                    password=make_password(request.POST["password1"]),
-                    tipo_usuario_idtipo_usuario=tipo_usuario,
-                    # Asegúrate de asignar los demás campos necesarios, como dentista_iddentista si es requerido
-                )
-                usuario.save()
-                
-                # login(request, user)  # La función login requiere un objeto User de Django. Considera crear una sesión manualmente o adaptar tu modelo Usuario.
-                return redirect("index")
-            except IntegrityError:
-                return render(request, "layouts/signup.html", {"error": "El usuario ya existe"})
+        form = UsuarioSignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("index")
         else:
-            return render(request, "layouts/signup.html", {"error": "Las contraseñas no coinciden"})
+            return render(request, "layouts/signup.html", {"form": form})
 
 
 def signin(request):
     if request.method == "GET":
-        return render(request, "layouts/login.html", {"form": AuthenticationForm})
+        form = UsuarioLoginForm()
+        return render(request, "layouts/login.html", {"form": form})
     else:
-        username = request.POST["username"]
-        password = request.POST["password"]
-        # Aquí necesitas implementar tu propia lógica de autenticación basada en tu modelo Usuario
-        usuario = Usuario.objects.filter(nombre_usuario=username).first()
-        if usuario and usuario.check_password(password):  # Necesitarás implementar check_password en tu modelo Usuario
-            # login(request, user)  # Considera crear una sesión manualmente o adaptar tu modelo Usuario.
-            return redirect('index')
+        form = UsuarioLoginForm(request.POST)
+        if form.is_valid():
+            # Se usa el backend personalizado para autenticar al usuario
+            backend = UsuarioBackend()
+            usuario = backend.authenticate(request, username=form.cleaned_data['nombre_usuario'], password=form.cleaned_data['password'])
+            if usuario:
+                return redirect('index')
+            else:
+                return render(request, "layouts/login.html", {"form": form, "error": "Error de autenticación."})
         else:
-            return render(request, "layouts/login.html", {"form": AuthenticationForm, "error": "El usuario o la contraseña es incorrecta"})
+            return render(request, "layouts/login.html", {"form": form})
         
 def lista_materiales(request):
     materiales = Material.objects.all()  # Realiza la consulta a la base de datos

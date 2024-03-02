@@ -6,51 +6,63 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.contrib.auth.hashers import check_password as django_check_password
 
 
 class Alergia(models.Model):
-    idalergia = models.IntegerField(db_column='idAlergia', primary_key=True)  # Field name made lowercase.
+    idalergia = models.AutoField(db_column='idAlergia', primary_key=True)  # Field name made lowercase.
     descripcion = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'alergia'
+        
+    def __str__(self):
+        return f"{self.idalergia} {self.descripcion}"
 
 
-class AlergiaHasPaciente(models.Model):
+class AlergiaPaciente(models.Model):
     alergia_idalergia = models.OneToOneField(Alergia, models.DO_NOTHING, db_column='Alergia_idAlergia', primary_key=True)  # Field name made lowercase. The composite primary key (Alergia_idAlergia, Paciente_idPaciente) found, that is not supported. The first column is selected.
     paciente_idpaciente = models.ForeignKey('Paciente', models.DO_NOTHING, db_column='Paciente_idPaciente')  # Field name made lowercase.
 
     class Meta:
         managed = True
-        db_table = 'alergia_has_paciente'
+        db_table = 'alergia_paciente'
         unique_together = (('alergia_idalergia', 'paciente_idpaciente'),)
+        
+    def __str__(self):
+        return f"{self.alergia_idalergia} - {self.paciente_idpaciente.nombre}"
 
 
 class Asistente(models.Model):
-    idasistente = models.IntegerField(db_column='idAsistente', primary_key=True)  # Field name made lowercase.
+    idasistente = models.AutoField(db_column='idAsistente', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(max_length=45, blank=True, null=True)
     apellido = models.CharField(max_length=45, blank=True, null=True)
     escolaridad = models.CharField(max_length=45, blank=True, null=True)
     salario = models.FloatField(blank=True, null=True)
-    usuario_idusuario = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='Usuario_idUsuario')  # Field name made lowercase.
 
     class Meta:
         managed = True
         db_table = 'asistente'
+        
+    def __str__(self):
+        return f"{self.idasistente} {self.nombre} {self.apellido}  {self.escolaridad} {self.salario}"
 
 
 class Cita(models.Model):
-    idcita = models.IntegerField(db_column='idCita', primary_key=True)  # Field name made lowercase.
+    idcita = models.AutoField(db_column='idCita', primary_key=True)  # Field name made lowercase.
     fecha_propuesta = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'cita'
+        
+    def __str__(self):
+        return f"{self.idcita} {self.fecha_propuesta}"
 
 
 class Dentista(models.Model):
-    iddentista = models.IntegerField(db_column='idDentista', primary_key=True)  # Field name made lowercase.
+    iddentista = models.AutoField(db_column='idDentista', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(max_length=45, blank=True, null=True)
     apellido = models.CharField(max_length=45, blank=True, null=True)
     numero_telefono = models.CharField(max_length=45, blank=True, null=True)
@@ -61,20 +73,26 @@ class Dentista(models.Model):
     class Meta:
         managed = True
         db_table = 'dentista'
+        
+    def __str__(self):
+        return f"{self.iddentista} {self.nombre} {self.apellido} {self.numero_telefono} {self.correo_electronico} {self.no_colegiado} {self.tipo_especialidad_idtipo_especialidad}"
 
 
-class DentistaHasTratamiento(models.Model):
+class DentistaTratamiento(models.Model):
     dentista_iddentista = models.OneToOneField(Dentista, models.DO_NOTHING, db_column='Dentista_idDentista', primary_key=True)  # Field name made lowercase. The composite primary key (Dentista_idDentista, Tratamiento_idTratamientno) found, that is not supported. The first column is selected.
     tratamiento_idtratamientno = models.ForeignKey('Tratamiento', models.DO_NOTHING, db_column='Tratamiento_idTratamientno')  # Field name made lowercase.
 
     class Meta:
         managed = True
-        db_table = 'dentista_has_tratamiento'
+        db_table = 'dentista_tratamiento'
         unique_together = (('dentista_iddentista', 'tratamiento_idtratamientno'),)
+        
+    def __str__(self):
+        return f"{self.dentista_iddentista} {self.tratamiento_idtratamientno}"
 
 
 class Factura(models.Model):
-    idfactura = models.IntegerField(db_column='idFactura', primary_key=True)  # Field name made lowercase.
+    idfactura = models.AutoField(db_column='idFactura', primary_key=True)  # Field name made lowercase.
     detalle = models.CharField(max_length=45, blank=True, null=True)
     cantidad_servicios = models.IntegerField(blank=True, null=True)
     fecha = models.DateTimeField(blank=True, null=True)
@@ -84,10 +102,13 @@ class Factura(models.Model):
     class Meta:
         managed = True
         db_table = 'factura'
+        
+    def __str__(self):
+        return f"{self.idfactura} {self.detalle} {self.cantidad_servicios} {self.fecha} {self.total} {self.tratamiento_idtratamientno}"
 
 
 class Material(models.Model):
-    idmaterial = models.IntegerField(db_column='idMaterial', primary_key=True)  # Field name made lowercase.
+    idmaterial = models.AutoField(db_column='idMaterial', primary_key=True)  # Field name made lowercase.
     descripcion = models.CharField(max_length=45, blank=True, null=True)
     serie_modelo = models.CharField(max_length=45, blank=True, null=True)
     cantidad = models.IntegerField(blank=True, null=True)
@@ -96,10 +117,13 @@ class Material(models.Model):
     class Meta:
         managed = True
         db_table = 'material'
+        
+    def __str__(self):
+        return f"{self.idmaterial} {self.descripcion} {self.serie_modelo} {self.cantidad} {self.precio_individual}"
 
 
 class Paciente(models.Model):
-    idpaciente = models.IntegerField(db_column='idPaciente', primary_key=True)  # Field name made lowercase.
+    idpaciente = models.AutoField(db_column='idPaciente', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(max_length=45, blank=True, null=True)
     apellido = models.CharField(max_length=45, blank=True, null=True)
     numero_telefonico = models.CharField(max_length=45, blank=True, null=True)
@@ -110,29 +134,38 @@ class Paciente(models.Model):
     class Meta:
         managed = True
         db_table = 'paciente'
+        
+    def __str__(self):
+        return f"{self.idpaciente} {self.nombre} {self.apellido} {self.numero_telefonico} {self.edad} {self.numero_seguro} {self.cita_idcita}"
 
 
 class TipoEspecialidad(models.Model):
-    idtipo_especialidad = models.IntegerField(db_column='idTipo_Especialidad', primary_key=True)  # Field name made lowercase.
+    idtipo_especialidad = models.AutoField(db_column='idTipo_Especialidad', primary_key=True)  # Field name made lowercase.
     descripcion = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'tipo_especialidad'
+        
+    def __str__(self):
+        return f"{self.idtipo_especialidad} {self.descripcion}"
 
 
 class TipoUsuario(models.Model):
-    idtipo_usuario = models.IntegerField(db_column='idTipo_Usuario', primary_key=True)  # Field name made lowercase.
+    idtipo_usuario = models.AutoField(db_column='idTipo_Usuario', primary_key=True)  # Field name made lowercase.
     descripcion = models.CharField(max_length=45, blank=True, null=True)
     permisos = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'tipo_usuario'
+        
+    def __str__(self):
+        return f"{self.idtipo_usuario} {self.descripcion} {self.permisos}"
 
 
 class Tratamiento(models.Model):
-    idtratamientno = models.IntegerField(db_column='idTratamientno', primary_key=True)  # Field name made lowercase.
+    idtratamientno = models.AutoField(db_column='idTratamientno', primary_key=True)  # Field name made lowercase.
     detalle = models.CharField(max_length=45, blank=True, null=True)
     precio = models.FloatField(blank=True, null=True)
     cantidad_citas = models.IntegerField(blank=True, null=True)
@@ -142,25 +175,39 @@ class Tratamiento(models.Model):
     class Meta:
         managed = True
         db_table = 'tratamiento'
+        
+    def __str__(self):
+        return f"{self.idtratamientno} {self.detalle} {self.precio} {self.cantidad_citas} {self.cita_idcita} {self.asistente_idasistente}"
 
 
-class TratamientoHasMaterial(models.Model):
+class TratamientoMaterial(models.Model):
     tratamiento_idtratamientno = models.OneToOneField(Tratamiento, models.DO_NOTHING, db_column='Tratamiento_idTratamientno', primary_key=True)  # Field name made lowercase. The composite primary key (Tratamiento_idTratamientno, Material_idMaterial) found, that is not supported. The first column is selected.
     material_idmaterial = models.ForeignKey(Material, models.DO_NOTHING, db_column='Material_idMaterial')  # Field name made lowercase.
+    cantidad_utilizada = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = True
-        db_table = 'tratamiento_has_material'
+        db_table = 'tratamiento_material'
         unique_together = (('tratamiento_idtratamientno', 'material_idmaterial'),)
+        
+    def __str__(self):
+        return f"{self.tratamiento_idtratamientno} {self.material_idmaterial} {self.cantidad_utilizada}"
 
 
 class Usuario(models.Model):
-    idusuario = models.IntegerField(db_column='idUsuario', primary_key=True)  # Field name made lowercase.
-    nombre_usuario = models.CharField(max_length=45, blank=True, null=True)
-    password = models.CharField(max_length=45, blank=True, null=True)
+    idusuario = models.AutoField(db_column='idUsuario', primary_key=True)  # Field name made lowercase.
+    nombre_usuario = models.CharField(max_length=45)
+    password = models.CharField(max_length=128, blank=True, null=True)
     dentista_iddentista = models.ForeignKey(Dentista, models.DO_NOTHING, db_column='Dentista_idDentista')  # Field name made lowercase.
     tipo_usuario_idtipo_usuario = models.ForeignKey(TipoUsuario, models.DO_NOTHING, db_column='Tipo_Usuario_idTipo_Usuario')  # Field name made lowercase.
+    asistente_idasistente = models.ForeignKey(Asistente, models.DO_NOTHING, db_column='Asistente_idAsistente')  # Field name made lowercase.
 
     class Meta:
         managed = True
         db_table = 'usuario'
+        
+    def check_password(self, raw_password):
+        return django_check_password(raw_password, self.password)
+        
+    def __str__(self):
+        return f"{self.idusuario} {self.nombre_usuario} {self.password} {self.dentista_iddentista} {self.tipo_usuario_idtipo_usuario} {self.asistente_idasistente}"
