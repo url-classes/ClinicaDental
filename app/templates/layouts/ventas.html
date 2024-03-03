@@ -10,28 +10,32 @@
   <link rel="stylesheet" href="{% static 'css/styleVenta.css' %}">
 </head>
 <body>
-  <div id="app">
-    <div class="container">
-      <div class="title-container">
-        <h1>Gestión de Ventas - Clínica Dental</h1>
-      </div>
-      <div id="services-container">
-        <!-- Botones de servicios predeterminados -->
-        <button class="service-btn" onclick="addSale('Limpieza Dental')">Limpieza Dental</button>
-        <button class="service-btn" onclick="addSale('Relleno Dental')">Relleno Dental</button>
-        <button class="service-btn" onclick="addSale('Corona Dental')">Corona Dental</button>
-        <button class="service-btn" onclick="addSale('Ortodoncia')">Ortodoncia</button>
-        <button class="service-btn" onclick="addSale('Puente Dental')">Puente Dental</button>
-        <!-- Botones de servicios agregados por el usuario se añadirán aquí -->
-      </div>
-      <div id="add-service-form">
-        <input type="text" id="new-service-input" placeholder="Nombre del Nuevo Servicio">
-        <button onclick="addCustomService()">Agregar Servicio</button>
-      </div>
-    </div>
-  </div>
-  <a href="{% url 'factura' %}">Ver factura</a>
-  <script src="{% static 'js/scriptVenta.js' %}"></script>
+  <h1>Lista de Tratamientos</h1>
+  <button onclick="location.href='/tratamiento/';">Crear Tratamiento</button>
+  <table>
+      <thead>
+          <tr>
+              <th>Id Tratamiento</th>
+              <th>Detalle</th>
+              <th>Precio</th>
+              <th>Cantidad de Citas</th>
+              <th>Cita ID</th>
+              <th>Asistente ID</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for tratamiento in tratamientos %}
+          <tr>
+              <td>{{ tratamiento.idtratamientno }}</td>
+              <td>{{ tratamiento.detalle }}</td>
+              <td>{{ tratamiento.precio }}</td>
+              <td>{{ tratamiento.cantidad_citas }}</td>
+              <td>{{ tratamiento.cita_idcita }}</td>
+              <td>{{ tratamiento.asistente_idasistente }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
 </body>
 </html>
 {% endblock %} 

@@ -1,0 +1,19 @@
+{% block content %}
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Tratamiento</title>
+    <link rel="stylesheet" href="{% static 'css/styleTratamiento.css' %}">
+</head>
+<body>
+    <h1>Crear Tratamiento</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>
+{% endblock %} 

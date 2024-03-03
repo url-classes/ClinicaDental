@@ -1,0 +1,15 @@
+/* estilos.css */
+.clase{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px 0;
+    padding: 10px;
+}
+
+.detalle {
+    background-color: #f8f8f8;
+}
+
+.precio {
+    font-weight: bold;
+}

@@ -5,15 +5,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from app.utils import user_has_permisos
-from .models import Material, Usuario, TipoUsuario
+from .models import Material, Usuario, TipoUsuario, Tratamiento
 from django.contrib.auth.hashers import make_password
 from .forms import UsuarioSignupForm
 from .backends import UsuarioBackend
 from .forms import UsuarioLoginForm
+from .forms import TratamientoForm
 
 
 # Create your views here.
-
 
 def index(request):
     title = "Clinica Dental"
@@ -80,5 +80,19 @@ def signin(request):
 def lista_materiales(request):
     materiales = Material.objects.all()  # Realiza la consulta a la base de datos
     return render(request, 'layouts/inventario.html', {'materiales': materiales})
+
+def crear_tratamiento(request):
+    if request.method == 'POST':
+        form = TratamientoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("ventas")
+    else:
+        form = TratamientoForm()
+    return render(request, 'layouts/tratamiento.html', {'form': form})
+
+def lista_tratamientos(request):
+    tratamientos = Tratamiento.objects.all()  # Recupera todos los objetos Tratamiento
+    return render(request, 'layouts/ventas.html', {'tratamientos': tratamientos})
 
         

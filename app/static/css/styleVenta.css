@@ -1,55 +1,31 @@
-html, body {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0;
+h1 {
+  text-align: center; /* Centra el texto del título */
+  margin-top: 20px; /* Añade un margen superior para separarlo del contenido anterior */
+  margin-bottom: 30px; /* Añade un margen inferior para separarlo de la tabla */
+  color: #333; /* Cambia el color del texto */
+  font-family: 'Arial', sans-serif; /* Cambia la fuente del texto */
 }
 
-.container {
-  text-align: center;
+table {
+  width: 100%; /* Ajusta el ancho de la tabla al 100% del contenedor */
+  border-collapse: collapse; /* Elimina el espacio entre las celdas */
+  text-align: left; /* Alinea el texto a la izquierda */
 }
 
-.title-container {
-  background-color: #007bff;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+th, td {
+  padding: 8px; /* Añade un poco de espacio alrededor del texto en las celdas */
+  border: 1px solid #ddd; /* Añade un borde a las celdas */
 }
 
-#services-container {
-  margin-top: 20px;
+th {
+  background-color: #4CAF50; /* Color de fondo para los encabezados de la tabla */
+  color: white; /* Color del texto para los encabezados */
 }
 
-.service-btn {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Añade un color de fondo a las filas pares para mejorar la legibilidad */
 }
 
-#add-service-form {
-  margin-top: 20px;
-}
-
-#add-service-form input[type="text"],
-#add-service-form button {
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-}
-
-#add-service-form button {
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
-
-#add-service-form input[type="text"] {
-  width: 200px;
+tr:hover {
+  background-color: #ddd; /* Cambia el color de fondo de la fila al pasar el mouse sobre ella */
 }

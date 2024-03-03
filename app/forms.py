@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
-from .models import Usuario, TipoUsuario, Dentista, Asistente
+from django.forms import ModelForm, Select
+from .models import Usuario, TipoUsuario, Dentista, Asistente, Tratamiento, Cita
 
 class UsuarioSignupForm(forms.ModelForm):
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
@@ -45,4 +46,21 @@ class UsuarioLoginForm(forms.Form):
         return self.cleaned_data
     
 
+class TratamientoForm(forms.ModelForm):
+    class Meta:
+        model = Tratamiento
+        fields = ['detalle', 'precio', 'cantidad_citas', 'cita_idcita', 'asistente_idasistente']
+    
+    def __init__(self, *args, **kwargs):
+        super(TratamientoForm, self).__init__(*args, **kwargs)
+        # Aplica una clase CSS a todos los campos
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'clase'
 
+        self.fields['detalle'].label = "Detalle del Tratamiento"
+        self.fields['precio'].label = "Precio"
+        self.fields['cantidad_citas'].label = "Cantidad de Citas Necesarias"
+        self.fields['cita_idcita'].label = "Cita Asociada"
+        self.fields['asistente_idasistente'].label = "Asistente Asignado"
+
+        
