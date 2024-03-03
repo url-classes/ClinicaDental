@@ -1,5 +1,5 @@
 {% block content %}
-
+{% load math_filters %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -12,26 +12,39 @@
     </head>
 
     <body>
-
-        <h1>Lista de Materiales</h1>
-        <ul>
-            {% for m in materiales %}
-                <li>{{ m.idmaterial }} - {{ m.descripcion }} - {{ m.serie_modelo}} - {{ m.cantidad}} - {{ m.precio_individual}}</li>
-            {% endfor %}
-        </ul>
-
         <div class="button-container">
             <h1>INVENTARIO</h1>
             <p>¿Qué desear hacer?</p>
             <div class="botones">
-                <button class="boton">Buscar</button>
-                <button class="boton">Actualizar</button>
-                <button class="boton">Agregar</button>
-            </div>
-
-        <div class="lado-derecho">
-            
+                <button class="boton" onclick="location.href='listaMateriales/';">Ver listado de Materiales</button>
+                <button class="boton" onclick="location.href='agregar_material/';">Agregar</button>
+            </div>    
         </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Id Material</th>
+                    <th>Descripcion</th>
+                    <th>Serie o Modelo</th>
+                    <th>Cantidad</th>
+                    <th>Precio Individual</th>
+                    <th>Precio Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for material in materiales %}
+                <tr>
+                    <td>{{ material.idmaterial }}</td>
+                    <td>{{ material.descripcion }}</td>
+                    <td>{{ material.serie_modelo }}</td>
+                    <td>{{ material.cantidad }}</td>
+                    <td>{{ material.precio_individual }}</td>
+                    <td>{{ material.precio_individual|multiply:material.cantidad }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 </body>
 </html>
 {% endblock %}

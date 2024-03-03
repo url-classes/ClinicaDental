@@ -22,7 +22,8 @@ def index(request):
 
 @user_has_permisos(permisos_requeridos=['inventario'])
 def inventario(request):
-    return render(request, "layouts/inventario.html")
+    materiales = Material.objects.all()
+    return render(request, 'layouts/inventario.html', {'materiales': materiales})
 
 @user_has_permisos(permisos_requeridos=['ventas'])
 def ventas(request):
@@ -77,10 +78,6 @@ def signin(request):
                 return render(request, "layouts/login.html", {"form": form, "error": "Error de autenticación."})
         else:
             return render(request, "layouts/login.html", {"form": form})
-        
-def lista_materiales(request):
-    materiales = Material.objects.all()  # Realiza la consulta a la base de datos
-    return render(request, 'layouts/inventario.html', {'materiales': materiales})
 
 def crear_tratamiento(request):
     if request.method == 'POST':
