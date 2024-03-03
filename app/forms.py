@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.hashers import make_password
 from django.forms import ModelForm, Select
 from .models import Usuario, TipoUsuario, Dentista, Asistente, Tratamiento, Cita
+from .models import Material
 
 class UsuarioSignupForm(forms.ModelForm):
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
@@ -63,4 +64,23 @@ class TratamientoForm(forms.ModelForm):
         self.fields['cita_idcita'].label = "Cita Asociada"
         self.fields['asistente_idasistente'].label = "Asistente Asignado"
 
-        
+# forms.py
+from django import forms
+from .models import Material
+
+class MaterialForm(forms.ModelForm):
+    class Meta:
+        model = Material
+        fields = ['descripcion', 'serie_modelo', 'cantidad', 'precio_individual']
+        labels = {
+            'descripcion': 'Descripción',
+            'serie_modelo': 'Serie/Modelo',
+            'cantidad': 'Cantidad',
+            'precio_individual': 'Precio Individual',
+        }
+        widgets = {
+            'descripcion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la descripción'}),
+            'serie_modelo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la serie/modelo'}),
+            'cantidad': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la cantidad'}),
+            'precio_individual': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el precio individual'}),
+        }

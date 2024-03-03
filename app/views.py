@@ -11,7 +11,8 @@ from .forms import UsuarioSignupForm
 from .backends import UsuarioBackend
 from .forms import UsuarioLoginForm
 from .forms import TratamientoForm
-
+from .models import Material
+from .forms import MaterialForm
 
 # Create your views here.
 
@@ -96,3 +97,29 @@ def lista_tratamientos(request):
     return render(request, 'layouts/ventas.html', {'tratamientos': tratamientos})
 
         
+def agregar_material(request):
+    if request.method == 'POST':
+        form = MaterialForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_materiales')
+    else:
+        form = MaterialForm()
+    return render(request, 'layouts/agregar_material.html', {'form': form})
+
+def borrar_material(request, idmaterial):
+    material = Material.objects.get(pk=idmaterial)
+    material.delete()
+    return redirect('lista_materiales')
+
+def actualizar_material(request, idmaterial):
+    material = Material.objects.get(pk=idmaterial)
+    form = MaterialForm(request.POST or None, instance=material)
+    if form.is_valid():
+        form.save()
+        return redirect('lista_materiales')
+    return render(request, 'layouts/actualizar_material.html', {'form': form})
+
+def lista_materiales(request):
+    materiales = Material.objects.all()
+    return render(request, 'layouts/lista_materiales.html', {'materiales': materiales})
