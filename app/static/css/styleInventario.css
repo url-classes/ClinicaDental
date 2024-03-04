@@ -39,3 +39,55 @@ p {
 .boton:hover {
     background-color: #2dafeb;
 }
+/* Reset default browser styles for tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  /* Style table header */
+  thead {
+    background-color: #f2f2f2;
+  }
+  
+  /* Style table header cells */
+  th {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  /* Style table body rows */
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Style table body cells */
+  td {
+    padding: 10px 15px;
+  }
+  
+  /* Style button container */
+  .button-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Style buttons */
+  .boton {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  /* Hover effect for buttons */
+  .boton:hover {
+    background-color: #45a049;
+  }
