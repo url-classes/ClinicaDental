@@ -3,7 +3,8 @@ from . import views
 from .views import lista_materiales, crear_tratamiento
 
 urlpatterns = [
-    path('', views.index, name="index"),
+    path('', views.signin, name="index"),
+    path('index/', views.index, name='index'),
     path('inventario/', views.inventario, name='inventario'),
     path('ventas/', views.lista_tratamientos, name='ventas'),
     path('financiero/', views.financiero, name='financiero'),
