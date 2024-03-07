@@ -1,93 +1,61 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-image: blue;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    flex-direction: column;
-    color: rgb(24, 109, 128);
-    text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
 }
-h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
+
+.button-container {
+  text-align: center;
+  margin-top: 50px;
 }
-p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-}
+
 .botones {
-    display: ruby;
-    justify-content: center;
-    align-items: center;
+  margin-top: 20px;
 }
+
 .boton {
-    background-color: rgb(129, 235, 217);
-    color: rgb(7, 143, 134);
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    margin: 0 0.5rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
 }
+
 .boton:hover {
-    background-color: #2dafeb;
+  background-color: #0056b3;
 }
-/* Reset default browser styles for tables */
+
 table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  /* Style table header */
-  thead {
-    background-color: #f2f2f2;
-  }
-  
-  /* Style table header cells */
-  th {
-    padding: 12px 15px;
-    text-align: left;
-  }
-  
-  /* Style table body rows */
-  tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  /* Style table body cells */
-  td {
-    padding: 10px 15px;
-  }
-  
-  /* Style button container */
-  .button-container {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Style buttons */
-  .boton {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  /* Hover effect for buttons */
-  .boton:hover {
-    background-color: #45a049;
-  }
+  width: 80%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+h1 {
+  color: #007bff;
+}
+
+p {
+  color: #333;
+  margin-bottom: 20px;
+}
