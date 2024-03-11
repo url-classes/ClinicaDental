@@ -46,7 +46,7 @@ class Asistente(models.Model):
         db_table = 'asistente'
         
     def __str__(self):
-        return f"{self.idasistente} {self.nombre} {self.apellido}  {self.escolaridad} {self.salario}"
+        return f"{self.nombre} {self.apellido}"
 
 
 class Cita(models.Model):
@@ -75,7 +75,7 @@ class Dentista(models.Model):
         db_table = 'dentista'
         
     def __str__(self):
-        return f"{self.iddentista} {self.nombre} {self.apellido} {self.numero_telefono} {self.correo_electronico} {self.no_colegiado} {self.tipo_especialidad_idtipo_especialidad}"
+        return f"{self.nombre} {self.apellido}"
 
 
 class DentistaTratamiento(models.Model):
@@ -161,7 +161,7 @@ class TipoUsuario(models.Model):
         db_table = 'tipo_usuario'
         
     def __str__(self):
-        return f"{self.idtipo_usuario} {self.descripcion} {self.permisos}"
+        return f"{self.descripcion} {self.permisos}"
 
 
 class Tratamiento(models.Model):
