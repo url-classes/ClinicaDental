@@ -1,8 +1,7 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
 from django.forms import ModelForm, Select
-from .models import Usuario, TipoUsuario, Dentista, Asistente, Tratamiento, Cita
-from .models import Material
+from .models import Usuario, TipoUsuario, Dentista, Asistente, Tratamiento, Cita, Material
 
 class UsuarioSignupForm(forms.ModelForm):
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
@@ -51,22 +50,20 @@ class TratamientoForm(forms.ModelForm):
     class Meta:
         model = Tratamiento
         fields = ['detalle', 'precio', 'cantidad_citas', 'cita_idcita', 'asistente_idasistente']
-    
-    def __init__(self, *args, **kwargs):
-        super(TratamientoForm, self).__init__(*args, **kwargs)
-        # Aplica una clase CSS a todos los campos
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'clase'
-
-        self.fields['detalle'].label = "Detalle del Tratamiento"
-        self.fields['precio'].label = "Precio"
-        self.fields['cantidad_citas'].label = "Cantidad de Citas Necesarias"
-        self.fields['cita_idcita'].label = "Cita Asociada"
-        self.fields['asistente_idasistente'].label = "Asistente Asignado"
-
-# forms.py
-from django import forms
-from .models import Material
+        labels = {
+            'detalle': 'Detalle',
+            'precio': 'Precio',
+            'cantidad_citas': 'Cantidad de Citas',
+            'cita_idcita': 'Identificador de la Cita',
+            'asistente_idasistente': 'Identificador del Asistente'
+        }
+        widgets = {
+            'detalle': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la el detalle'}),
+            'precio': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el precio'}),
+            'cantidad_citas': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la cantidad de citas'}),
+            'cita_idcita': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el identificador de la cita'}),
+            'asistente_idasistente': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el identificador del asistente'}),
+        }
 
 class MaterialForm(forms.ModelForm):
     class Meta:

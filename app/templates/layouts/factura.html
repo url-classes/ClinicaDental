@@ -19,16 +19,16 @@
                 <p>Dirección: 4ta calle 23-61 zona 3</p>
                 <p>Quetzaltenango</p>
                 <p>Teléfono: +123456789</p>
-                <p>Email: info@empresa.com</p>
+                <p>Email: clinica_especialidades_lapaz@gmail.com</p>
             </div>
         </div>
         <div class="invoice-details">
             <div class="customer-info">
                 <h2>Cliente:</h2>
-                <p>Nombre del Cliente:</p>
-                <p>Dirección del Client:e</p>
-                <p>Ciudad, País:</p>
-                <p>Email: cliente@example.com</p>
+                <p>Nombre del Cliente: {{ paciente.nombre }} {{ paciente.apellido }}</p>
+                <p>Número Telefónico: {{ paciente.numero_telefonico }}</p>
+                <p>Edad: {{ paciente.edad }}</p>
+                <p>Número de Seguro: {{ paciente.numero_seguro }}</p>
             </div>
         </div>
         <table class="invoice-table">
@@ -42,21 +42,16 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Producto 1</td>
-                    <td>2</td>
-                    <td>Q.00.00</td>
-                    <td>Q.00.00</td>
+                    <td>{{ tratamiento.detalle }}</td>
+                    <td>{{ tratamiento.cantidad_citas }}</td>
+                    <td>Q{{ tratamiento.precio }}</td>
+                    <td>Q{{ total }}</td>
                 </tr>
-                <tr>
-                    <td>Producto 2</td>
-                    <td>1</td>
-                    <td>Q.00.00</td>
-                    <td>Q.00.00</td>
-                </tr>
+                <!-- Añade más filas aquí si necesitas -->
             </tbody>
         </table>
         <div class="invoice-total">
-            <p>Total: Q.OO.00</p>
+            <p>Total: Q{{ total }}</p>
         </div>
     </div>
 </body>

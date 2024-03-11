@@ -29,3 +29,36 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #ddd; /* Cambia el color de fondo de la fila al pasar el mouse sobre ella */
 }
+.btn {
+  padding: 5px 10px; /* Ajusta el padding a tu preferencia */
+  color: white; /* Texto blanco para todos los botones */
+  text-decoration: none; /* Remueve el subrayado de los enlaces */
+  border-radius: 5px; /* Bordes redondeados para los botones */
+  font-size: 14px; /* Tamaño de fuente para los botones */
+  margin-right: 5px; /* Espacio entre botones */
+}
+
+.btn-sm {
+  font-size: 12px; /* Tamaño más pequeño de fuente para botones pequeños */
+  padding: 3px 7px; /* Padding reducido para botones pequeños */
+}
+
+.btn-primary {
+  background-color: #28a745; /* Verde para botón Actualizar */
+}
+
+.btn-danger {
+  background-color: #dc3545; /* Rojo para botón Borrar */
+}
+
+.btn-info {
+  background-color: #17a2b8; /* Azul para botón Ver Factura */
+}
+
+/* Estilos para hover (cuando el cursor pasa sobre el botón) */
+.btn-primary:hover,
+.btn-danger:hover,
+.btn-info:hover {
+  opacity: 0.8; /* Hace los botones ligeramente transparentes al pasar el cursor */
+}
+

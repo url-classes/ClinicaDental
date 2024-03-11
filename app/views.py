@@ -44,8 +44,12 @@ def recursosHumanos(request):
         return HttpResponseForbidden("No tienes permiso para acceder a esta sección.")
     
 
-def factura(request):
-    return render(request, "layouts/factura.html")
+def factura(request, idtratamientno):
+    tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
+    #paciente = tratamiento.cita_idcita.paciente
+    total = tratamiento.precio * tratamiento.cantidad_citas
+    return render(request, "layouts/factura.html", {'tratamiento': tratamiento, 'total': total})
+
 
 
 def signup(request):
@@ -120,3 +124,19 @@ def actualizar_material(request, idmaterial):
 def lista_materiales(request):
     materiales = Material.objects.all()
     return render(request, 'layouts/lista_materiales.html', {'materiales': materiales})
+
+def borrar_tratamiento(request, idtratamientno):
+    tratamiento = Tratamiento.objects.get(pk=idtratamientno)
+    tratamiento.delete()
+    return redirect('ventas')
+
+def actualizar_tratamiento(request, idtratamientno):
+    if idtratamientno:
+        tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
+    else:
+        tratamiento = None
+    form = TratamientoForm(request.POST or None, instance=tratamiento)
+    if form.is_valid():
+        form.save()
+        return redirect('ventas')
+    return render(request, 'layouts/actualizar_tratamiento.html', {'form': form})
