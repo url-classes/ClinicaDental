@@ -1,6 +1,8 @@
+// JavaScript para el manejo de datos de dentistas y asistentes
 let dentistas = [];
 let asistentes = [];
 
+// Funciones para renderizar la información de dentistas y asistentes
 function renderizarDentistas() {
     const container = document.getElementById('dentistas-container');
     container.innerHTML = '';
@@ -45,6 +47,7 @@ function renderizarAsistentes() {
     });
 }
 
+// Funciones para mostrar y ocultar el formulario de agregar dentistas y asistentes
 function mostrarFormulario(tipo) {
     document.getElementById(`formulario-${tipo}`).classList.remove('hidden');
 }
@@ -53,6 +56,7 @@ function cancelar(tipo) {
     document.getElementById(`formulario-${tipo}`).classList.add('hidden');
 }
 
+// Funciones para agregar, eliminar y editar dentistas
 function agregarDentista() {
     const foto = document.getElementById('foto-dentista').value;
     const nombre = document.getElementById('nombre-dentista').value;
@@ -131,6 +135,7 @@ function editarAsistente(indice) {
     document.getElementById('salario-asistente').value = asistentes[indice].salario;
 }
 
+// Función para guardar datos en el almacenamiento local
 function guardarDatos(tipo) {
     if (tipo === 'dentistas') {
         localStorage.setItem('dentistas', JSON.stringify(dentistas));
@@ -139,6 +144,7 @@ function guardarDatos(tipo) {
     }
 }
 
+// Función para cargar datos desde el almacenamiento local al cargar la página
 function cargarDatos() {
     const datosDentistas = localStorage.getItem('dentistas');
     if (datosDentistas) {
@@ -153,4 +159,5 @@ function cargarDatos() {
     }
 }
 
+// Llamar a la función cargarDatos al cargar la página
 cargarDatos();

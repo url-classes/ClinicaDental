@@ -3,60 +3,68 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="es">
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gestión de Dentistas y Asistentes</title>
-<link rel="stylesheet" href="{% static 'css/styleRecursosHumanos.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Dentistas y Asistentes</title>
+    <link rel="stylesheet" href="{% static 'css/styleRecursosHumanos.css' %}">
 </head>
 <body>
+    <div class="header">
+        <h1>Recursos Humanos</h1>
+        <h2 class="subtitle">Dentistas</h2>
+        <button class="btn" onclick="mostrarFormulario('dentista')">Agregar Dentista</button>
+    </div>
 
-<div id="formulario-dentista" class="formulario hidden">
-  <h2 class="subtitle">Agregar Dentista</h2>
-  <form id="dentista-form">
-    <label for="foto-dentista">Foto (URL):</label><br>
-    <input type="text" id="foto-dentista" name="foto-dentista"><br>
-    <label for="nombre-dentista">Nombre:</label><br>
-    <input type="text" id="nombre-dentista" name="nombre-dentista"><br>
+    <div class="formulario hidden" id="formulario-dentista">
+        <h3>Agregar Dentista</h3>
+        <label for="foto-dentista">Foto (URL):</label>
+        <input type="text" id="foto-dentista" placeholder="URL de la foto"><br>
+        <label for="nombre-dentista">Nombre:</label>
+        <input type="text" id="nombre-dentista" placeholder="Nombre"><br>
+        <label for="apellido-dentista">Apellido:</label>
+        <input type="text" id="apellido-dentista" placeholder="Apellido"><br>
+        <label for="telefono-dentista">Teléfono:</label>
+        <input type="text" id="telefono-dentista" placeholder="Teléfono"><br>
+        <label for="email-dentista">Correo Electrónico:</label>
+        <input type="email" id="email-dentista" placeholder="Correo Electrónico"><br>
+        <label for="colegiado-dentista">Número de Colegiado:</label>
+        <input type="text" id="colegiado-dentista" placeholder="Número de Colegiado"><br>
+        <label for="especialidad-dentista">Especialidad:</label>
+        <input type="text" id="especialidad-dentista" placeholder="Especialidad"><br>
+        <button class="btn" onclick="agregarDentista()">Guardar</button>
+        <button class="btn" onclick="cancelar('dentista')">Cancelar</button>
+    </div>
 
-    <input type="text" id="colegiado-dentista" name="colegiado-dentista"><br>
-    <label for="especialidad-dentista">Especialidad:</label><br>
-    <input type="text" id="especialidad-dentista" name="especialidad-dentista"><br><br>
-    <button type="button" onclick="agregarDentista()">Agregar Dentista</button>
-    <button type="button" onclick="cancelar('dentista')">Cancelar</button>
-  </form>
-</div>
+    <div class="container" id="dentistas-container"></div>
 
-  <h2 class="subtitle">Asistentes</h2>
-</div>
+    <div class="header">
+        <h2 class="subtitle">Asistentes</h2>
+        <button class="btn" onclick="mostrarFormulario('asistente')">Agregar Asistente</button>
+    </div>
 
-<div id="asistentes-container"></div>
+    <div class="formulario hidden" id="formulario-asistente">
+        <h3>Agregar Asistente</h3>
+        <label for="foto-asistente">Foto (URL):</label>
+        <input type="text" id="foto-asistente" placeholder="URL de la foto"><br>
+        <label for="nombre-asistente">Nombre:</label>
+        <input type="text" id="nombre-asistente" placeholder="Nombre"><br>
+        <label for="apellido-asistente">Apellido:</label>
+        <input type="text" id="apellido-asistente" placeholder="Apellido"><br>
+        <label for="escolaridad-asistente">Escolaridad:</label>
+        <input type="text" id="escolaridad-asistente" placeholder="Escolaridad"><br>
+        <label for="salario-asistente">Salario:</label>
+        <input type="text" id="salario-asistente" placeholder="Salario"><br>
+        <button class="btn" onclick="agregarAsistente()">Guardar</button>
+        <button class="btn" onclick="cancelar('asistente')">Cancelar</button>
+    </div>
 
-<div style="text-align: center;">
-  <button class="btn" onclick="mostrarFormulario('asistente')">Agregar Asistente</button>
-</div>
+    <div class="container" id="asistentes-container"></div>
 
-
-<div id="formulario-asistente" class="formulario hidden">
-  <h2 class="subtitle">Agregar Asistente</h2>
-  <form id="asistente-form">
-    <label for="foto-asistente">Foto (URL):</label><br>
-    <input type="text" id="foto-asistente" name="foto-asistente"><br>
-    <label for="nombre-asistente">Nombre:</label><br>
-    <input type="text" id="nombre-asistente" name="nombre-asistente"><br>
-
-    <input type="text" id="escolaridad-asistente" name="escolaridad-asistente"><br>
-    <label for="salario-asistente">Salario:</label><br>
-    <input type="text" id="salario-asistente" name="salario-asistente"><br><br>
-    <button type="button" onclick="agregarAsistente()">Agregar Asistente</button>
-    <button type="button" onclick="cancelar('asistente')">Cancelar</button>
-  </form>
-</div>
-
-<script src="{% static 'js/scriptHumanos.js' %}"></script>
-
+    <script src="{% static 'js/scriptHumanos.js' %}"></script>
 </body>
 </html>
+
 
 {% endblock %}
