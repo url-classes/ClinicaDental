@@ -20,6 +20,7 @@ from django.template.loader import render_to_string
 from xhtml2pdf import pisa
 from .models import Tratamiento
 from io import BytesIO
+from .models import Dentista, Asistente
 
 # Create your views here.
 
@@ -205,3 +206,83 @@ def actualizar_tratamiento(request, idtratamientno):
         form.save()
         return redirect('ventas')
     return render(request, 'layouts/actualizar_tratamiento.html', {'form': form})
+
+# Funciones para Dentistas
+def listar_dentistas(request):
+    dentistas = Dentista.objects.all()
+    return render(request, 'listar_dentistas.html', {'dentistas': dentistas})
+
+def agregar_dentista(request):
+    if request.method == 'POST':
+        # Obtener datos del formulario
+        foto = request.POST['foto']
+        nombre = request.POST['nombre']
+        apellido = request.POST['apellido']
+        telefono = request.POST['telefono']
+        email = request.POST['email']
+        colegiado = request.POST['colegiado']
+        especialidad = request.POST['especialidad']
+
+        # Crear nuevo dentista
+        dentista = Dentista.objects.create(foto=foto, nombre=nombre, apellido=apellido,
+                                           telefono=telefono, email=email, colegiado=colegiado,
+                                           especialidad=especialidad)
+        return redirect('listar_dentistas')
+    return render(request, 'agregar_dentista.html')
+
+def eliminar_dentista(request, id):
+    dentista = Dentista.objects.get(pk=id)
+    dentista.delete()
+    return redirect('listar_dentistas')
+
+def editar_dentista(request, id):
+    dentista = Dentista.objects.get(pk=id)
+    if request.method == 'POST':
+        # Actualizar datos del dentista
+        dentista.foto = request.POST['foto']
+        dentista.nombre = request.POST['nombre']
+        dentista.apellido = request.POST['apellido']
+        dentista.telefono = request.POST['telefono']
+        dentista.email = request.POST['email']
+        dentista.colegiado = request.POST['colegiado']
+        dentista.especialidad = request.POST['especialidad']
+        dentista.save()
+        return redirect('listar_dentistas')
+    return render(request, 'editar_dentista.html', {'dentista': dentista})
+
+# Funciones para Asistentes
+def listar_asistentes(request):
+    asistentes = Asistente.objects.all()
+    return render(request, 'listar_asistentes.html', {'asistentes': asistentes})
+
+def agregar_asistente(request):
+    if request.method == 'POST':
+        # Obtener datos del formulario
+        foto = request.POST['foto']
+        nombre = request.POST['nombre']
+        apellido = request.POST['apellido']
+        escolaridad = request.POST['escolaridad']
+        salario = request.POST['salario']
+
+        # Crear nuevo asistente
+        asistente = Asistente.objects.create(foto=foto, nombre=nombre, apellido=apellido,
+                                             escolaridad=escolaridad, salario=salario)
+        return redirect('listar_asistentes')
+    return render(request, 'agregar_asistente.html')
+
+def eliminar_asistente(request, id):
+    asistente = Asistente.objects.get(pk=id)
+    asistente.delete()
+    return redirect('listar_asistentes')
+
+def editar_asistente(request, id):
+    asistente = Asistente.objects.get(pk=id)
+    if request.method == 'POST':
+        # Actualizar datos del asistente
+        asistente.foto = request.POST['foto']
+        asistente.nombre = request.POST['nombre']
+        asistente.apellido = request.POST['apellido']
+        asistente.escolaridad = request.POST['escolaridad']
+        asistente.salario = request.POST['salario']
+        asistente.save()
+        return redirect('listar_asistentes')
