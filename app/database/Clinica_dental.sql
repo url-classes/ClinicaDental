@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema clinica_dental
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `clinica_dental` ;
+CREATE SCHEMA IF NOT EXISTS `clinica_dental` DEFAULT CHARACTER SET utf8mb4 ;
 USE `clinica_dental` ;
 
 -- -----------------------------------------------------
@@ -21,17 +21,8 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`alergia` (
   `idAlergia` INT(11) NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idAlergia`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `clinica_dental`.`cita`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinica_dental`.`cita` (
-  `idCita` INT(11) NOT NULL AUTO_INCREMENT,
-  `fecha_propuesta` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`idCita`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -42,17 +33,13 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`paciente` (
   `nombre` VARCHAR(45) NULL DEFAULT NULL,
   `apellido` VARCHAR(45) NULL DEFAULT NULL,
   `numero_telefonico` VARCHAR(45) NULL DEFAULT NULL,
+  `correo_electronico` VARCHAR(45) NULL DEFAULT NULL,
   `edad` INT(11) NULL DEFAULT NULL,
   `numero_seguro` VARCHAR(45) NULL DEFAULT NULL,
-  `Cita_idCita` INT(11) NOT NULL,
-  PRIMARY KEY (`idPaciente`),
-  INDEX `fk_Paciente_Cita1_idx` (`Cita_idCita` ASC) VISIBLE,
-  CONSTRAINT `fk_Paciente_Cita1`
-    FOREIGN KEY (`Cita_idCita`)
-    REFERENCES `clinica_dental`.`cita` (`idCita`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  PRIMARY KEY (`idPaciente`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -74,7 +61,8 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`alergia_paciente` (
     REFERENCES `clinica_dental`.`paciente` (`idPaciente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -87,7 +75,28 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`asistente` (
   `escolaridad` VARCHAR(45) NULL DEFAULT NULL,
   `salario` FLOAT NULL DEFAULT NULL,
   PRIMARY KEY (`idAsistente`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `clinica_dental`.`cita`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`cita` (
+  `idCita` INT(11) NOT NULL AUTO_INCREMENT,
+  `fecha_propuesta` DATETIME NULL DEFAULT NULL,
+  `paciente_idPaciente` INT(11) NOT NULL,
+  PRIMARY KEY (`idCita`),
+  INDEX `fk_cita_paciente1_idx` (`paciente_idPaciente` ASC) VISIBLE,
+  CONSTRAINT `fk_cita_paciente1`
+    FOREIGN KEY (`paciente_idPaciente`)
+    REFERENCES `clinica_dental`.`paciente` (`idPaciente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 10
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -97,7 +106,9 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tipo_especialidad` (
   `idTipo_Especialidad` INT(11) NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idTipo_Especialidad`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -118,7 +129,9 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`dentista` (
     REFERENCES `clinica_dental`.`tipo_especialidad` (`idTipo_Especialidad`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 8
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -144,7 +157,9 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tratamiento` (
     REFERENCES `clinica_dental`.`cita` (`idCita`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -166,7 +181,8 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`dentista_tratamiento` (
     REFERENCES `clinica_dental`.`tratamiento` (`idTratamientno`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -186,7 +202,8 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`factura` (
     REFERENCES `clinica_dental`.`tratamiento` (`idTratamientno`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -199,7 +216,9 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`material` (
   `cantidad` INT(11) NULL DEFAULT NULL,
   `precio_individual` FLOAT NULL DEFAULT NULL,
   PRIMARY KEY (`idMaterial`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -210,7 +229,9 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tipo_usuario` (
   `descripcion` VARCHAR(45) NULL DEFAULT NULL,
   `permisos` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idTipo_Usuario`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -219,7 +240,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `clinica_dental`.`tratamiento_material` (
   `Tratamiento_idTratamientno` INT(11) NOT NULL,
   `Material_idMaterial` INT(11) NOT NULL,
-  `cantidad_utilizada` INT NULL,
+  `cantidad_utilizada` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`Tratamiento_idTratamientno`, `Material_idMaterial`),
   INDEX `fk_Tratamiento_has_Material_Material1_idx` (`Material_idMaterial` ASC) VISIBLE,
   INDEX `fk_Tratamiento_has_Material_Tratamiento1_idx` (`Tratamiento_idTratamientno` ASC) VISIBLE,
@@ -233,7 +254,8 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tratamiento_material` (
     REFERENCES `clinica_dental`.`tratamiento` (`idTratamientno`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -243,14 +265,19 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`usuario` (
   `idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre_usuario` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NULL DEFAULT NULL,
-  `last_login` DATETIME NULL,
-  `Dentista_idDentista` INT(11) NULL,
+  `last_login` DATETIME NULL DEFAULT NULL,
+  `Dentista_idDentista` INT(11) NULL DEFAULT NULL,
   `Tipo_Usuario_idTipo_Usuario` INT(11) NOT NULL,
-  `Asistente_idAsistente` INT(11) NULL,
+  `Asistente_idAsistente` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`idUsuario`),
   INDEX `fk_Usuario_Dentista1_idx` (`Dentista_idDentista` ASC) VISIBLE,
   INDEX `fk_Usuario_Tipo_Usuario1_idx` (`Tipo_Usuario_idTipo_Usuario` ASC) VISIBLE,
   INDEX `fk_Usuario_Asistente1_idx` (`Asistente_idAsistente` ASC) VISIBLE,
+  CONSTRAINT `fk_Usuario_Asistente1`
+    FOREIGN KEY (`Asistente_idAsistente`)
+    REFERENCES `clinica_dental`.`asistente` (`idAsistente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_Dentista1`
     FOREIGN KEY (`Dentista_idDentista`)
     REFERENCES `clinica_dental`.`dentista` (`idDentista`)
@@ -260,13 +287,10 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`usuario` (
     FOREIGN KEY (`Tipo_Usuario_idTipo_Usuario`)
     REFERENCES `clinica_dental`.`tipo_usuario` (`idTipo_Usuario`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Usuario_Asistente1`
-    FOREIGN KEY (`Asistente_idAsistente`)
-    REFERENCES `clinica_dental`.`asistente` (`idAsistente`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

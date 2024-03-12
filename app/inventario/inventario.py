@@ -1,1 +1,0 @@
-print('aqui va tu inventario kevin')

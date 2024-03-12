@@ -19,4 +19,6 @@ urlpatterns = [
     path('inventario/listaMateriales/', views.lista_materiales, name='lista_materiales'),
     path('ventas/actualizar_tratamiento/<int:idtratamientno>/', views.actualizar_tratamiento, name='actualizar_tratamiento'),
     path('ventas/borrar_tratamiento/<int:idtratamientno>/', views.borrar_tratamiento, name='borrar_tratamiento'),
+    path('enviar-factura/<int:idtratamientno>/', views.enviar_factura_email, name='enviar_factura_email'),
+    path('confirmacion-factura/', views.confirmacion_factura, name='confirmacion_factura'),
 ]

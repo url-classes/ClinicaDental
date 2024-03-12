@@ -1,0 +1,19 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Envío</title>
+    <link rel="stylesheet" href="{% static 'css/styleConfirmacionFactura.css' %}"> 
+</head>
+<body>
+    <div class="container">
+        <h1>¡Factura Enviada!</h1>
+        <p>Tu factura ha sido enviada exitosamente.</p>
+        <p><a href="{% url 'index' %}">Volver a Inicio</a></p>
+    </div>
+</body>
+</html>
+{% endblock %}

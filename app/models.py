@@ -52,6 +52,7 @@ class Asistente(models.Model):
 class Cita(models.Model):
     idcita = models.AutoField(db_column='idCita', primary_key=True)  # Field name made lowercase.
     fecha_propuesta = models.DateTimeField(blank=True, null=True)
+    paciente_idpaciente = models.ForeignKey('Paciente', models.DO_NOTHING, db_column='paciente_idPaciente')
 
     class Meta:
         managed = True
@@ -129,7 +130,6 @@ class Paciente(models.Model):
     numero_telefonico = models.CharField(max_length=45, blank=True, null=True)
     edad = models.IntegerField(blank=True, null=True)
     numero_seguro = models.CharField(max_length=45, blank=True, null=True)
-    cita_idcita = models.ForeignKey(Cita, models.DO_NOTHING, db_column='Cita_idCita')  # Field name made lowercase.
 
     class Meta:
         managed = True

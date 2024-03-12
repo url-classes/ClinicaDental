@@ -13,6 +13,13 @@ from .forms import UsuarioLoginForm
 from .forms import TratamientoForm
 from .models import Material
 from .forms import MaterialForm
+from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponse
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from xhtml2pdf import pisa
+from .models import Tratamiento
+from io import BytesIO
 
 # Create your views here.
 
@@ -46,11 +53,69 @@ def recursosHumanos(request):
 
 def factura(request, idtratamientno):
     tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
-    #paciente = tratamiento.cita_idcita.paciente
     total = tratamiento.precio * tratamiento.cantidad_citas
-    return render(request, "layouts/factura.html", {'tratamiento': tratamiento, 'total': total})
+    return render(request, "layouts/factura.html", {'tratamiento': tratamiento, 'total': total, 'idtratamientno': idtratamientno})
 
 
+def generar_pdf(request, idtratamientno):
+    tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
+    cita = tratamiento.cita_idcita
+    paciente = cita.paciente_idpaciente
+
+    # Renderiza la plantilla HTML con los datos
+    html_string = render_to_string('layouts/factura.html', {'tratamiento': tratamiento, 'cita': cita, 'paciente': paciente})
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="factura.pdf"'
+
+    # Convertir HTML a PDF
+    resultado_pdf = BytesIO()
+    pisa_status = pisa.CreatePDF(BytesIO(html_string.encode("UTF-8")), dest=resultado_pdf)
+    resultado_pdf.seek(0)
+    response.write(resultado_pdf.read())
+    return response
+
+def enviar_factura_email(request, idtratamientno):
+    if request.method == 'POST':
+        tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
+        cita = tratamiento.cita_idcita
+        paciente = cita.paciente_idpaciente
+        
+        # Generar el contexto para tu plantilla
+        context = {
+            'tratamiento': tratamiento,
+            'cita': cita,
+            'paciente': paciente,
+            'idtratamientno': idtratamientno,
+        }
+
+        # Renderizar la plantilla HTML con el contexto
+        html_string = render_to_string('layouts/factura.html', context)
+        
+        # Convertir HTML a PDF
+        resultado_pdf = BytesIO()
+        pisa_status = pisa.CreatePDF(BytesIO(html_string.encode("UTF-8")), dest=resultado_pdf)
+        resultado_pdf.seek(0)
+
+        # Configura el correo electrónico
+        email = EmailMessage(
+            'Tu Factura de la Clínica Dental',  # Asunto
+            'Aquí está tu factura adjunta.',  # Mensaje
+            'especialidadeslapaz1@gmail.com',  # Email de origen
+            ['kevinestuardocast3395@gmail.com'], #[paciente.correo_electronico],  # Destinatario de prueba
+            reply_to=['especialidadeslapaz1@gmail.com'],  # Opcional
+        )
+        email.attach('factura.pdf', resultado_pdf.getvalue(), 'application/pdf')  # Adjunta el PDF
+        email.send()
+
+        # Redirecciona a una página de confirmación o vuelve a la lista de tratamientos, por ejemplo
+        return redirect('confirmacion_factura')
+    else:
+        # Si el método no es POST, puedes redireccionar a otra página o mostrar un mensaje de error
+        return HttpResponse("Método no permitido", status=405)
+
+def confirmacion_factura(request):
+    return render(request, 'layouts/confirmacion_factura.html')
 
 def signup(request):
     if request.method == "GET":

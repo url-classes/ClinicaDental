@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{% static 'css/styleFactura.css' %}">
 </head>
 <body>
+    <form action="{% url 'enviar_factura_email' idtratamientno=idtratamientno %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Enviar Factura por Email</button>
+    </form>
     <div class="invoice">
         <div class="invoice-header">
             <div class="logo">
@@ -17,9 +21,9 @@
             <div class="company-info">
                 <h1>Clínica de Especialidades La Paz</h1>
                 <p>Dirección: 4ta calle 23-61 zona 3</p>
-                <p>Quetzaltenango</p>
-                <p>Teléfono: +123456789</p>
-                <p>Email: clinica_especialidades_lapaz@gmail.com</p>
+                <p>Ciudad: Quetzaltenango, Guatemala</p>
+                <p>Teléfono: +502 5900 5742</p>
+                <p>Email: especialidadeslapaz1@gmail.com</p>
             </div>
         </div>
         <div class="invoice-details">
@@ -27,7 +31,7 @@
                 <h2>Cliente:</h2>
                 <p>Nombre del Cliente: {{ paciente.nombre }} {{ paciente.apellido }}</p>
                 <p>Número Telefónico: {{ paciente.numero_telefonico }}</p>
-                <p>Edad: {{ paciente.edad }}</p>
+                <p>Correo Electronico: {{ paciente.correo_electronico }}</p>
                 <p>Número de Seguro: {{ paciente.numero_seguro }}</p>
             </div>
         </div>
