@@ -1,126 +1,57 @@
-/* Estilos CSS para dentistas */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-/* Estilos para el encabezado */
 .header {
+  background-color: #3498db;
+  color: white;
   text-align: center;
-  background-color: #3498db; /* Azul */
+  padding: 20px 0;
+}
+
+.subtitle {
+  text-align: left;
+}
+
+.btn {
+  background-color: #4CAF50;
   color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.formulario {
+  margin: 20px auto;
+  width: 50%;
   padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.header h1 {
-  margin-bottom: 10px;
+.hidden {
+  display: none;
 }
 
-/* Estilos para el formulario de dentistas */
-.formulario-dentista {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.formulario-dentista h3 {
-  margin-bottom: 10px;
-}
-
-.formulario-dentista label {
-  margin-bottom: 5px;
-}
-
-.formulario-dentista input {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 5px;
-}
-
-/* Estilos para las tarjetas de dentistas */
 .dentista-card {
-  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  margin-bottom: 10px;
   padding: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  display: inline-block;
+  width: 30%;
+  text-align: left;
 }
 
-.dentista-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.dentista-card p {
-  margin-bottom: 5px;
-}
-
-.dentista-card button {
-  padding: 5px 10px;
-  background-color: #e74c3c; /* Rojo */
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.dentista-card button:hover {
-  background-color: #c0392b; /* Rojo oscuro */
-}
-
-
-/* Estilos CSS para asistentes */
-
-/* Estilos para el formulario de asistentes */
-.formulario-asistente {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.formulario-asistente h3 {
-  margin-bottom: 10px;
-}
-
-.formulario-asistente label {
-  margin-bottom: 5px;
-}
-
-.formulario-asistente input {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 5px;
-}
-
-/* Estilos para las tarjetas de asistentes */
-.asistente-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  padding: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.asistente-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.asistente-card p {
-  margin-bottom: 5px;
-}
-
-.asistente-card button {
-  padding: 5px 10px;
-  background-color: #2ecc71; /* Verde */
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.asistente-card button:hover {
-  background-color: #27ae60; /* Verde oscuro */
+.imagen-asistente img {
+  display: block;
+  margin: auto; /* Centrar la imagen horizontalmente */
+  margin-bottom: 10px; /* Separación entre la imagen y el texto */
+  max-width: 100%;
+  height: auto;
 }
