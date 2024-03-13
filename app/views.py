@@ -103,7 +103,7 @@ def enviar_factura_email(request, idtratamientno):
             'Tu Factura de la Clínica Dental',  # Asunto
             'Aquí está tu factura adjunta.',  # Mensaje
             'especialidadeslapaz1@gmail.com',  # Email de origen
-            ['kevinestuardocast3395@gmail.com'], #[paciente.correo_electronico],  # Destinatario de prueba
+            ['paciente.correo_electronico'],  # Destinatario de prueba
             reply_to=['especialidadeslapaz1@gmail.com'],  # Opcional
         )
         email.attach('factura.pdf', resultado_pdf.getvalue(), 'application/pdf')  # Adjunta el PDF
