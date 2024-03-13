@@ -21,6 +21,7 @@ from xhtml2pdf import pisa
 from .models import Tratamiento
 from io import BytesIO
 from .models import Dentista, Asistente
+from .forms import DentistaForm
 
 # Create your views here.
 
@@ -208,27 +209,20 @@ def actualizar_tratamiento(request, idtratamientno):
     return render(request, 'layouts/actualizar_tratamiento.html', {'form': form})
 
 # Funciones para Dentistas
+
 def listar_dentistas(request):
     dentistas = Dentista.objects.all()
-    return render(request, 'listar_dentistas.html', {'dentistas': dentistas})
+    return render(request, 'layouts/listar_dentistas.html', {'dentistas': dentistas})
 
 def agregar_dentista(request):
     if request.method == 'POST':
-        # Obtener datos del formulario
-        foto = request.POST['foto']
-        nombre = request.POST['nombre']
-        apellido = request.POST['apellido']
-        telefono = request.POST['telefono']
-        email = request.POST['email']
-        colegiado = request.POST['colegiado']
-        especialidad = request.POST['especialidad']
-
-        # Crear nuevo dentista
-        dentista = Dentista.objects.create(foto=foto, nombre=nombre, apellido=apellido,
-                                           telefono=telefono, email=email, colegiado=colegiado,
-                                           especialidad=especialidad)
-        return redirect('listar_dentistas')
-    return render(request, 'agregar_dentista.html')
+        form = DentistaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_dentistas')  # Asegúrate de reemplazar esto con el nombre de tu URL
+    else:
+        form = DentistaForm()
+    return render(request, 'layouts/agregar_dentistas.html', {'form': form})
 
 def eliminar_dentista(request, id):
     dentista = Dentista.objects.get(pk=id)
@@ -242,10 +236,10 @@ def editar_dentista(request, id):
         dentista.foto = request.POST['foto']
         dentista.nombre = request.POST['nombre']
         dentista.apellido = request.POST['apellido']
-        dentista.telefono = request.POST['telefono']
-        dentista.email = request.POST['email']
-        dentista.colegiado = request.POST['colegiado']
-        dentista.especialidad = request.POST['especialidad']
+        dentista.numero_telefono = request.POST['telefono']
+        dentista.correo_electronico = request.POST['email']
+        dentista.no_colegiado = request.POST['colegiado']
+        dentista.tipo_especialidad_idtipo_especialidad = request.POST['especialidad']
         dentista.save()
         return redirect('listar_dentistas')
     return render(request, 'editar_dentista.html', {'dentista': dentista})

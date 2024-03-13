@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
 from django.forms import ModelForm, Select
-from .models import Usuario, TipoUsuario, Dentista, Asistente, Tratamiento, Cita, Material
+from .models import Usuario, TipoUsuario, Dentista, Asistente, Tratamiento, Cita, Material, TipoEspecialidad
 
 class UsuarioSignupForm(forms.ModelForm):
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
@@ -80,4 +80,25 @@ class MaterialForm(forms.ModelForm):
             'serie_modelo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la serie/modelo'}),
             'cantidad': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la cantidad'}),
             'precio_individual': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el precio individual'}),
+        }
+
+class DentistaForm(forms.ModelForm):
+    class Meta:
+        model = Dentista
+        tipo_especalidad_idtipo_especialidad = forms.ModelChoiceField(queryset=TipoEspecialidad.objects.all(), required=False)
+        fields = ['nombre', 'apellido', 'numero_telefono', 'correo_electronico', 'no_colegiado', 'tipo_especialidad_idtipo_especialidad']
+        labels = {
+            'nombre': 'Nombre', 
+            'apellido': 'Apellido', 
+            'numero_telefono': 'Número Teléfono', 
+            'correo_electronico': 'Correo Electrónico', 
+            'no_colegiado': 'Número de Colegiado', 
+            'tipo_especialidad_idtipo_especialidad': 'Especialidad'
+        }
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la descripción'}),
+            'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la serie/modelo'}),
+            'numero_telefono': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la cantidad'}),
+            'correo_electronico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el precio individual'}),
+            'no_colegiado': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la cantidad'}),
         }
