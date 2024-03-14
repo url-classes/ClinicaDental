@@ -5,9 +5,15 @@ body {
     padding: 0;
 }
 
-h1 {
+.title-container {
+    background-image: url(../img/clinica-dental.jpg); /* Ruta de la imagen de fondo */
+    background-size: cover;
+    padding: 20px;
     text-align: center;
-    color: #333;
+}
+
+.title {
+    color: white;
 }
 
 table {
@@ -32,4 +38,17 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
     background-color: #e0e0e0;
+}
+
+.edit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
 }
