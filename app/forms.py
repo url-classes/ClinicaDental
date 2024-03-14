@@ -96,9 +96,11 @@ class DentistaForm(forms.ModelForm):
             'tipo_especialidad_idtipo_especialidad': 'Especialidad'
         }
         widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la descripción'}),
-            'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la serie/modelo'}),
-            'numero_telefono': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la cantidad'}),
-            'correo_electronico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el precio individual'}),
-            'no_colegiado': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la cantidad'}),
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su nombre'}),
+            'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su apellido'}),
+            'numero_telefono': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su número de teléfono'}),
+            'correo_electronico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el correo electrónico'}),
+            'no_colegiado': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su número de colegiado'}),
         }
+
+
