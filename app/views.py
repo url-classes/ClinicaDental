@@ -21,7 +21,7 @@ from xhtml2pdf import pisa
 from .models import Tratamiento
 from io import BytesIO
 from .models import Dentista, Asistente
-from .forms import DentistaForm
+from .forms import DentistaForm, AsistenteForm
 
 # Create your views here.
 
@@ -247,22 +247,17 @@ def editar_dentista(request, id):
 # Funciones para Asistentes
 def listar_asistentes(request):
     asistentes = Asistente.objects.all()
-    return render(request, 'listar_asistentes.html', {'asistentes': asistentes})
+    return render(request, 'layouts/listar_asistentes.html', {'asistentes': asistentes})
 
 def agregar_asistente(request):
     if request.method == 'POST':
-        # Obtener datos del formulario
-        foto = request.POST['foto']
-        nombre = request.POST['nombre']
-        apellido = request.POST['apellido']
-        escolaridad = request.POST['escolaridad']
-        salario = request.POST['salario']
-
-        # Crear nuevo asistente
-        asistente = Asistente.objects.create(foto=foto, nombre=nombre, apellido=apellido,
-                                             escolaridad=escolaridad, salario=salario)
-        return redirect('listar_asistentes')
-    return render(request, 'agregar_asistente.html')
+        form = AsistenteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_asistentes')  # Asegúrate de reemplazar esto con el nombre de tu URL
+    else:
+        form = AsistenteForm()
+    return render(request, 'layouts/agregar_asistentes.html', {'form': form})
 
 def eliminar_asistente(request, id):
     asistente = Asistente.objects.get(pk=id)

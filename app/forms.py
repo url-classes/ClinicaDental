@@ -102,5 +102,23 @@ class DentistaForm(forms.ModelForm):
             'correo_electronico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el correo electrónico'}),
             'no_colegiado': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su número de colegiado'}),
         }
+    
+class AsistenteForm(forms.ModelForm):
+    class Meta:
+        model = Asistente
+        fields = ['nombre', 'apellido', 'escolaridad', 'salario']
+        labels = {
+            'nombre': 'Nombre', 
+            'apellido': 'Apellido', 
+            'escolaridad': 'Escolaridad', 
+            'salario': 'Salario', 
+        }
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su nombre'}),
+            'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su apellido'}),
+            'escolaridad': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su escolaridad'}),
+            'salario': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el salario'}),
+        }
+    
 
 

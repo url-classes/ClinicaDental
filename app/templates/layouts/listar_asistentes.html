@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Dentistas</title>
+    <link rel="stylesheet" href="{% static 'css/styleListarAsistente.css' %}">
+</head>
+<body>
+    <div class="title-container">
+        <h1 class="title">Listado de Asistentes</h1>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Escolaridad</th>
+                <th>Salario</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for asistente in asistentes %}
+                <tr>
+                    <td>{{ asistente.nombre }}</td>
+                    <td>{{ asistente.apellido }}</td>
+                    <td>{{ asistente.escolaridad }}</td>
+                    <td>{{ asistente.salario }}</td>
+                    <td>
+                        <button class="edit-btn">Editar</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

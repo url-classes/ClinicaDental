@@ -24,11 +24,15 @@ urlpatterns = [
     
     path('recursosHumanos/dentistas/', views.listar_dentistas, name='listar_dentistas'),
     path('recursosHumanos/dentistas/agregar_dentista/', views.agregar_dentista, name='agregar_dentista'),
+
     path('recursosHumanos/dentistas/<int:id>/eliminar/', views.eliminar_dentista, name='eliminar_dentista'),
     path('recursosHumanos/dentistas/<int:id>/editar/', views.editar_dentista, name='editar_dentista'),
     path('recursosHumanos/dentistas/listar_dentistas/', views.listar_dentistas, name='listas_dentistas'),
-    path('recursosHumanos/asistentes/', views.listar_asistentes, name='listar_asistentes'),
-    path('recurosHumanos/asistentes/agregar/', views.agregar_asistente, name='agregar_asistente'),
+
+    path('recursosHumanosasistentes/', views.listar_asistentes, name='listar_asistentes'),
+    path('recursosHumanos/asistente/listar_asistente/', views.listar_asistentes, name='listar_asistentes'),
+    path('recursosHumanos/asistente/agregar_asistente/', views.agregar_asistente, name='agregar_asistente'),
+
     path('recursosHumanos/asistentes/<int:id>/eliminar/', views.eliminar_asistente, name='eliminar_asistente'),
     path('recursosHumanos/asistentes/<int:id>/editar/', views.editar_asistente, name='editar_asistente'),
 ]
