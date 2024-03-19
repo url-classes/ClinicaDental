@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Dentistas</title>
-    <link rel="stylesheet" href="{% static 'css/styleListarAsistente.css' %}">
+    <title>Listado de Asistentes</title>
+    <link rel="stylesheet" href="{% static 'css/styleListarAsistentes.css' %}">
 </head>
 <body>
     <div class="title-container">
@@ -17,7 +17,7 @@
                 <th>Apellido</th>
                 <th>Escolaridad</th>
                 <th>Salario</th>
-
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +29,7 @@
                     <td>{{ asistente.salario }}</td>
                     <td>
                         <button class="edit-btn">Editar</button>
+                        <button class="delete-btn">Eliminar</button>
                     </td>
                 </tr>
             {% endfor %}

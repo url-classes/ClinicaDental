@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar Asistente</title>
+    <link rel="stylesheet"  href="{% static 'css/styleAgregarAsistente.css' %}">
 </head>
 <body>
-    <h1>Agregar Nuevo Asistente</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
+    <div class="container">
+        <h1>Agregar Nuevo Asistente</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
 </body>
 </html>
