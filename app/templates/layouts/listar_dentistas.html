@@ -11,6 +11,7 @@
 <body>
     <div class="title-container">
         <h1 class="title">Listado de Dentistas</h1>
+        <a href="{% url 'index' %}" class="back-btn">Inicio</a>
     </div>
     <table>
         <thead>
@@ -34,7 +35,8 @@
                     <td>{{ dentista.no_colegiado }}</td>
                     <td>{{ dentista.tipo_especialidad_idtipo_especialidad }}</td>
                     <td>
-                        <a href="{% url 'eliminar_dentista' dentista.iddentista %}" class="btn btn-sm btn-danger">Borrar</a>
+                        <a href="{% url 'actualizar_dentista' dentista.iddentista %}" class="edit-btn">Actualizar</a>
+                        <a href="{% url 'eliminar_dentista' dentista.iddentista %}" class="delete-btn">Borrar</a>
                     </td>
                 </tr>
             {% endfor %}

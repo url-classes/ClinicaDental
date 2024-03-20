@@ -229,20 +229,16 @@ def eliminar_dentista(request, iddentista):
     dentista.delete()
     return redirect('listar_dentistas')
 
-def editar_dentista(request, id):
-    dentista = Dentista.objects.get(pk=id)
-    if request.method == 'POST':
-        # Actualizar datos del dentista
-        dentista.foto = request.POST['foto']
-        dentista.nombre = request.POST['nombre']
-        dentista.apellido = request.POST['apellido']
-        dentista.numero_telefono = request.POST['telefono']
-        dentista.correo_electronico = request.POST['email']
-        dentista.no_colegiado = request.POST['colegiado']
-        dentista.tipo_especialidad_idtipo_especialidad = request.POST['especialidad']
-        dentista.save()
+def actualizar_dentista(request, iddentista):
+    if iddentista:
+        dentista = get_object_or_404(Dentista, pk=iddentista)
+    else:
+        dentista = None
+    form = DentistaForm(request.POST or None, instance=dentista)
+    if form.is_valid():
+        form.save()
         return redirect('listar_dentistas')
-    return render(request, 'editar_dentista.html', {'dentista': dentista})
+    return render(request, 'layouts/actualizar_dentista.html', {'form': form})
 
 # Funciones para Asistentes
 def listar_asistentes(request):
@@ -264,14 +260,13 @@ def eliminar_asistente(request, idasistente):
     asistente.delete()
     return redirect('listar_asistentes')
 
-def editar_asistente(request, id):
-    asistente = Asistente.objects.get(pk=id)
-    if request.method == 'POST':
-        # Actualizar datos del asistente
-        asistente.foto = request.POST['foto']
-        asistente.nombre = request.POST['nombre']
-        asistente.apellido = request.POST['apellido']
-        asistente.escolaridad = request.POST['escolaridad']
-        asistente.salario = request.POST['salario']
-        asistente.save()
+def actualizar_asistente(request, idasistente):
+    if idasistente:
+        asistente = get_object_or_404(Asistente, pk=idasistente)
+    else:
+        asistente = None
+    form = AsistenteForm(request.POST or None, instance=asistente)
+    if form.is_valid():
+        form.save()
         return redirect('listar_asistentes')
+    return render(request, 'layouts/actualizar_asistente.html', {'form': form})

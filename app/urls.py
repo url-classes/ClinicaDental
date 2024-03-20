@@ -26,14 +26,11 @@ urlpatterns = [
     path('recursosHumanos/dentistas/listar_dentistas/', views.listar_dentistas, name='listas_dentistas'),
     path('recursosHumanos/dentistas/agregar_dentista/', views.agregar_dentista, name='agregar_dentista'),
     path('recursosHumanos/eliminar_dentista/<int:iddentista>/', views.eliminar_dentista, name='eliminar_dentista'),
-
-    path('recursosHumanos/dentistas/<int:id>/editar/', views.editar_dentista, name='editar_dentista'),
+    path('recursosHumanos/actualizar_dentista/<int:iddentista>/', views.actualizar_dentista, name='actualizar_dentista'),
 
     path('recursosHumanosasistentes/', views.listar_asistentes, name='listar_asistentes'),
     path('recursosHumanos/asistente/listar_asistente/', views.listar_asistentes, name='listar_asistentes'),
     path('recursosHumanos/asistente/agregar_asistente/', views.agregar_asistente, name='agregar_asistente'),
     path('recursosHumanos/asistentes/<int:idasistente>/eliminar/', views.eliminar_asistente, name='eliminar_asistente'),
-
-    path('recursosHumanos/asistentes/<int:id>/eliminar/', views.eliminar_asistente, name='eliminar_asistente'),
-    path('recursosHumanos/asistentes/<int:id>/editar/', views.editar_asistente, name='editar_asistente'),
+    path('recursosHumanos/actualizar_asistente/<int:idasistente>/', views.actualizar_asistente, name='actualizar_asistente'),
 ]

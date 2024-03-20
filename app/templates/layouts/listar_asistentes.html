@@ -9,6 +9,7 @@
 <body>
     <div class="title-container">
         <h1 class="title">Listado de Asistentes</h1>
+        <a href="{% url 'index' %}" class="back-btn">Inicio</a>
     </div>
     <table>
         <thead>
@@ -28,7 +29,8 @@
                     <td>{{ asistente.escolaridad }}</td>
                     <td>{{ asistente.salario }}</td>
                     <td>
-                        <a href="{% url 'eliminar_asistente' asistente.idasistente %}" class="btn btn-sm btn-danger">Borrar</a>
+                        <a href="{% url 'actualizar_asistente' asistente.idasistente %}" class="edit-btn">Actualizar</a>
+                        <a href="{% url 'eliminar_asistente' asistente.idasistente %}" class="delete-btn">Borrar</a>
                     </td>
                 </tr>
             {% endfor %}

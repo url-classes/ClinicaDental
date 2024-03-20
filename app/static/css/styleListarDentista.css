@@ -65,3 +65,16 @@ tbody tr:hover {
 .delete-btn:hover {
     background-color: #bd2130;
 }
+.back-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.back-btn:hover {
+    background-color: #0056b3;
+}
