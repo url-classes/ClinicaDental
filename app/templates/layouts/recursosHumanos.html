@@ -7,64 +7,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Dentistas y Asistentes</title>
-    <link rel="stylesheet" href="{% static 'css/styleRecursosHumanos.css' %}">
+    <title>Recursos Humanos</title>
+    <link rel="stylesheet"  href="{% static 'css/styleRecursosHumanos.css' %}">
 </head>
 <body>
-    <button class="boton" onclick="location.href='dentistas/listar_dentistas/';">Ver listado de Dentistas</button>
-    <button class="boton" onclick="location.href='dentistas/agregar_dentista/';">Agregar Dentistas</button>
-    <button class="boton" onclick="location.href='asistente/listar_asistente/';">Ver listado de Asistentes</button>
-    <button class="boton" onclick="location.href='asistente/agregar_asistente';">Agregar Asistente</button>
-    <div class="container">
-        <h1>Recursos Humanos</h1>
-        <h2>Dentistas</h2>
-        <button onclick="mostrarFormulario('dentista')">Agregar Dentista</button>
-        <div id="formulario-dentista" class="formulario hidden">
-            <h3>Agregar Dentista</h3>
-            <label for="foto-dentista">Foto:</label>
-            <input type="text" id="foto-dentista" placeholder="URL de la foto">
-            <label for="nombre-dentista">Nombre:</label>
-            <input type="text" id="nombre-dentista" placeholder="Nombre">
-            <label for="apellido-dentista">Apellido:</label>
-            <input type="text" id="apellido-dentista" placeholder="Apellido">
-            <label for="telefono-dentista">Teléfono:</label>
-            <input type="text" id="telefono-dentista" placeholder="Teléfono">
-            <label for="email-dentista">Correo electrónico:</label>
-            <input type="email" id="email-dentista" placeholder="Correo electrónico">
-            <label for="colegiado-dentista">Número de colegiado:</label>
-            <input type="text" id="colegiado-dentista" placeholder="Número de colegiado">
-            <label for="especialidad-dentista">Especialidad:</label>
-            <input type="text" id="especialidad-dentista" placeholder="Especialidad">
-            <button onclick="agregarDentista()">Agregar</button>
-            <button onclick="cancelar('dentista')">Cancelar</button>
+    <div class="background-image">
+        <div class="content">
+            <h1>Recursos Humanos</h1>
+            <h2>Dentistas</h2>
+            <button class="boton" onclick="location.href='dentistas/listar_dentistas/';">Ver listado de Dentistas</button>
+            <button class="boton" onclick="location.href='dentistas/agregar_dentista/';">Agregar Dentistas</button>
+            <br><br>
+            <h2>Asistentes</h2>
+            <button class="boton" onclick="location.href='asistente/listar_asistente/';">Ver listado de Asistentes</button>
+            <button class="boton" onclick="location.href='asistente/agregar_asistente';">Agregar Asistente</button>
         </div>
-
-        <div id="dentistas-container"></div>
-
-        <h2>Asistentes</h2>
-        <button onclick="mostrarFormulario('asistente')">Agregar Asistente</button>
-        <div id="formulario-asistente" class="formulario hidden">
-            <h3>Agregar Asistente</h3>
-            <label for="foto-asistente">Foto:</label>
-            <input type="text" id="foto-asistente" placeholder="URL de la foto">
-            <label for="nombre-asistente">Nombre:</label>
-            <input type="text" id="nombre-asistente" placeholder="Nombre">
-            <label for="apellido-asistente">Apellido:</label>
-            <input type="text" id="apellido-asistente" placeholder="Apellido">
-            <label for="escolaridad-asistente">Escolaridad:</label>
-            <input type="text" id="escolaridad-asistente" placeholder="Escolaridad">
-            <label for="salario-asistente">Salario:</label>
-            <input type="text" id="salario-asistente" placeholder="Salario">
-            <button onclick="agregarAsistente()">Agregar</button>
-            <button onclick="cancelar('asistente')">Cancelar</button>
-        </div>
-
-        <div id="asistentes-container"></div>
     </div>
-    <script src="{% static 'js/scriptHumanos.js' %}"></script>
 </body>
 </html>
-
-
 
 {% endblock %}

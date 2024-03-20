@@ -1,4 +1,6 @@
 {% load static %}
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,8 +34,7 @@
                     <td>{{ dentista.no_colegiado }}</td>
                     <td>{{ dentista.tipo_especialidad_idtipo_especialidad }}</td>
                     <td>
-                        <button class="edit-btn">Editar</button>
-                        <button class="delete-btn">Eliminar</button>
+                        <a href="{% url 'eliminar_dentista' dentista.iddentista %}" class="btn btn-sm btn-danger">Borrar</a>
                     </td>
                 </tr>
             {% endfor %}

@@ -28,8 +28,7 @@
                     <td>{{ asistente.escolaridad }}</td>
                     <td>{{ asistente.salario }}</td>
                     <td>
-                        <button class="edit-btn">Editar</button>
-                        <button class="delete-btn">Eliminar</button>
+                        <a href="{% url 'eliminar_asistente' asistente.idasistente %}" class="btn btn-sm btn-danger">Borrar</a>
                     </td>
                 </tr>
             {% endfor %}

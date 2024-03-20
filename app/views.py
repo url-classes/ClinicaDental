@@ -224,8 +224,8 @@ def agregar_dentista(request):
         form = DentistaForm()
     return render(request, 'layouts/agregar_dentistas.html', {'form': form})
 
-def eliminar_dentista(request, id):
-    dentista = Dentista.objects.get(pk=id)
+def eliminar_dentista(request, iddentista):
+    dentista = Dentista.objects.get(pk=iddentista)
     dentista.delete()
     return redirect('listar_dentistas')
 
@@ -259,8 +259,8 @@ def agregar_asistente(request):
         form = AsistenteForm()
     return render(request, 'layouts/agregar_asistentes.html', {'form': form})
 
-def eliminar_asistente(request, id):
-    asistente = Asistente.objects.get(pk=id)
+def eliminar_asistente(request, idasistente):
+    asistente = Asistente.objects.get(pk=idasistente)
     asistente.delete()
     return redirect('listar_asistentes')
 
