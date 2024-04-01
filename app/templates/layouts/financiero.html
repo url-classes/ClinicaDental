@@ -1,0 +1,136 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Módulo Financiero</title>
+        <link rel="stylesheet" href="{% static 'css/styleFinanciero.css' %}">
+    </head>    
+<body>
+    <h1>Módulo Financiero</h1>
+    <table border="1">
+        <caption>Resumen Financiero</caption>
+        <thead>
+            <tr>
+                <th>Categoría</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Giro de la Empresa</td>
+                <td>Servicios Odontologicos</td>
+            </tr>
+            <tr>
+                <td>Etapa del Negocio</td>
+                <td>Madurez (25 años)</td>
+            </tr>
+            <tr>
+                <td>Periodo de Tiempo a Desarrollar</td>
+                <td>10  Años</td>
+            </tr>
+            <tr>
+                <td>Año de Comienzo</td>
+                <td>2020</td>
+            </tr>
+            <tr>
+                <td>Mes de Comienzo</td>
+                <td>Enero</td>
+            </tr>
+            <tr>
+                <td>Regimen Tributario</td>
+                <td>Pequeño Contribuyente (5% anual)</td>
+            </tr>
+        </tbody>
+    </table>
+    <p></p>
+<div class="tablas-financieras">
+    <section class="tabla-ingresos">
+        <h3>Desglose Ingresos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Concepto</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tratamiento in tratamientos %}
+                <tr>
+                    <td>{{ tratamiento.detalle }}</td>
+                    <td>{{ tratamiento.precio }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th>Total</th>
+                    <td>{{ total_tratamientos }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h1>Impuesto sobre Regimen Tributario</h1>
+        <p>{{impuesto|floatformat:2}}</p>
+        <strong>Subtotal Ingresos:</strong> {{ total_ingresos|floatformat:2 }}
+    </section>
+    <section class="tabla-egresos">
+        <h3>Desglose Egresos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Concepto</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for asistente in asistentes %}
+                <tr>
+                    <td>{{ asistente.nombre }} {{ asistente.apellido }}</td>
+                    <td>{{ asistente.salario|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th>Total</th>
+                    <td>{{ total_asistentes|floatformat:2 }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tratamiento</th>
+                    <th>Material</th>
+                    <th>Cantidad Utilizada</th>
+                    <th>Precio Individual</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tratamiento_material in tratamientos_materiales %}
+                <tr>
+                    <td>{{ tratamiento_material.detalle_tratamiento }} </td>
+                    <td>{{ tratamiento_material.descripcion_material }}</td>
+                    <td>{{ tratamiento_material.cantidad_utilizada }}</td>
+                    <td>{{ tratamiento_material.precio_individual_material|floatformat:2 }}</td>
+                    <td>{{ tratamiento_material.total_material|floatformat:2}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th>Total</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ suma_total_material|floatformat:2 }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <strong>Subtotal Egresos:</strong> {{ total_egresos|floatformat:2 }}
+    </section>
+</div>
+<div class="ganancia-total">
+    <h3>Ganancia Total </h3>
+    <p>{{ganancia|floatformat:2}}</p>
+</div>
+</body>
+</html>
+{% endblock %}

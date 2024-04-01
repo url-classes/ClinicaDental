@@ -19,9 +19,11 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from xhtml2pdf import pisa
 from .models import Tratamiento
+from .models import TratamientoMaterial
 from io import BytesIO
 from .models import Dentista, Asistente
 from .forms import DentistaForm, AsistenteForm
+from django.db.models import F, FloatField, ExpressionWrapper
 
 # Create your views here.
 
@@ -41,7 +43,47 @@ def ventas(request):
 @user_has_permisos(permisos_requeridos=['financiero'])
 def financiero(request):
     if hasattr(request.user, 'dentista_iddentista'):
-        return render(request, "layouts/financiero.html")
+        tratamientos = Tratamiento.objects.all()  # Recupera todos los objetos Tratamiento
+        total_tratamientos = sum(tratamiento.precio for tratamiento in tratamientos)
+    
+        asistentes = Asistente.objects.all()  # Recupera todos los objetos Asistente
+        total_asistentes = sum(asistente.salario for asistente in asistentes)
+
+        tratamientos_materiales = TratamientoMaterial.objects.annotate(
+            detalle_tratamiento=F('tratamiento_idtratamientno__detalle'), 
+            descripcion_material=F('material_idmaterial__descripcion'),  
+            precio_individual_material=F('material_idmaterial__precio_individual'),
+            total_material=ExpressionWrapper(
+                F('cantidad_utilizada') * F('precio_individual_material'),
+                output_field=FloatField()
+            )  
+        ).values(
+            'detalle_tratamiento', 'descripcion_material', 'cantidad_utilizada', 'precio_individual_material', 'total_material'
+        )
+        suma_total_material = sum(item['total_material'] for item in tratamientos_materiales)
+        
+        total_egresos = suma_total_material + total_asistentes
+        
+        impuesto = 0.05 * total_tratamientos
+        
+        total_ingresos = total_tratamientos - impuesto
+        
+        ganancia = total_ingresos - suma_total_material
+        
+        context = {
+            'tratamientos': tratamientos,
+            'total_tratamientos': total_tratamientos,
+            'asistentes': asistentes,
+            'total_asistentes': total_asistentes,
+            'tratamientos_materiales': tratamientos_materiales,
+            'suma_total_material': suma_total_material,
+            'total_egresos': total_egresos,
+            'impuesto': impuesto,
+            'total_ingresos': total_ingresos,
+            'ganancia': ganancia,
+        }
+    
+        return render(request, 'layouts/financiero.html', context)
     else:
         return HttpResponseForbidden("No tienes permiso para acceder a esta sección.")
 
