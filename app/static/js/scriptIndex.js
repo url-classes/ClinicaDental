@@ -1,76 +1,55 @@
-let imagenes = [
+const imagenes = [
     {
         "url": baseUrlStatic + "img/inventario.webp",
         "nombre": "Inventario",
         "descripcion": "Creado para controlar el manejo de material e instrumentos en la clínica"
-
     },
     {
         "url": baseUrlStatic + "img/Ventas.webp",
         "nombre": "Ventas",
         "descripcion": "Optimizar los procesos que conlleva el brindar un servicio."
-
     },
     {
         "url": baseUrlStatic + "img/rh.webp",
-        "nombre": "Recursos Humano",
+        "nombre": "Recursos Humanos",
         "descripcion": "Implementado para mejorar y replantear Recursos humanos"
-
     },
     {
         "url": baseUrlStatic + "img/financiero.webp",
         "nombre": "Financiero",
         "descripcion": "Módulo implementado para manejar las finanzas e impuestos."
-
-    },
-]
-
-
-let atras = document.getElementById('atras');
-let adelante = document.getElementById('adelante');
-let imagen = document.getElementById('img');
-let puntos = document.getElementById('puntos');
-let texto = document.getElementById('texto')
-let actual = 0
-posicionCarrusel()
-
-atras.addEventListener('click', function(){
-    actual -=1
-
-    if (actual == -1){
-        actual = imagenes.length - 1
     }
+];
 
-    imagen.innerHTML = ` <img class="img" src="${imagenes[actual].url}" alt="logo pagina" loading="lazy"></img>`
-    texto.innerHTML = `
-    <h3>${imagenes[actual].nombre}</h3>
-    <p>${imagenes[actual].descripcion}</p>
-    `
-    posicionCarrusel()
-})  
-adelante.addEventListener('click', function(){
-    actual +=1
+const atrasBtn = document.getElementById('atras');
+const adelanteBtn = document.getElementById('adelante');
+const imagenElement = document.getElementById('img');
+const puntosElement = document.getElementById('puntos');
+const textoElement = document.getElementById('texto');
+let actualIndex = 0;
 
-    if (actual == imagenes.length){
-        actual = 0
-    }
+atrasBtn.addEventListener('click', function() {
+    cambiarImagen(-1);
+});
 
-    imagen.innerHTML = ` <img class="img" src="${imagenes[actual].url}" alt="logo pagina" loading="lazy"></img>`
-    texto.innerHTML = `
-    <h3>${imagenes[actual].nombre}</h3>
-    <p>${imagenes[actual].descripcion}</p>
-    `
-    posicionCarrusel()
-})  
+adelanteBtn.addEventListener('click', function() {
+    cambiarImagen(1);
+});
 
-function posicionCarrusel() {
-    puntos.innerHTML = ""
-    for (var i = 0; i <imagenes.length; i++){
-        if(i == actual){
-            puntos.innerHTML += '<p class="bold">.<p>'
-        }
-        else{
-            puntos.innerHTML += '<p>.<p>'
-        }
-    } 
+function cambiarImagen(delta) {
+    actualIndex = (actualIndex + delta + imagenes.length) % imagenes.length;
+    const imagen = imagenes[actualIndex];
+    
+    imagenElement.src = imagen.url;
+    textoElement.innerHTML = `<h3>${imagen.nombre}</h3><p>${imagen.descripcion}</p>`;
+    actualizarPuntos();
 }
+
+function actualizarPuntos() {
+    puntosElement.innerHTML = imagenes.map((_, index) => {
+        return `<p${index === actualIndex ? ' class="bold"' : ''}>.</p>`;
+    }).join('');
+}
+
+// Mostrar la primera imagen al cargar la página
+cambiarImagen(0);
