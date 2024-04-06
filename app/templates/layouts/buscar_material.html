@@ -1,0 +1,20 @@
+<!-- buscar_material.html -->
+{% block content %}
+{% load math_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscar Material</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylebuscar_material.css' %}">
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="descripcion">Ingrese la descripción del material:</label>
+        <input type="text" name="descripcion" id="descripcion">
+        <button type="submit">Buscar</button>
+    </form>
+</body>
+</html>
+{% endblock %}

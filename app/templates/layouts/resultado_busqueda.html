@@ -1,0 +1,25 @@
+<!-- resultado_busqueda.html -->
+{% block content %}
+{% load math_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado de Búsqueda</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styleresultado_busqueda.css' %}">
+</head>
+<body>
+    <div class="result-container">
+        {% if material %}
+            <p class="success-message">El material con la descripción "{{ material.descripcion }}" existe en la tabla.</p>
+            <p class="result-item">Serie/Modelo: {{ material.serie_modelo }}</p>
+            <p class="result-item">Cantidad: {{ material.cantidad }}</p>
+            <p class="result-item">Precio individual: {{ material.precio_individual }}</p>
+        {% else %}
+            <p class="error-message">El material con la descripción ingresada no existe en la tabla.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %}
+

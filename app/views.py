@@ -230,6 +230,14 @@ def actualizar_material(request, idmaterial):
         return redirect('lista_materiales')
     return render(request, 'layouts/actualizar_material.html', {'form': form})
 
+def buscar_material(request):
+    if request.method == 'POST':
+        descripcion = request.POST.get('descripcion', '')
+        material = Material.objects.filter(descripcion=descripcion).first()
+        return render(request, 'layouts/resultado_busqueda.html', {'material': material})
+    return render(request, 'layouts/buscar_material.html')
+
+
 def lista_materiales(request):
     materiales = Material.objects.all()
     return render(request, 'layouts/lista_materiales.html', {'materiales': materiales})

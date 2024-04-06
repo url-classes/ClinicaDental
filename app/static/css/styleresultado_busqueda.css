@@ -1,0 +1,38 @@
+/* styles.css */
+
+/* Estilos para el cuerpo del documento */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el contenedor del resultado */
+.result-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el mensaje de éxito */
+.success-message {
+    color: #1948a0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Estilos para el mensaje de error */
+.error-message {
+    color: #FF5733;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Estilos para los párrafos */
+.result-item {
+    margin-bottom: 10px;
+}
