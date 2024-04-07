@@ -10,7 +10,7 @@ from django.contrib.auth.hashers import make_password
 from .forms import UsuarioSignupForm
 from .backends import UsuarioBackend
 from .forms import UsuarioLoginForm
-from .forms import TratamientoForm
+from .forms import TratamientoForm, TratamientoMaterialForm
 from .models import Material
 from .forms import MaterialForm
 from django.shortcuts import get_object_or_404, redirect
@@ -48,17 +48,22 @@ def financiero(request):
     
         asistentes = Asistente.objects.all()  # Recupera todos los objetos Asistente
         total_asistentes = sum(asistente.salario for asistente in asistentes)
-
+        
         tratamientos_materiales = TratamientoMaterial.objects.annotate(
             detalle_tratamiento=F('tratamiento_idtratamientno__detalle'), 
-            descripcion_material=F('material_idmaterial__descripcion'),  
+            descripcion_material=F('material_idmaterial__descripcion'),
+            cantidad_material=F('material_idmaterial__cantidad'),  
             precio_individual_material=F('material_idmaterial__precio_individual'),
             total_material=ExpressionWrapper(
                 F('cantidad_utilizada') * F('precio_individual_material'),
                 output_field=FloatField()
+            ),
+            cantidad_material_despues=ExpressionWrapper(
+                F('material_idmaterial__cantidad') - F('cantidad_utilizada'),
+                output_field=FloatField()
             )  
         ).values(
-            'detalle_tratamiento', 'descripcion_material', 'cantidad_utilizada', 'precio_individual_material', 'total_material'
+            'detalle_tratamiento', 'descripcion_material', 'cantidad_material', 'cantidad_utilizada', 'cantidad_antes', 'cantidad_despues', 'fecha_transaccion', 'precio_individual_material', 'total_material', 'cantidad_material_despues'
         )
         suma_total_material = sum(item['total_material'] for item in tratamientos_materiales)
         
@@ -266,6 +271,35 @@ def borrar_tratamiento(request, idtratamientno):
     tratamiento.delete()
     return redirect('ventas')
 
+def agregar_tratamiento_material(request, idtratamientno):
+    if request.method == 'POST':
+        form = TratamientoMaterialForm(request.POST)
+        if form.is_valid():
+            for material in Material.objects.all():
+                material_seleccionado = form.cleaned_data.get(f'material_seleccionado_{material.idmaterial}', False)
+                cantidad = form.cleaned_data.get(f'cantidad_{material.idmaterial}', 0)
+                
+                if material_seleccionado and cantidad > 0:
+                    # Usar get_or_create para prevenir IntegrityError por duplicados
+                    tratamiento_material, created = TratamientoMaterial.objects.get_or_create(
+                        tratamiento_idtratamientno_id=idtratamientno,
+                        material_idmaterial_id=material.idmaterial,
+                        defaults={'cantidad_utilizada': cantidad}
+                    )
+
+                    # Si el objeto ya existía, y no fue creado en esta llamada, actualizamos la cantidad
+                    if not created:
+                        tratamiento_material.cantidad_utilizada = cantidad
+                        tratamiento_material.save()
+            return redirect('ventas')
+        else:
+            # Manejar el caso de formulario no válido si es necesario
+            pass
+    else:
+        form = TratamientoMaterialForm()
+    
+    return render(request, 'layouts/agregar_tratamiento_material.html', {'form': form})
+
 def actualizar_tratamiento(request, idtratamientno):
     if idtratamientno:
         tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
@@ -339,3 +373,20 @@ def actualizar_asistente(request, idasistente):
         form.save()
         return redirect('listar_asistentes')
     return render(request, 'layouts/actualizar_asistente.html', {'form': form})
+
+def guardar_fecha(request, idtratamientno):
+    # Si es POST, se procesa el formulario
+    if request.method == "POST":
+        fecha_transaccion = request.POST.get("fecha_transaccion")
+        tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
+
+        TratamientoMaterial.objects.create(
+            tratamiento_idtratamientno=tratamiento,
+            fecha_transaccion=fecha_transaccion,
+            # Configura otros campos según sea necesario
+        )
+
+        # Redirige después de guardar la fecha
+        return redirect('ventas')
+    else:
+        return redirect('layouts/seleccionar_fecha.html')

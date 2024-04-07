@@ -35,4 +35,7 @@ urlpatterns = [
     path('recursosHumanos/asistente/agregar_asistente/', views.agregar_asistente, name='agregar_asistente'),
     path('recursosHumanos/asistentes/<int:idasistente>/eliminar/', views.eliminar_asistente, name='eliminar_asistente'),
     path('recursosHumanos/actualizar_asistente/<int:idasistente>/', views.actualizar_asistente, name='actualizar_asistente'),
+    
+    path('ventas/<int:idtratamientno>/agregar_material', views.agregar_tratamiento_material, name='agregar_tratamiento_material'),
+    path('ventas/<int:idtratamientno>/agregar_fecha_material/', views.guardar_fecha, name='guardar_fecha_material'),
 ]

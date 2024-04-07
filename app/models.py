@@ -40,6 +40,7 @@ class Asistente(models.Model):
     apellido = models.CharField(max_length=45, blank=True, null=True)
     escolaridad = models.CharField(max_length=45, blank=True, null=True)
     salario = models.FloatField(blank=True, null=True)
+    estado = models.BooleanField(default=True, null=True, blank=True)
 
     class Meta:
         managed = True
@@ -69,6 +70,7 @@ class Dentista(models.Model):
     numero_telefono = models.CharField(max_length=45, blank=True, null=True)
     correo_electronico = models.CharField(max_length=45, blank=True, null=True)
     no_colegiado = models.CharField(max_length=45, blank=True, null=True)
+    estado = models.BooleanField(default=True, null=True, blank=True)
     tipo_especialidad_idtipo_especialidad = models.ForeignKey('TipoEspecialidad', models.DO_NOTHING, db_column='Tipo_Especialidad_idTipo_Especialidad')  # Field name made lowercase.
 
     class Meta:
@@ -114,6 +116,7 @@ class Material(models.Model):
     serie_modelo = models.CharField(max_length=45, blank=True, null=True)
     cantidad = models.IntegerField(blank=True, null=True)
     precio_individual = models.FloatField(blank=True, null=True)
+    estado = models.BooleanField(default=True, null=True, blank=True)
 
     class Meta:
         managed = True
@@ -170,6 +173,7 @@ class Tratamiento(models.Model):
     detalle = models.CharField(max_length=45, blank=True, null=True)
     precio = models.FloatField(blank=True, null=True)
     cantidad_citas = models.IntegerField(blank=True, null=True)
+    estado = models.BooleanField(default=True, null=True, blank=True)
     cita_idcita = models.ForeignKey(Cita, models.DO_NOTHING, db_column='Cita_idCita')  # Field name made lowercase.
     asistente_idasistente = models.ForeignKey(Asistente, models.DO_NOTHING, db_column='Asistente_idAsistente')  # Field name made lowercase.
 
@@ -185,6 +189,9 @@ class TratamientoMaterial(models.Model):
     tratamiento_idtratamientno = models.OneToOneField(Tratamiento, models.DO_NOTHING, db_column='Tratamiento_idTratamientno', primary_key=True)  # Field name made lowercase. The composite primary key (Tratamiento_idTratamientno, Material_idMaterial) found, that is not supported. The first column is selected.
     material_idmaterial = models.ForeignKey(Material, models.DO_NOTHING, db_column='Material_idMaterial')  # Field name made lowercase.
     cantidad_utilizada = models.IntegerField(blank=True, null=True)
+    cantidad_antes = models.IntegerField(null=True, blank=True, default=None)
+    cantidad_despues = models.IntegerField(null=True, blank=True, default=None)
+    fecha_transaccion = models.DateTimeField(null=True, blank=True, default=None)
 
     class Meta:
         managed = True

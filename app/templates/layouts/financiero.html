@@ -131,6 +131,36 @@
     <h3>Ganancia Total </h3>
     <p>{{ganancia|floatformat:2}}</p>
 </div>
+<div class="control-materiales">
+    <h2>Control de Materiales</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Tratamiento</th>
+                <th>Material</th>
+                <th>Cantidad antes del Tratamiento</th>
+                <th>Cantidad después del Tratamiento</th>
+                <th>Fecha de la Transacción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tratamiento_material in tratamientos_materiales %}
+                <tr>
+                    <td>{{ tratamiento_material.detalle_tratamiento }}</td>
+                    <td>{{ tratamiento_material.descripcion_material }}</td>
+                    <td>{{ tratamiento_material.cantidad_material }}</td>
+                    <!-- Aplicar el estilo condicionalmente solo a esta celda -->
+                    {% if tratamiento_material.cantidad_material_despues <= 3 %}
+                        <td style="background-color: red;">{{ tratamiento_material.cantidad_material_despues }}</td>
+                    {% else %}
+                        <td>{{ tratamiento_material.cantidad_material_despues }}</td>
+                    {% endif %}
+                    <td>{{ tratamiento_material.fecha_transaccion }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>        
+    </table>
+</div>
 </body>
 </html>
 {% endblock %}

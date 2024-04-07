@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`asistente` (
   `apellido` VARCHAR(45) NULL DEFAULT NULL,
   `escolaridad` VARCHAR(45) NULL DEFAULT NULL,
   `salario` FLOAT NULL DEFAULT NULL,
+  `estado` TINYINT(1) NULL DEFAULT 1,
   PRIMARY KEY (`idAsistente`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 7
@@ -121,6 +122,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`dentista` (
   `numero_telefono` VARCHAR(45) NULL DEFAULT NULL,
   `correo_electronico` VARCHAR(45) NULL DEFAULT NULL,
   `no_colegiado` VARCHAR(45) NULL DEFAULT NULL,
+  `estado` TINYINT(1) NULL DEFAULT 1,
   `Tipo_Especialidad_idTipo_Especialidad` INT(11) NOT NULL,
   PRIMARY KEY (`idDentista`),
   INDEX `fk_Dentista_Tipo_Especialidad1_idx` (`Tipo_Especialidad_idTipo_Especialidad` ASC) VISIBLE,
@@ -142,6 +144,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tratamiento` (
   `detalle` VARCHAR(45) NULL DEFAULT NULL,
   `precio` FLOAT NULL DEFAULT NULL,
   `cantidad_citas` INT(11) NULL DEFAULT NULL,
+  `estado` TINYINT(1) NULL DEFAULT 1,
   `Cita_idCita` INT(11) NOT NULL,
   `Asistente_idAsistente` INT(11) NOT NULL,
   PRIMARY KEY (`idTratamientno`),
@@ -215,6 +218,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`material` (
   `serie_modelo` VARCHAR(45) NULL DEFAULT NULL,
   `cantidad` INT(11) NULL DEFAULT NULL,
   `precio_individual` FLOAT NULL DEFAULT NULL,
+  `estado` TINYINT(1) NULL DEFAULT 1,
   PRIMARY KEY (`idMaterial`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 11
@@ -241,6 +245,9 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tratamiento_material` (
   `Tratamiento_idTratamientno` INT(11) NOT NULL,
   `Material_idMaterial` INT(11) NOT NULL,
   `cantidad_utilizada` INT(11) NULL DEFAULT NULL,
+  `cantidad_antes` INT NULL,
+  `cantidad_despues` INT NULL,
+  `fecha_transaccion` DATETIME NULL,
   PRIMARY KEY (`Tratamiento_idTratamientno`, `Material_idMaterial`),
   INDEX `fk_Tratamiento_has_Material_Material1_idx` (`Material_idMaterial` ASC) VISIBLE,
   INDEX `fk_Tratamiento_has_Material_Tratamiento1_idx` (`Tratamiento_idTratamientno` ASC) VISIBLE,

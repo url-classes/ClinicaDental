@@ -55,9 +55,20 @@ tr:hover {
   background-color: #17a2b8; /* Azul para botón Ver Factura */
 }
 
+.btn-yellow {
+  background-color: #c5d643; 
+}
+
+.btn-blue {
+  background-color: #112cb5; 
+}
+
+
 /* Estilos para hover (cuando el cursor pasa sobre el botón) */
 .btn-primary:hover,
 .btn-danger:hover,
+.btn-yellow:hover,
+.btn-blue:hover,
 .btn-info:hover {
   opacity: 0.8; /* Hace los botones ligeramente transparentes al pasar el cursor */
 }

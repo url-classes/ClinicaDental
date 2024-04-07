@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.hashers import make_password
 from django.forms import ModelForm, Select
 from .models import Usuario, TipoUsuario, Dentista, Asistente, Tratamiento, Cita, Material, TipoEspecialidad
+from django import forms
 
 class UsuarioSignupForm(forms.ModelForm):
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
@@ -119,6 +120,13 @@ class AsistenteForm(forms.ModelForm):
             'escolaridad': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su escolaridad'}),
             'salario': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el salario'}),
         }
-    
+class TratamientoMaterialForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        materiales = Material.objects.all()
+        for material in materiales:
+            self.fields[f'material_seleccionado_{material.idmaterial}'] = forms.BooleanField(label=f"Utilizar {material.descripcion}", required=False)
+            self.fields[f'cantidad_{material.idmaterial}'] = forms.IntegerField(label=f"Cantidad para {material.descripcion}", min_value=1, required=False)
+
 
 

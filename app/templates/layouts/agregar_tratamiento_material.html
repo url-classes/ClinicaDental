@@ -1,0 +1,35 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Tratamiento Material</title>
+    <link rel="stylesheet" href="{% static 'css/styleAgregarTratamientoMaterial.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Materiales al Tratamiento</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <!-- Mostrar cada campo. -->
+                    <!-- Usa field.id_for_label para asociar el label con el input correspondiente. -->
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    <!-- Muestra errores de validación para cada campo. -->
+                    {% if field.errors %}
+                        <div class="alert alert-danger">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Aceptar</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

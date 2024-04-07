@@ -49,17 +49,6 @@ INSERT INTO clinica_dental.material (idMaterial, descripcion, serie_modelo, cant
 (28, 'Sillas sala de espera', 'Basic Livin silla de espera Meta/plastico', 5, 299.00),
 (29, 'Micromotor Marathon 3 dental', 'MARATHON+316', 1, 1550);
 
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('1', '1', '5');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('1', '2', '1');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('1', '5', '1');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('1', '19', '1');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('1', '25', '1');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('2', '1', '6');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('2', '23', '1');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('2', '25', '1');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('3', '1', '5');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('3', '4', '1');
-INSERT INTO `clinica_dental`.`tratamiento_material` (`Tratamiento_idTratamientno`, `Material_idMaterial`, `cantidad_utilizada`) VALUES ('3', '22', '1');
 
 
 
