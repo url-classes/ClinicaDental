@@ -21,7 +21,7 @@ from xhtml2pdf import pisa
 from .models import Tratamiento
 from .models import TratamientoMaterial
 from io import BytesIO
-from .models import Dentista, Asistente
+from .models import Dentista, Asistente, Paciente, Factura
 from .forms import DentistaForm, AsistenteForm
 from django.db.models import F, FloatField, ExpressionWrapper
 
@@ -98,7 +98,23 @@ def recursosHumanos(request):
 def factura(request, idtratamientno):
     tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
     total = tratamiento.precio * tratamiento.cantidad_citas
-    return render(request, "layouts/factura.html", {'tratamiento': tratamiento, 'total': total, 'idtratamientno': idtratamientno})
+    pacientes = Paciente.objects.all()  # Obtiene todos los objetos Paciente
+    factura = Factura.objects.filter(tratamiento_idtratamientno=tratamiento).first()
+    cita = tratamiento.cita_idcita
+    paciente = cita.paciente_idpaciente
+    if factura:
+        total = factura.total
+    else:
+        total = 0  # O algún otro manejo si la factura no existe
+    # Agrega los pacientes al contexto
+    context = {
+        'tratamiento': tratamiento,
+        'total': total,
+        'idtratamientno': idtratamientno,
+        'paciente': paciente,  # Añade los pacientes al contexto
+    }
+    
+    return render(request, "layouts/factura.html", context)
 
 
 def generar_pdf(request, idtratamientno):
@@ -142,20 +158,23 @@ def enviar_factura_email(request, idtratamientno):
         resultado_pdf.seek(0)
 
         # Configura el correo electrónico
-        email = EmailMessage(
-            'Tu Factura de la Clínica Dental',  # Asunto
-            'Aquí está tu factura adjunta.',  # Mensaje
-            'especialidadeslapaz1@gmail.com',  # Email de origen
-            ['paciente.correo_electronico'],  # Destinatario de prueba
-            reply_to=['especialidadeslapaz1@gmail.com'],  # Opcional
-        )
-        email.attach('factura.pdf', resultado_pdf.getvalue(), 'application/pdf')  # Adjunta el PDF
-        email.send()
+        # Asegurándonos de que el correo electrónico del paciente es válido
+        if paciente.correo_electronico and '@' in paciente.correo_electronico:
+            email = EmailMessage(
+                'Tu Factura de la Clínica Dental',  # Asunto
+                'Aquí está tu factura adjunta.',  # Mensaje
+                'especialidadeslapaz1@gmail.com',  # Email de origen
+                [paciente.correo_electronico],  # Correo del destinatario
+                reply_to=['especialidadeslapaz1@gmail.com'],  # Opcional
+            )
+            email.attach('factura.pdf', resultado_pdf.getvalue(), 'application/pdf')  # Adjunta el PDF
+            email.send()
 
-        # Redirecciona a una página de confirmación o vuelve a la lista de tratamientos, por ejemplo
-        return redirect('confirmacion_factura')
+            # Redirecciona a una página de confirmación
+            return redirect('confirmacion_factura')
+        else:
+            return HttpResponse("La dirección de correo electrónico del paciente no es válida", status=400)
     else:
-        # Si el método no es POST, puedes redireccionar a otra página o mostrar un mensaje de error
         return HttpResponse("Método no permitido", status=405)
 
 def confirmacion_factura(request):
