@@ -27,9 +27,31 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary">Aceptar</button>
         </form>
     </div>
+<div class="modal fade" id="fechaModal" tabindex="-1" role="dialog" aria-labelledby="fechaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="fechaModalLabel">Seleccionar Fecha</h5>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="modal-body">
+            <input type="date" name="fecha_transaccion" class="form-control">
+            <!-- Campo oculto para pasar el ID del tratamiento -->
+            <input type="hidden" name="tratamiento_id" value="{{ tratamiento.idtratamientno }}">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Aceptar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
 {% endblock %}

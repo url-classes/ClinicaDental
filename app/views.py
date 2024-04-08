@@ -291,6 +291,16 @@ def agregar_tratamiento_material(request, idtratamientno):
                     if not created:
                         tratamiento_material.cantidad_utilizada = cantidad
                         tratamiento_material.save()
+                        
+                    fecha_transaccion = request.POST.get("fecha_transaccion")
+                    tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
+
+                    TratamientoMaterial.objects.create(
+                        tratamiento_idtratamientno=tratamiento,
+                        fecha_transaccion=fecha_transaccion,
+                        # Configura otros campos según sea necesario
+                    )
+
             return redirect('ventas')
         else:
             # Manejar el caso de formulario no válido si es necesario
@@ -389,4 +399,4 @@ def guardar_fecha(request, idtratamientno):
         # Redirige después de guardar la fecha
         return redirect('ventas')
     else:
-        return redirect('layouts/seleccionar_fecha.html')
+        return render(request, 'layouts/seleccionar_fecha.html', {'idtratamientno': idtratamientno})
