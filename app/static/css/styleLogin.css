@@ -1,11 +1,22 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+}
+
+.background-image {
+    background-image: url("{% static 'img/fondo.jpg' %}");
+    background-size: cover; /* Ajusta la imagen de fondo para cubrir todo el contenedor */
+    background-position: center; /* Centra la imagen de fondo */
+    opacity: 0.9; /* Ajusta la opacidad de la imagen de fondo */
+    width: 100%; /* Ajusta el ancho del contenedor */
+    height: 100%; /* Ajusta la altura del contenedor */
+    display: flex; /* Permite centrar el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
 }
 
 form {
