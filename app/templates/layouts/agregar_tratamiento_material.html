@@ -27,31 +27,19 @@
                     {% endif %}
                 </div>
             {% endfor %}
+            <!-- Aquí incorporamos el campo de fecha de transacción dentro del mismo formulario -->
+            <div class="form-group">
+                <label for="fecha_transaccion">Fecha de Transacción</label>
+                <input type="date" name="fecha_transaccion" class="form-control" required>
+            </div>
+            <!-- Aquí asumo que el ID del tratamiento se está pasando al contexto de la plantilla correctamente -->
+            <!-- Esto insertará el ID del tratamiento en el formulario como un campo oculto -->
+            <input type="hidden" name="tratamiento_id" value="{{ tratamiento.id }}" required>
+            
+            <!-- Botón de envío para todo el formulario -->
+            <button type="submit" class="btn btn-primary">Guardar Todo</button>
         </form>
     </div>
-<div class="modal fade" id="fechaModal" tabindex="-1" role="dialog" aria-labelledby="fechaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="fechaModalLabel">Seleccionar Fecha</h5>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form method="POST">
-          {% csrf_token %}
-          <div class="modal-body">
-            <input type="date" name="fecha_transaccion" class="form-control">
-            <!-- Campo oculto para pasar el ID del tratamiento -->
-            <input type="hidden" name="tratamiento_id" value="{{ tratamiento.idtratamientno }}">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Aceptar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
 {% endblock %}
