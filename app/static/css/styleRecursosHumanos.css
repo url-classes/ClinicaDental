@@ -1,63 +1,42 @@
-/* Estilos generales */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f0f0f0;
-  color: #333;
-  padding: 20px;
-  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f7ff; /* Azul claro para el fondo */
+  color: #333; /* Color de texto */
 }
 
-.container {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.background-image {
+  background-image: url('../img/clinica-dental\ \(1\).jpg'); /* Ruta a tu imagen de fondo */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Alinear elementos en columna */
 }
 
-h1, h2, h3 {
-  color: #333;
+.content {
+  text-align: center;
 }
 
-/* Estilos para los formularios */
-.formulario {
-  background-color: #f9f9f9;
-  padding: 15px;
-  margin-top: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+h1, h2 {
+  color: #0066ff; /* Azul oscuro para los títulos */
+  margin-top: 0; /* Eliminar margen superior por defecto */
 }
 
-.formulario label {
-  display: block;
-  margin: 10px 0 5px;
-}
-
-.formulario input[type="text"],
-.formulario input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-/* Estilos para los botones */
-button {
-  background-color: #5cb85c;
+.boton {
+  background-color: #0066ff; /* Azul oscuro para los botones */
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 20px;
   margin: 5px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #4cae4c;
+.boton:hover {
+  background-color: #0052cc; /* Cambio de color al pasar el cursor sobre el botón */
 }
-
-/* Ocultar elementos con la clase 'hidden' */
-.hidden {
-  display: none;
-}
-
