@@ -228,7 +228,7 @@ def crear_tratamiento(request):
     return render(request, 'layouts/tratamiento.html', {'form': form})
 
 def lista_tratamientos(request):
-    tratamientos = Tratamiento.objects.all()  # Recupera todos los objetos Tratamiento
+    tratamientos = Tratamiento.objects.filter(estado=1)
     return render(request, 'layouts/ventas.html', {'tratamientos': tratamientos})
 
         
@@ -243,8 +243,14 @@ def agregar_material(request):
     return render(request, 'layouts/agregar_material.html', {'form': form})
 
 def borrar_material(request, idmaterial):
+    # Obtener la instancia de Material
     material = Material.objects.get(pk=idmaterial)
-    material.delete()
+    
+    # Cambiar el estado a 0 en lugar de eliminar el objeto
+    material.estado = 0
+    material.save()
+    
+    # Redirigir a la lista de materiales
     return redirect('lista_materiales')
 
 def actualizar_material(request, idmaterial):
@@ -264,12 +270,18 @@ def buscar_material(request):
 
 
 def lista_materiales(request):
-    materiales = Material.objects.all()
+    materiales = Material.objects.filter(estado=1)
     return render(request, 'layouts/lista_materiales.html', {'materiales': materiales})
 
 def borrar_tratamiento(request, idtratamientno):
+    # Obtener la instancia de Tratamiento
     tratamiento = Tratamiento.objects.get(pk=idtratamientno)
-    tratamiento.delete()
+    
+    # Cambiar el estado a 0 en lugar de eliminar el objeto
+    tratamiento.estado = 0
+    tratamiento.save()
+    
+    # Redirigir a la vista de ventas
     return redirect('ventas')
 
 def agregar_tratamiento_material(request, idtratamientno):
@@ -324,7 +336,7 @@ def actualizar_tratamiento(request, idtratamientno):
 # Funciones para Dentistas
 
 def listar_dentistas(request):
-    dentistas = Dentista.objects.all()
+    dentistas = Dentista.objects.filter(estado=1)
     return render(request, 'layouts/listar_dentistas.html', {'dentistas': dentistas})
 
 def agregar_dentista(request):
@@ -338,8 +350,14 @@ def agregar_dentista(request):
     return render(request, 'layouts/agregar_dentistas.html', {'form': form})
 
 def eliminar_dentista(request, iddentista):
+    # Obtener la instancia de Dentista
     dentista = Dentista.objects.get(pk=iddentista)
-    dentista.delete()
+    
+    # Cambiar el estado a 0 en lugar de eliminar el objeto
+    dentista.estado = 0
+    dentista.save()
+    
+    # Redirigir a la lista de dentistas
     return redirect('listar_dentistas')
 
 def actualizar_dentista(request, iddentista):
@@ -355,7 +373,7 @@ def actualizar_dentista(request, iddentista):
 
 # Funciones para Asistentes
 def listar_asistentes(request):
-    asistentes = Asistente.objects.all()
+    asistentes = Asistente.objects.filter(estado=1)
     return render(request, 'layouts/listar_asistentes.html', {'asistentes': asistentes})
 
 def agregar_asistente(request):
@@ -369,8 +387,14 @@ def agregar_asistente(request):
     return render(request, 'layouts/agregar_asistentes.html', {'form': form})
 
 def eliminar_asistente(request, idasistente):
+    # Obtener la instancia del Asistente
     asistente = Asistente.objects.get(pk=idasistente)
-    asistente.delete()
+    
+    # Cambiar el estado a 0 para marcar el asistente como inactivo
+    asistente.estado = 0
+    asistente.save()
+    
+    # Redirigir a la lista de asistentes
     return redirect('listar_asistentes')
 
 def actualizar_asistente(request, idasistente):
