@@ -40,3 +40,17 @@ h1, h2 {
 .boton:hover {
   background-color: #0052cc; /* Cambio de color al pasar el cursor sobre el botón */
 }
+
+.back-btn {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+}
