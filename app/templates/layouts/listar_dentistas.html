@@ -1,6 +1,5 @@
 {% load static %}
 
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +17,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Apellido</th>
+                <th>Foto</th>
                 <th>Número de Teléfono</th>
                 <th>Correo Electrónico</th>
                 <th>Número Colegiado</th>
@@ -30,6 +30,7 @@
                 <tr>
                     <td>{{ dentista.nombre }}</td>
                     <td>{{ dentista.apellido }}</td>
+                    <td><img src="{{ dentista.foto.url }}" alt="Foto de {{ dentista.nombre }}" width="100"></td>
                     <td>{{ dentista.numero_telefono }}</td>
                     <td>{{ dentista.correo_electronico }}</td>
                     <td>{{ dentista.no_colegiado }}</td>
