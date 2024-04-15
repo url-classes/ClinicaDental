@@ -84,6 +84,7 @@ class MaterialForm(forms.ModelForm):
         }
 
 class DentistaForm(forms.ModelForm):
+    foto = forms.FileField(label='Foto del Dentista', required=False)  # Campo para la foto del dentista
     class Meta:
         model = Dentista
         tipo_especalidad_idtipo_especialidad = forms.ModelChoiceField(queryset=TipoEspecialidad.objects.all(), required=False)
