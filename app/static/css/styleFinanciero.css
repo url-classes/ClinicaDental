@@ -1,33 +1,65 @@
+/* Variables de colores y sombras */
+:root {
+    --color-primary: #333;
+    --color-secondary: #666;
+    --color-tertiary: #444;
+    --color-light: #f2f2f2; /* Usado para el fondo de los encabezados de las tablas */
+    --color-background: #f5f5f5;
+    --color-background-alt: #f9f9f9;
+    --color-border: #ddd;
+    --color-accent: #007bff; /* Azul principal */
+    --color-accent-hover: #0056b3; /* Azul más oscuro para hover */
+    --shadow-default: 0 2px 4px rgba(0,0,0,0.1);
+
+    /* Nuevos colores para las tablas */
+    --table-header: #007bff; /* Azul para cabeceras */
+    --table-header-text: #ffffff; /* Texto blanco para contraste */
+    --table-row-even: #e7f1ff; /* Azul claro para filas alternas */
+    --table-row-odd: #ffffff; /* Blanco para filas no alternas */
+}
+
+header{
+    display: flex;        /* Usa Flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;  /* Centra verticalmente */
+}
+
+
+/* Estilos base del documento */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: var(--color-background);
 }
 
+/* Estilos para encabezados */
 h1 {
-    color: #333;
+    color: var(--color-primary);
     text-align: center;
 }
 
-h2 {
-    color: #666;
+h2, .control-materiales h2 {
+    color: var(--color-secondary);
     margin-top: 20px;
-}
-
-section {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 h3 {
-    color: #444;
+    color: var(--color-tertiary);
 }
 
+/* Estilos de secciones y componentes de contenido */
+section, .ganancia-total, .control-materiales {
+    background-color: #fff;
+    border: 1px solid var(--color-border);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: var(--shadow-default);
+}
+
+/* Tablas y estilos de datos */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -35,7 +67,7 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border);
 }
 
 th, td {
@@ -44,7 +76,8 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: var(--table-header);
+    color: var(--table-header-text);
 }
 
 caption {
@@ -53,67 +86,63 @@ caption {
 }
 
 table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: var(--table-row-even);
 }
+
+table tr:nth-child(odd) {
+    background-color: var(--table-row-odd);
+}
+
+/* Diseño de tablas financieras */
 .tablas-financieras {
     display: flex;
     justify-content: space-between;
 }
 
 .tabla-ingresos, .tabla-egresos {
-    width: 48%; /* Ajusta para que cada tabla ocupe aproximadamente la mitad del ancho disponible, dejando espacio entre ellas */
+    width: 48%; /* Para que cada tabla ocupe aproximadamente la mitad del ancho disponible, dejando espacio entre ellas */
 }
 
-.ganancia-total {
-    margin-top: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;
-}
-.control-materiales {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.control-materiales h2 {
-    text-align: center;
-    color: #333;
-}
-
-.control-materiales table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.control-materiales th, .control-materiales td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.control-materiales thead {
-    background-color: #f2f2f2;
-}
-
+/* Botón de regreso con estilo fijo */
 .back-btn {
-    position: fixed; /* O "absolute", dependiendo de cómo quieras que se comporte respecto al scrolling */
-    top: 10px; /* Margen superior */
-    right: 10px; /* Margen derecho */
+    position: fixed;
+    top: 10px;
+    right: 10px;
     padding: 8px 15px;
-    background-color: #007bff;
+    background-color: var(--color-accent);
     color: white;
     text-decoration: none;
     border-radius: 5px;
     margin-bottom: 30px;
-  }
-  
-  .back-btn:hover {
-    background-color: #0056b3;
-  }
+}
+
+.back-btn:hover {
+    background-color: var(--color-accent-hover);
+}
+
+
+/* Estilo y color para tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff; /* Cambiar el fondo de la tabla a blanco */
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    box-shadow: var(--shadow-default);
+}
+
+th, td {
+    border: 1px solid var(--color-border);
+    padding: 8px;
+}
+
+th {
+    background-color: var(--color-accent); /* Cambiar el fondo del encabezado de la tabla a azul */
+    color: white; /* Cambiar el color del texto en el encabezado a blanco */
+}
+
+table tr:nth-child(even) {
+    background-color: var(--color-light); /* Cambiar el fondo de las filas pares a blanco */
+}
+

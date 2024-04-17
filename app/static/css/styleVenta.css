@@ -1,3 +1,9 @@
+header{
+  display: flex;        /* Usa Flexbox */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;  /* Centra verticalmente */
+}
+
 h1 {
   text-align: center; /* Centra el texto del título */
   margin-top: 20px; /* Añade un margen superior para separarlo del contenido anterior */
@@ -18,7 +24,7 @@ th, td {
 }
 
 th {
-  background-color: #4CAF50; /* Color de fondo para los encabezados de la tabla */
+  background-color: #1a7fa7; /* Color de fondo para los encabezados de la tabla */
   color: white; /* Color del texto para los encabezados */
 }
 

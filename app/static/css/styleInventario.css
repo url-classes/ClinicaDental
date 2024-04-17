@@ -1,3 +1,10 @@
+header{
+  display: flex;        /* Usa Flexbox */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;  /* Centra verticalmente */
+  text-decoration-color: black;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
@@ -52,7 +59,7 @@ tbody tr:hover {
 }
 
 h1 {
-  color: #007bff;
+  color: #040d18;
 }
 
 p {

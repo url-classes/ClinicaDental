@@ -11,10 +11,11 @@
     <a href="{% url 'index' %}" class="back-btn">Inicio</a>
     <link rel="stylesheet" href="{% static 'css/styleInventario.css' %}">
     </head>
-
+    <header style="background-image: url('{% static 'img/bannerinventario.jpg' %}'); background-size: cover; height: 250px; overflow: hidden;"></headerstyle>
+        <h1>INVENTARIO</h1>
+    </header>
     <body>
         <div class="button-container">
-            <h1>INVENTARIO</h1>
             <p>¿Qué desear hacer?</p>
             <div class="botones">
                 <button class="boton" onclick="location.href='buscar_material/';">Buscar</button>

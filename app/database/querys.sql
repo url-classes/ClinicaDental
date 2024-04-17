@@ -80,7 +80,7 @@ INSERT INTO clinica_dental.material (idMaterial, descripcion, serie_modelo, cant
 (10, 'Explorador liquid Steel', 'Herramientas', 4, 66.16),
 (11, 'Explorador Recto', 'Herramientas', 4, 45.00),
 (12, 'Palodent Aros Redondos', 'Herramientas', 8, 116.07),
-(13, 'Jeringuillas para anestesia dental', 'Materia', 200, 85.00),
+(13, 'Jeringuillas para anestesia dental', 'Material', 200, 85.00),
 (14, 'Pinzas para sistemas de matrices', 'Herramientas', 2, 632.14),
 (15, 'Pinzas para ajuste de brackets 110mm', 'Herramientas', 2, 158.94),
 (16, 'Pinza Gubia Friedman', 'Herramientas', 4, 861.39),
