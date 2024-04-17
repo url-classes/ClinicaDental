@@ -40,41 +40,34 @@ tbody tr:hover {
     background-color: #e0e0e0;
 }
 
-.edit-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
+.edit-btn, .delete-btn, .back-btn {
+    display: inline-block;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
+    text-decoration: none;
 }
 
-.edit-btn:hover {
+.edit-btn, .back-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-btn:hover, .back-btn:hover {
     background-color: #0056b3;
 }
 
 .delete-btn {
     background-color: #dc3545;
     color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
 }
 
 .delete-btn:hover {
     background-color: #bd2130;
 }
-.back-btn {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
 
-.back-btn:hover {
-    background-color: #0056b3;
+.foto-dentista {
+    width: 100px; /* Tamaño de la foto */
+    height: auto; /* Altura automática según la proporción de la imagen */
+    border-radius: 50%; /* Redondear la imagen */
 }

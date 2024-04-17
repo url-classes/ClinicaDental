@@ -1,9 +1,19 @@
 body {
+  position: relative;
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #f0f7ff; /* Azul claro para el fondo */
-  color: #333; /* Color de texto */
+  background-color: #f0f7ff;
+  color: #333;
+  min-height: 100vh; /* Asegura que el body tome al menos la altura completa de la ventana */
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Centra el contenido horizontalmente */
+  text-align: center;
 }
 
 .background-image {
@@ -15,10 +25,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column; /* Alinear elementos en columna */
-}
-
-.content {
-  text-align: center;
 }
 
 h1, h2 {
