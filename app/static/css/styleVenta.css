@@ -84,13 +84,13 @@ tr:hover {
   top: 10px; /* Margen superior */
   right: 10px; /* Margen derecho */
   padding: 8px 15px;
-  background-color: #007bff;
-  color: white;
+  background-color: white;
+  color: black;
   text-decoration: none;
   border-radius: 5px;
   margin-bottom: 30px;
 }
 
 .back-btn:hover {
-  background-color: #0056b3;
+  background-color: black;
 }

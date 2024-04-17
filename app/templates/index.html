@@ -9,7 +9,7 @@
     <title>Clinica de Especiliadades la Paz</title>
     <link rel="stylesheet" href="{% static 'css/styleIndex.css' %}">
 </head>
-<header>
+<header style="background-image: url('{% static 'img/banner2.webp' %}'); background-size: cover; height: 200px; overflow: hidden;">
     <h1>Clinica de Especialidades la Paz</h1>
 </header>
 <body>
@@ -20,7 +20,10 @@
             <li><a href="{% url 'ventas' %}">Ventas</a></li>
             <li><a href="{% url 'recursosHumanos' %}">Recursos Humanos</a></li>
             <li><a href="{% url 'financiero' %}">Financiero</a></li>
+            <li><a href="{% url 'financiero' %}">Bussines Inteligence</a></li>
+            <li><a href="{% url 'financiero' %}">Citas</a></li>
             <li><a href="{% url 'signin' %}">Logout</a></li>
+                        <li><a href="{% url 'signin' %}">Logout</a></li>
         </ul>
     </nav>
 </body>
