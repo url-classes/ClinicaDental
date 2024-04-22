@@ -25,12 +25,33 @@ from .models import Dentista, Asistente, Paciente, Factura
 from .forms import DentistaForm, AsistenteForm
 from django.db.models import F, FloatField, ExpressionWrapper
 from django.db import transaction
+from django.db.models import Count
+import json
 
 # Create your views here.
 
 def index(request):
     title = "Clinica Dental"
     return render(request, "index.html", {"title": title})
+
+def bussines(request):
+    asistentes_tratamientos = Tratamiento.objects.values('asistente_idasistente_id__nombre', 'asistente_idasistente_id__salario').annotate(total_tratamientos=Count('idtratamientno')).order_by('asistente_idasistente_id')
+    
+    # Crear listas para los labels, datos, salarios y bonificaciones
+    labels = [item['asistente_idasistente_id__nombre'] for item in asistentes_tratamientos]
+    data = [item['total_tratamientos'] for item in asistentes_tratamientos]
+    salarios = [item['asistente_idasistente_id__salario'] for item in asistentes_tratamientos]
+    bonificaciones = [100 * count if count >= 5 else 0 for count in data]  # 100 dólares por cada tratamiento a partir del quinto
+
+    # Convertir a JSON para uso seguro en JavaScript
+    context = {
+        'labels_json': json.dumps(labels),
+        'data_json': json.dumps(data),
+        'salarios_json': json.dumps(salarios),
+        'bonificaciones_json': json.dumps(bonificaciones),
+    }
+    return render(request, 'layouts/bussines.html', context)
+
 
 @user_has_permisos(permisos_requeridos=['inventario'])
 def inventario(request):

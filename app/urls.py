@@ -38,4 +38,6 @@ urlpatterns = [
     
     path('ventas/<int:idtratamientno>/agregar_material', views.agregar_tratamiento_material, name='agregar_tratamiento_material'),
     path('ventas/<int:idtratamientno>/agregar_fecha_material/', views.guardar_fecha, name='guardar_fecha_material'),
+    
+    path('bussines-inteligence/', views.bussines, name='bussines'),
 ]

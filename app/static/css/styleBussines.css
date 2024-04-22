@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif; /* Añade una fuente más legible */
+}
+#chart-container {
+    width: 50%; /* Ajusta este valor según necesites */
+    height: 300px;
+    margin: 2rem auto; /* Añade un margen superior e inferior para separar los elementos */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#bonificacion-container {
+    width: 60%;
+    margin: 2rem auto; /* Aumenta el margen para evitar intercalación */
+    text-align: center;
+    padding: 1rem; /* Añade padding para mejorar la legibilidad */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Añade sombra para distinguir visualmente las secciones */
+    background: #f9f9f9; /* Añade un fondo para mejorar el contraste */
+}
+#myChart {
+    width: 100%; /* Hace el gráfico tan ancho como su contenedor */
+    height: 100%; /* Hace el gráfico tan alto como su contenedor */
+}
+ul {
+    list-style-type: none; /* Elimina los marcadores de lista */
+    padding: 0; /* Elimina el padding por defecto */
+}
+li {
+    margin-bottom: 0.5rem; /* Espacio entre los elementos de la lista */
+}
+.back-btn {
+    position: fixed; /* O "absolute", dependiendo de cómo quieras que se comporte respecto al scrolling */
+    top: 10px; /* Margen superior */
+    right: 10px; /* Margen derecho */
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+  
+  .back-btn:hover {
+    background-color: #0056b3;
+  }

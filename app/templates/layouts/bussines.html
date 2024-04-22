@@ -1,0 +1,58 @@
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tratamientos por Asistente</title>
+    <a href="{% url 'index' %}" class="back-btn">Inicio</a>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'css/styleBussines.css' %}">
+</head>
+<body>
+    <div id="chart-container">
+        <h1>Business Intelligence</h1>
+        <canvas id="myChart"></canvas>
+    </div>
+    <div id="bonificacion-container">
+        <h2>Bonificación</h2>
+        <ul id="bonificacion-list"></ul>
+    </div>
+    <script>
+        var labels = JSON.parse('{{ labels_json|safe }}');
+        var data = JSON.parse('{{ data_json|safe }}');
+        var salarios = JSON.parse('{{ salarios_json|safe }}');
+        var bonificaciones = JSON.parse('{{ bonificaciones_json|safe }}');
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Cantidad de Tratamientos',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Llenar la lista de bonificaciones
+        const bonificacionList = document.getElementById('bonificacion-list');
+        labels.forEach((label, index) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${label}: Salario Base = $${salarios[index]}, Bonificación = $${bonificaciones[index]}`;
+            bonificacionList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>
+{% endblock %}
