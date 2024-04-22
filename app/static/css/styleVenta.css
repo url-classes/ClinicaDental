@@ -69,13 +69,17 @@ tr:hover {
   background-color: #112cb5; 
 }
 
+.btn-crear{
+  background-color: #ACF6C8; 
+}
 
 /* Estilos para hover (cuando el cursor pasa sobre el botón) */
 .btn-primary:hover,
 .btn-danger:hover,
 .btn-yellow:hover,
 .btn-blue:hover,
-.btn-info:hover {
+.btn-info:hover,
+.btn-crear:hover {
   opacity: 0.8; /* Hace los botones ligeramente transparentes al pasar el cursor */
 }
 
@@ -93,4 +97,3 @@ tr:hover {
 
 .back-btn:hover {
   background-color: black;
-}

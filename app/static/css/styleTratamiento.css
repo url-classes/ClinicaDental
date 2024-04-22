@@ -1,15 +1,18 @@
-/* estilos.css */
-.clase{
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin: 5px 0;
-    padding: 10px;
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
 }
-
-.detalle {
-    background-color: #f8f8f8;
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
-
-.precio {
-    font-weight: bold;
+button:hover {
+    background-color: #0056b3;
 }
