@@ -27,12 +27,15 @@ from django.db.models import F, FloatField, ExpressionWrapper
 from django.db import transaction
 from django.db.models import Count
 import json
+from .models import Paciente
 
 # Create your views here.
 
 def index(request):
     title = "Clinica Dental"
-    return render(request, "index.html", {"title": title})
+    total_pacientes = Paciente.objects.count()
+    return render(request, 'index.html', {'total_pacientes': total_pacientes})
+
 
 def bussines(request):
     asistentes_tratamientos = Tratamiento.objects.values('asistente_idasistente_id__nombre', 'asistente_idasistente_id__salario').annotate(total_tratamientos=Count('idtratamientno')).order_by('asistente_idasistente_id')

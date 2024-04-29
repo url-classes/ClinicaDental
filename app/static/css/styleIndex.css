@@ -1,9 +1,21 @@
-/* Encabezado */
-header{
-    display: flex;        /* Usa Flexbox */
+/* Estilos para el encabezado */
+header {
+    background-size: cover;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
     justify-content: center; /* Centra horizontalmente */
-    align-items: center;  /* Centra verticalmente */
-  }
+    align-items: center; /* Centra verticalmente */
+}
+
+/* Estilos para el título */
+header h1 {
+    color: #fff; /* Color del texto */
+    font-size: 32px; /* Tamaño de fuente */
+    text-align: center; /* Alineación del texto */
+    margin: 0; /* Elimina el margen por defecto */
+}
+
 
 /* Estilos Generales */
 body {
@@ -12,8 +24,6 @@ body {
     padding: 0;
     background-color: #f4f4f4;
 }
-
-
 
 /* Navegación */
 nav ul {
@@ -57,4 +67,53 @@ nav ul li a {
 .menu-bar li a:focus {
     background-color: #587ba0;
     color: #ffffff;
+}
+
+/* Estilos personalizados para el dashboard */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Cambia .h1 por h1 */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 18px;
+    color: #333;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
 }

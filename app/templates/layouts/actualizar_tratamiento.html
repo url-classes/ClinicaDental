@@ -6,14 +6,20 @@
     <title>Actualizar Tratamiento</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <div class="container mt-5">
-        <h2>Actualizar Tratamiento</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Actualizar</button>
-        </form>
+<body class="background-image" style="background-image: url('{% static 'img/fondo.jpg' %}')">
+    <div class="form-group">
+        <!-- Aquí cambiamos el orden para que el checkbox esté al lado del nombre del material -->
+        <input type="checkbox" id="{{ field.id_for_label }}" name="{{ field.name }}">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <!-- Aquí agregamos un input solo para números -->
+        <input type="number" name="cantidad_{{ field.name }}" class="form-control" placeholder="Cantidad" required>
+        <!-- Muestra errores de validación para cada campo. -->
+        {% if field.errors %}
+            <div class="alert alert-danger">
+                {{ field.errors }}
+            </div>
+        {% endif %}
+    </div>
     </div>
 </body>
 </html>

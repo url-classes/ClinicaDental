@@ -8,12 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinica de Especiliadades la Paz</title>
     <link rel="stylesheet" href="{% static 'css/styleIndex.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <header style="background-image: url('{% static 'img/banner2.webp' %}'); background-size: cover; height: 200px; overflow: hidden;">
     <h1>Clinica de Especialidades la Paz</h1>
 </header>
-<body>
-
+<body >
+    
     <nav>
         <ul class="menu-bar">
             <li><a href="{% url 'inventario' %}">Inventario</a></li>
@@ -25,6 +27,17 @@
             <li><a href="{% url 'signin' %}">Logout</a></li>
         </ul>
     </nav>
+    
+    <div class="container mt-5">
+        <h2>Dashboard</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users"></i> Pacientes Actuales</h5>
+                <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
+                <a href="{% url 'ventas' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 {% endblock %}

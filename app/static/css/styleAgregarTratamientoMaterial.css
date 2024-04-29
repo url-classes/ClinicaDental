@@ -4,14 +4,25 @@ body {
     padding: 20px;
 }
 
+.background-image {
+    background-image: url("{% static 'img/fondo.jpg' %}");
+    background-size: cover; /* Ajusta la imagen de fondo para cubrir todo el contenedor */
+    background-position: center; /* Centra la imagen de fondo */
+    opacity: 0.9; /* Ajusta la opacidad de la imagen de fondo */
+    width: 100%; /* Ajusta el ancho del contenedor */
+    height: 100%; /* Ajusta la altura del contenedor */
+    display: flex; /* Permite centrar el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+}
+
 .container {
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Aumenta el radio de los bordes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra suave */
     max-width: 600px;
     margin: auto;
-}
 
 h1 {
     color: #333;
@@ -20,30 +31,24 @@ h1 {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    display: flex; /* Cambia el comportamiento a disposición en línea */
+    align-items: center; /* Centra verticalmente los elementos */
+    margin-bottom: 20px; /* Aumenta el espacio entre grupos de formulario */
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
+    margin-bottom: 0; /* Elimina el margen inferior para alinear mejor con el checkbox */
+    margin-right: 10px; /* Añade un pequeño margen entre el checkbox y el texto */
     font-weight: bold;
 }
 
 .form-group input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 10px; /* Ajusta el margen derecho del checkbox */
 }
 
 .form-group input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Para que el padding no aumente el tamaño del input */
-}
-
-.form-group input[type="text"],
-.form-group input[type="number"] {
-    width: calc(100% - 16px); /* Considera el padding y el borde */
+    width: 80px; /* Establece un ancho fijo para el input de números */
+    margin-left: auto; /* Empuja el input de números hacia la derecha */
 }
 
 button[type="submit"] {
