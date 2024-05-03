@@ -448,3 +448,7 @@ def guardar_fecha(request, idtratamientno):
         return redirect('ventas')
     else:
         return render(request, 'layouts/seleccionar_fecha.html', {'idtratamientno': idtratamientno})
+    
+def citas(request):
+    # Your view logic here
+    return render(request, 'layouts/citas.html')
