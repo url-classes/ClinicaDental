@@ -16,7 +16,12 @@ header h1 {
     margin: 0; /* Elimina el margen por defecto */
 }
 
-
+body h2 {
+    color: #fff; /* Color del texto */
+    font-size: 32px; /* Tamaño de fuente */
+    text-align: center; /* Alineación del texto */
+    margin: 0; /* Elimina el margen por defecto */
+}
 /* Estilos Generales */
 body {
     font-family: Arial, sans-serif;
