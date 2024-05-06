@@ -1,44 +1,24 @@
 USE clinica_dental;
 
-INSERT INTO asistente(idAsistente, nombre, apellido, escolaridad, salario) VALUES(1, 'Marisol', 'Gomez', 'Estudiante de Odontologia', 1000);
-INSERT INTO asistente(idAsistente, nombre, apellido, escolaridad, salario) VALUES(2, 'Wendy', 'Perez', 'Estudiante de Odontologia', 1000);
-INSERT INTO tipo_especialidad(idTipo_Especialidad, descripcion) VALUES(1, 'Ortodoncista');
-INSERT INTO tipo_especialidad(idTipo_Especialidad, descripcion) VALUES(2, 'Anestecista');
 
-INSERT INTO dentista(idDentista, nombre, apellido, numero_telefono, correo_electronico, no_colegiado, Tipo_Especialidad_idTipo_Especialidad) VALUES(1, 'Silvia', 'Soberanis', '65873901', 'dra.silviasoberanis@gmail.com', '12345678', 1);
-INSERT INTO dentista(idDentista, nombre, apellido, numero_telefono, correo_electronico, no_colegiado, Tipo_Especialidad_idTipo_Especialidad) VALUES(2, 'Nicthe', 'Castellanos', '65821990', 'nicthe.rodas@gmail.com', '123546578', 2);
-
-INSERT INTO tipo_usuario(idTipo_Usuario, descripcion, permisos) VALUES(1, 'Dentista', 'inventario, ventas, recursos, financiero');
-INSERT INTO tipo_usuario(idTipo_Usuario, descripcion, permisos) VALUES(2, 'Asistente', 'inventario, ventas');
-
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(1, 'Edwin', 'Garcia', '34678298', 'edwindavid2002@hotmail.com', 37, '12345');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(2, 'Maria', 'Perez', '346734518', 'mariaperez@gmail.com', 40, '675839');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(3, 'Josue', 'Estrada', '51145070', 'josuebarrios254@gmail.com', 25, '798543');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(4, 'Juan', 'Perez', '47587469', 'jacaceresfuentes@gmail.com', 31, '4587962');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(5, 'Oscar', 'Carrascosa', '34678298', 'oeinteriano@correo.url.edu.gt', 19, '12345');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(6, 'Daniel', 'Interiano', '59530583', 'jdcifuentesca@correo.url.edu.gt', 20, '4783666');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(7, 'Ana', 'Lopez', '54789213', 'analopez@gmail.com', 28, '123456');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(8, 'Luis', 'Martinez', '68745213', 'luis.martinez@hotmail.com', 45, '789012');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(9, 'Elena', 'Gutierrez', '35687412', 'elenagutierrez@yahoo.com', 33, '543219');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(10, 'Pedro', 'Castro', '46892137', 'pedrocastro@gmail.com', 50, '908765');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(11, 'Laura', 'Ramirez', '54783291', 'lauraramirez@hotmail.com', 29, '654321');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(12, 'Sofia', 'Hernandez', '69874321', 'sofiahernandez@yahoo.com', 38, '345678');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(13, 'Carlos', 'Gonzalez', '35678921', 'carlosgonzalez@gmail.com', 27, '987654');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(14, 'Diana', 'Flores', '46872913', 'dianaflores@hotmail.com', 42, '876543');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(15, 'Manuel', 'Sanchez', '54783219', 'manuelsanchez@yahoo.com', 36, '234567');
-INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(16, 'Marta', 'Gomez', '69872143', 'martagomez@gmail.com', 32, '765432');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(7, 'Edwin', 'Garcia', '34678298', 'edwindavid2002@hotmail.com', 37, '12345');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(8, 'Maria', 'Perez', '346734518', 'mariaperez@gmail.com', 40, '675839');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(9, 'Josue', 'Estrada', '51145070', 'josuebarrios254@gmail.com', 25, '798543');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(10, 'Juan', 'Perez', '47587469', 'jacaceresfuentes@gmail.com', 31, '4587962');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(11, 'Oscar', 'Carrascosa', '34678298', 'oeinteriano@correo.url.edu.gt', 19, '12345');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(12, 'Daniel', 'Interiano', '59530583', 'jdcifuentesca@correo.url.edu.gt', 20, '4783666');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(13, 'Ana', 'Lopez', '54789213', 'analopez@gmail.com', 28, '123456');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(14, 'Luis', 'Martinez', '68745213', 'luis.martinez@hotmail.com', 45, '789012');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(15, 'Elena', 'Gutierrez', '35687412', 'elenagutierrez@yahoo.com', 33, '543219');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(16, 'Pedro', 'Castro', '46892137', 'pedrocastro@gmail.com', 50, '908765');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(17, 'Laura', 'Ramirez', '54783291', 'lauraramirez@hotmail.com', 29, '654321');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(18, 'Sofia', 'Hernandez', '69874321', 'sofiahernandez@yahoo.com', 38, '345678');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(19, 'Carlos', 'Gonzalez', '35678921', 'carlosgonzalez@gmail.com', 27, '987654');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(20, 'Diana', 'Flores', '46872913', 'dianaflores@hotmail.com', 42, '876543');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(21, 'Manuel', 'Sanchez', '54783219', 'manuelsanchez@yahoo.com', 36, '234567');
+INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(22, 'Marta', 'Gomez', '69872143', 'martagomez@gmail.com', 32, '765432');
 
 
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(1, '2023-01-14 17:15:00', 1);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(2, '2023-01-16 05:15:30', 2);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(3, '2023-01-20 11:00:00', 3);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(4, '2023-01-25 14:30:00', 4);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(5, '2023-02-05 10:45:00', 5);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(6, '2023-02-10 09:00:00', 6);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(7, '2023-02-15 13:20:00', 7);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(8, '2023-02-20 16:10:00', 8);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(9, '2023-03-05 08:30:00', 9);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(10, '2023-03-10 11:45:00', 10);
 INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(11, '2023-03-15 15:00:00', 11);
 INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(12, '2023-03-20 17:20:00', 12);
 INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(13, '2023-04-05 08:00:00', 13);
@@ -66,9 +46,8 @@ INSERT INTO tratamiento(idTratamientno, detalle, precio, cantidad_citas, Cita_id
 
 
 
-ALTER TABLE clinica_dental.material MODIFY COLUMN descripcion VARCHAR(100);
 INSERT INTO clinica_dental.material (idMaterial, descripcion, serie_modelo, cantidad, precio_individual) VALUES
-(1, 'Yeso', 'Materia', 100, 25),
+(1, 'Yeso', 'Material', 100, 25),
 (2, 'Espejo dental 7/8 pulgadas', 'Herramientas', 8, 10.00),
 (3, 'Espejo dental 15/16 pulgadas', 'Herramientas', 8, 10.00),
 (4, 'Espejo dental 14 mm', 'Herramientas', 6, 12.00),
