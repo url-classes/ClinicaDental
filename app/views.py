@@ -28,7 +28,7 @@ from django.db import transaction
 from django.db.models import Count
 import json
 from .models import Paciente
-
+from .models import Material
 # Create your views here.
 
 def index(request):

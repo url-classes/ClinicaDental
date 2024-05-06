@@ -36,7 +36,27 @@
                 <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
                 <a href="{% url 'ventas' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
+
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users"></i>Material </h5>
+                <p class="card-text">Total de materiales: {{ material }}</p>
+                <a href="{% url 'inventario' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users"></i> Pacientes Actuales</h5>
+                <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
+                <a href="{% url 'recursosHumanos' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users"></i> Pacientes Actuales</h5>
+                <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
+                <a href="{% url 'financiero' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
+            </div>
+
         </div>
+
     </div>
 </body>
 </html>
