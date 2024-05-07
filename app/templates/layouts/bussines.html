@@ -49,7 +49,7 @@
         const bonificacionList = document.getElementById('bonificacion-list');
         labels.forEach((label, index) => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${label}: Salario Base = $${salarios[index]}, Bonificación = $${bonificaciones[index]}`;
+            listItem.textContent = `${label}: Salario Base = Q${salarios[index]}, Bonificación = Q${bonificaciones[index]}`;
             bonificacionList.appendChild(listItem);
         });
     </script>
