@@ -145,7 +145,7 @@ class PacienteForm(forms.ModelForm):
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el nombre'}),
             'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el apellido'}),
             'numero_telefonico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el numero telefonico'}),
-            'numero_telefonico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el correo electronico'}),
+            'correo_electronico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el correo electronico'}),
             'edad': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la edad'}),
             'numero_seguro': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el numero de seguro'}),
         }

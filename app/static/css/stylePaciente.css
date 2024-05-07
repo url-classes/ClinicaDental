@@ -1,0 +1,106 @@
+header{
+    display: flex;        /* Usa Flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;  /* Centra verticalmente */
+  }
+  
+  h1 {
+    text-align: center; /* Centra el texto del título */
+    margin-top: 20px; /* Añade un margen superior para separarlo del contenido anterior */
+    margin-bottom: 30px; /* Añade un margen inferior para separarlo de la tabla */
+    color: #253d8d; /* Cambia el color del texto */
+    font-family: 'Arial', sans-serif; /* Cambia la fuente del texto */
+  }
+  
+  table {
+    width: 100%; /* Ajusta el ancho de la tabla al 100% del contenedor */
+    border-collapse: collapse; /* Elimina el espacio entre las celdas */
+    text-align: left; /* Alinea el texto a la izquierda */
+  }
+  
+  th, td {
+    padding: 8px; /* Añade un poco de espacio alrededor del texto en las celdas */
+    border: 1px solid #ddd; /* Añade un borde a las celdas */
+  }
+  
+  th {
+    background-color: #1a7fa7; /* Color de fondo para los encabezados de la tabla */
+    color: white; /* Color del texto para los encabezados */
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2; /* Añade un color de fondo a las filas pares para mejorar la legibilidad */
+  }
+  
+  tr:hover {
+    background-color: #ddd; /* Cambia el color de fondo de la fila al pasar el mouse sobre ella */
+  }
+  .btn {
+    padding: 5px 10px; /* Ajusta el padding a tu preferencia */
+    color: white; /* Texto blanco para todos los botones */
+    text-decoration: none; /* Remueve el subrayado de los enlaces */
+    border-radius: 5px; /* Bordes redondeados para los botones */
+    font-size: 14px; /* Tamaño de fuente para los botones */
+    margin-right: 5px; /* Espacio entre botones */
+  }
+  
+  .btn-sm {
+    font-size: 12px; /* Tamaño más pequeño de fuente para botones pequeños */
+    padding: 3px 7px; /* Padding reducido para botones pequeños */
+  }
+  
+  .btn-primary {
+    background-color: #28a745; /* Verde para botón Actualizar */
+  }
+  
+  .btn-danger {
+    background-color: #dc3545; /* Rojo para botón Borrar */
+  }
+  
+  .btn-info {
+    background-color: #17a2b8; /* Azul para botón Ver Factura */
+  }
+  
+  .btn-yellow {
+    background-color: #c5d643; 
+  }
+  
+  .btn-blue {
+    background-color: #112cb5; 
+  }
+  
+  .btn-crear {
+    background-color: #46fb8c; /* Color de fondo verde claro */
+    color: #000000; /* Color de texto negro */
+    font-size: 16px; /* Aumenta el tamaño del texto */
+    padding: 10px 20px; /* Aumenta el relleno para hacer el botón más grande */
+    border: none; /* Elimina el borde, opcional según el diseño deseado */
+    border-radius: 5px; /* Bordes redondeados, opcional según el diseño deseado */
+    font-weight: bold; /* Hacer el texto en negrita, opcional según preferencia */
+    }
+  
+  /* Estilos para hover (cuando el cursor pasa sobre el botón) */
+  .btn-primary:hover,
+  .btn-danger:hover,
+  .btn-yellow:hover,
+  .btn-blue:hover,
+  .btn-info:hover,
+  .btn-crear:hover {
+    opacity: 0.8; /* Hace los botones ligeramente transparentes al pasar el cursor */
+  }
+  
+  .back-btn {
+    position: fixed; /* O "absolute", dependiendo de cómo quieras que se comporte respecto al scrolling */
+    top: 10px; /* Margen superior */
+    right: 10px; /* Margen derecho */
+    padding: 8px 15px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+  
+  .back-btn:hover {
+    background-color: black;
+  }

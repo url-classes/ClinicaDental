@@ -69,8 +69,14 @@ tr:hover {
   background-color: #112cb5; 
 }
 
-.btn-crear{
-  background-color: #ACF6C8; 
+.btn-crear {
+  background-color: #46fb8c; /* Color de fondo verde claro */
+  color: #000000; /* Color de texto negro */
+  font-size: 16px; /* Aumenta el tamaño del texto */
+  padding: 10px 20px; /* Aumenta el relleno para hacer el botón más grande */
+  border: none; /* Elimina el borde, opcional según el diseño deseado */
+  border-radius: 5px; /* Bordes redondeados, opcional según el diseño deseado */
+  font-weight: bold; /* Hacer el texto en negrita, opcional según preferencia */
 }
 
 /* Estilos para hover (cuando el cursor pasa sobre el botón) */
@@ -97,3 +103,4 @@ tr:hover {
 
 .back-btn:hover {
   background-color: black;
+}

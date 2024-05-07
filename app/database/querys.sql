@@ -96,7 +96,7 @@ INSERT INTO clinica_dental.material (idMaterial, descripcion, serie_modelo, cant
 (47, 'Cepillos dentales extra suaves', 'Producto', 24, 39.00, 1),
 (48, 'Colgate 360° Luminus', 'Producto', 30, 35.00, 1),
 (49, 'Colgate smiles 0-2 años', 'Producto', 30, 38.50, 1),
-(50, 'Colgate plax kids', 'Producto', 12, 40.82, 1),
+(50, 'Colgate plax kids', 'Producto', 12, 40.82, 1);
 
 
 

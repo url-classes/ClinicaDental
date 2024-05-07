@@ -58,6 +58,16 @@ def borrar_paciente(request, idpaciente):
     # Redirigir a la lista de materiales
     return redirect('pacientes')
 
+def agregar_paciente(request):
+    if request.method == 'POST':
+        form = PacienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('pacientes')
+    else:
+        form = PacienteForm()
+    return render(request, 'layouts/agregar_paciente.html', {'form': form})
+
 def bussines(request):
     asistentes_tratamientos = Tratamiento.objects.values('asistente_idasistente_id__nombre', 'asistente_idasistente_id__salario').annotate(total_tratamientos=Count('idtratamientno')).order_by('asistente_idasistente_id')
     
