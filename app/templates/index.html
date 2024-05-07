@@ -33,19 +33,25 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-users"></i> Pacientes Actuales</h5>
-                <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
+                <!-- Deserializa el JSON y asigna el valor a una variable de JavaScript -->
+                <script>
+                    var pacientes_count = {{ pacientes_json|safe }};
+                </script>
+                <!-- Muestra el conteo de pacientes -->
+                <p class="card-text">Total de pacientes: <span id="pacientes_count"></span></p>
+                <!-- Enlaza el botón a la página 'ventas' -->
                 <a href="{% url 'ventas' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-users"></i>Material </h5>
+                <h5 class="card-title"><i class="fas fa-box-open"></i>Material.</h5>
                 <p class="card-text">Total de materiales: {{ material }}</p>
                 <a href="{% url 'inventario' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-users"></i> Pacientes Actuales</h5>
-                <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
+                <h5 class="card-title"><i class="fas fa-users"></i> Recursos Humanos.</h5>
+                <p class="card-text">Dentistas y asistentes laborando en la clinica.</p>
                 <a href="{% url 'recursosHumanos' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
 
