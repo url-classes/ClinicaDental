@@ -34,7 +34,12 @@ from .models import Material
 def index(request):
     title = "Clinica Dental"
     total_pacientes = Paciente.objects.count()
-    return render(request, 'index.html', {'total_pacientes': total_pacientes})
+    material = Material.objects.count()
+    dentista = Dentista.objects.count()
+    asistente = Asistente.objects.count()
+    tratamientos = Tratamiento.objects.count()
+    return render(request, 'index.html', {'total_pacientes': total_pacientes, 'material': material, 'dentista': dentista, 'asistente': asistente, 'tratamiento': tratamientos})
+
 
 def pacientes(request):
     pacientes = Paciente.objects.all()

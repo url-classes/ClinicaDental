@@ -34,14 +34,8 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-users"></i> Pacientes Actuales</h5>
-                <!-- Deserializa el JSON y asigna el valor a una variable de JavaScript -->
-                <script>
-                    var pacientes_count = {{ pacientes_json|safe }};
-                </script>
-                <!-- Muestra el conteo de pacientes -->
-                <p class="card-text">Total de pacientes: <span id="pacientes_count"></span></p>
-                <!-- Enlaza el botón a la página 'ventas' -->
-                <a href="{% url 'ventas' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
+                <a href="{% url 'pacientes' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <div class="card-body">
@@ -50,18 +44,31 @@
                 <a href="{% url 'inventario' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
 
+            
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-teeth"></i>Tratamientos.</h5>
+                <p class="card-text">Total de tratamientos: {{ tratamiento }}</p>
+                <a href="{% url 'ventas' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
+            </div>
+
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-users"></i> Recursos Humanos.</h5>
-                <p class="card-text">Dentistas y asistentes laborando en la clinica.</p>
+                <p class="card-text">Dentistas laborando en la clinica: {{dentista}}.</p>
+                <p class="card-text">Asistentes laborando en la clinica: {{asistente}}.</p>
                 <a href="{% url 'recursosHumanos' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-users"></i> Pacientes Actuales</h5>
+                <h5 class="card-title"><i class="fas fa-money-bill-alt"></i>Financiero</h5>
                 <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
                 <a href="{% url 'financiero' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
 
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-business-time"></i>Bussines Inteligence</h5>
+                <p class="card-text">Bonificaciones. </p>
+                <a href="{% url 'financiero' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
 
     </div>
