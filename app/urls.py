@@ -45,4 +45,8 @@ urlpatterns = [
     path('ventas/<int:idtratamientno>/agregar_fecha_material/', views.guardar_fecha, name='guardar_fecha_material'),
     
     path('bussines-inteligence/', views.bussines, name='bussines'),
+
+        
+    path('citas', views.citas, name='citas'),     
+    path('citas/agregar_citas/', views.agregar_citas, name='agregar_citas'),
 ]

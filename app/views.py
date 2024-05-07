@@ -10,7 +10,7 @@ from django.contrib.auth.hashers import make_password
 from .forms import UsuarioSignupForm
 from .backends import UsuarioBackend
 from .forms import UsuarioLoginForm
-from .forms import TratamientoForm, TratamientoMaterialForm, PacienteForm
+from .forms import TratamientoForm, TratamientoMaterialForm, PacienteForm, CitasForm
 from .models import Material
 from .forms import MaterialForm
 from django.shortcuts import get_object_or_404, redirect
@@ -21,7 +21,7 @@ from xhtml2pdf import pisa
 from .models import Tratamiento
 from .models import TratamientoMaterial
 from io import BytesIO
-from .models import Dentista, Asistente, Paciente, Factura
+from .models import Dentista, Asistente, Paciente, Factura, Cita
 from .forms import DentistaForm, AsistenteForm
 from django.db.models import F, FloatField, ExpressionWrapper
 from django.db import transaction
@@ -486,5 +486,15 @@ def guardar_fecha(request, idtratamientno):
         return render(request, 'layouts/seleccionar_fecha.html', {'idtratamientno': idtratamientno})
     
 def citas(request):
-    # Your view logic here
-    return render(request, 'layouts/citas.html')
+    citas = Cita.objects.filter(estado=1)
+    return render(request, 'layouts/citas.html', {'asistentes': citas})
+
+def agregar_citas(request):
+    if request.method == 'POST':
+        form = CitasForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('citas')  # Asegúrate de reemplazar esto con el nombre de tu URL
+    else:
+        form = CitasForm()
+    return render(request, 'layouts/agregar_dentistas.html', {'form': form})
