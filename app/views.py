@@ -10,7 +10,7 @@ from django.contrib.auth.hashers import make_password
 from .forms import UsuarioSignupForm
 from .backends import UsuarioBackend
 from .forms import UsuarioLoginForm
-from .forms import TratamientoForm, TratamientoMaterialForm
+from .forms import TratamientoForm, TratamientoMaterialForm, PacienteForm
 from .models import Material
 from .forms import MaterialForm
 from django.shortcuts import get_object_or_404, redirect
@@ -36,6 +36,27 @@ def index(request):
     total_pacientes = Paciente.objects.count()
     return render(request, 'index.html', {'total_pacientes': total_pacientes})
 
+def pacientes(request):
+    pacientes = Paciente.objects.all()
+    return render(request, 'layouts/pacientes.html', {'pacientes': pacientes})
+
+def actualizar_paciente(request, idpaciente):
+    paciente = Paciente.objects.get(pk=idpaciente)
+    form = PacienteForm(request.POST or None, instance=paciente)
+    if form.is_valid():
+        form.save()
+        return redirect('pacientes')
+    return render(request, 'layouts/actualizar_paciente.html', {'form': form})
+
+def borrar_paciente(request, idpaciente):
+    paciente = Paciente.objects.get(pk=idpaciente)
+    
+    # Cambiar el estado a 0 en lugar de eliminar el objeto
+    paciente.estado = 0
+    paciente.save()
+    
+    # Redirigir a la lista de materiales
+    return redirect('pacientes')
 
 def bussines(request):
     asistentes_tratamientos = Tratamiento.objects.values('asistente_idasistente_id__nombre', 'asistente_idasistente_id__salario').annotate(total_tratamientos=Count('idtratamientno')).order_by('asistente_idasistente_id')

@@ -1,0 +1,54 @@
+{% block content %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Pacientes</title>
+  <a href="{% url 'index' %}" class="back-btn">🏠</a>
+  <link rel="stylesheet" href="{% static 'css/styleVenta.css' %}">
+</head>
+<body>
+  <header style="background-image: url('{% static 'img/banner3.jpg' %}'); background-size: cover; height: 250px; overflow: hidden;">
+      <h1>Pacientes</h1>
+  </header>
+
+<body>
+  <button class="btn btn-sm btn-crear" onclick="location.href='/tratamiento/';">Crear Tratamiento</button>
+  <table>
+      <thead>
+          <tr>
+              <th>Id Paciente</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Numero Telefonico</th>
+              <th>Correo Electronico</th>
+              <th>Edad</th>
+              <th>Numero de Seguro</th>
+              <th>Ultima Visita</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for paciente in pacientes %}
+          <tr>
+              <td>{{ paciente.idpaciente }}</td>
+              <td>{{ paciente.nombre }}</td>
+              <td>{{ paciente.apellido }}</td>
+              <td>{{ paciente.numero_telefonico }}</td>
+              <td>{{ paciente.correo_electronico }}</td>
+              <td>{{ paciente.edad }}</td>
+              <td>{{ paciente.numero_seguro }}</td>
+              <td>{{ paciente.ultima_visita }}</td>
+              <td>
+                <a href="{% url 'actualizar_paciente' paciente.idpaciente %}" class="btn btn-sm btn-primary">Actualizar</a>
+                <a href="{% url 'borrar_paciente' paciente.idpaciente %}" class="btn btn-sm btn-danger">Borrar</a>
+                </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</body>
+</html>
+{% endblock %} 

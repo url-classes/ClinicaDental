@@ -19,12 +19,12 @@ INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_ele
 INSERT INTO paciente(idPaciente, nombre, apellido, numero_telefonico, correo_electronico, edad, numero_seguro) VALUES(22, 'Marta', 'Gomez', '69872143', 'martagomez@gmail.com', 32, '765432');
 
 
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(11, '2023-03-15 15:00:00', 11);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(12, '2023-03-20 17:20:00', 12);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(13, '2023-04-05 08:00:00', 13);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(14, '2023-04-10 10:30:00', 14);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(15, '2023-04-15 12:15:00', 15);
-INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(16, '2023-04-20 14:40:00', 16);
+INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(11, '2023-03-15 15:00:00', 1, 11);
+INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(12, '2023-03-20 17:20:00', 1, 12);
+INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(13, '2023-04-05 08:00:00', 1, 13);
+INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(14, '2023-04-10 10:30:00', 1, 14);
+INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(15, '2023-04-15 12:15:00', 1, 15);
+INSERT INTO cita(idCita, fecha_propuesta, paciente_idPaciente) VALUES(16, '2023-04-20 14:40:00', 1, 16);
 
 
 INSERT INTO tratamiento(idTratamientno, detalle, precio, cantidad_citas, Cita_idCita, Asistente_idAsistente) VALUES (1, "Puente Dental", 2500, 4, 1, 1, 1);

@@ -40,7 +40,6 @@
                 <tr>
                     <th>Descripción</th>
                     <th>Cantidad</th>
-                    <th>Precio Unitario</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -49,13 +48,12 @@
                     <td>{{ tratamiento.detalle }}</td>
                     <td>{{ tratamiento.cantidad_citas }}</td>
                     <td>Q{{ tratamiento.precio }}</td>
-                    <td>Q{{ total }}</td>
                 </tr>
                 <!-- Añade más filas aquí si necesitas -->
             </tbody>
         </table>
         <div class="invoice-total">
-            <p>Total: Q{{ total }}</p>
+            <p>Total: Q{{ tratamiento.precio }}</p>
         </div>
     </div>
 </body>

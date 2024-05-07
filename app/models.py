@@ -137,6 +137,7 @@ class Paciente(models.Model):
     edad = models.IntegerField(blank=True, null=True)
     numero_seguro = models.CharField(max_length=45, blank=True, null=True)
     correo_electronico = models.EmailField(max_length=254, blank=True, null=True)
+    ultima_visita = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         managed = True

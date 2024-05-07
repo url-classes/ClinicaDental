@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
 from django.forms import ModelForm, Select
-from .models import Usuario, TipoUsuario, Dentista, Asistente, Tratamiento, Cita, Material, TipoEspecialidad
+from .models import Usuario, TipoUsuario, Dentista, Asistente, Tratamiento, Cita, Material, TipoEspecialidad, Paciente
 from django import forms
 
 class UsuarioSignupForm(forms.ModelForm):
@@ -72,13 +72,13 @@ class MaterialForm(forms.ModelForm):
         fields = ['descripcion', 'serie_modelo', 'cantidad', 'precio_individual']
         labels = {
             'descripcion': 'Descripción',
-            'serie_modelo': 'Serie/Modelo',
+            'serie_modelo': 'Tipo',
             'cantidad': 'Cantidad',
             'precio_individual': 'Precio Individual',
         }
         widgets = {
             'descripcion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la descripción'}),
-            'serie_modelo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la serie/modelo'}),
+            'serie_modelo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el tipo'}),
             'cantidad': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la cantidad'}),
             'precio_individual': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el precio individual'}),
         }
@@ -129,5 +129,24 @@ class TratamientoMaterialForm(forms.Form):
             self.fields[f'material_seleccionado_{material.idmaterial}'] = forms.BooleanField(label=f"Utilizar {material.descripcion}", required=False)
             self.fields[f'cantidad_{material.idmaterial}'] = forms.IntegerField(label=f"Cantidad para {material.descripcion}", min_value=1, required=False)
 
-
+class PacienteForm(forms.ModelForm):
+    class Meta:
+        model = Paciente
+        fields = ['nombre', 'apellido', 'numero_telefonico', 'correo_electronico', 'edad', 'numero_seguro']
+        labels = {
+            'nombre': 'Nombre',
+            'apellido': 'Apellido',
+            'numero_telefonico': 'Numero de Telefono',
+            'correo_electronico': 'Correo Electronico',
+            'edad': 'Edad',
+            'numero_seguro': 'Numero de Seguro',
+        }
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el nombre'}),
+            'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el apellido'}),
+            'numero_telefonico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el numero telefonico'}),
+            'numero_telefonico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el correo electronico'}),
+            'edad': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la edad'}),
+            'numero_seguro': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el numero de seguro'}),
+        }
 
