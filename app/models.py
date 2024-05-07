@@ -41,6 +41,7 @@ class Asistente(models.Model):
     escolaridad = models.CharField(max_length=45, blank=True, null=True)
     salario = models.FloatField(blank=True, null=True)
     estado = models.BooleanField(default=True, null=True, blank=True)
+    url = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = True
@@ -53,6 +54,7 @@ class Asistente(models.Model):
 class Cita(models.Model):
     idcita = models.AutoField(db_column='idCita', primary_key=True)  # Field name made lowercase.
     fecha_propuesta = models.DateTimeField(blank=True, null=True)
+    estado = models.BooleanField(default=True, null=True, blank=True)
     paciente_idpaciente = models.ForeignKey('Paciente', models.DO_NOTHING, db_column='paciente_idPaciente')
 
     class Meta:
@@ -71,6 +73,7 @@ class Dentista(models.Model):
     correo_electronico = models.CharField(max_length=45, blank=True, null=True)
     no_colegiado = models.CharField(max_length=45, blank=True, null=True)
     estado = models.BooleanField(default=True, null=True, blank=True)
+    url = models.CharField(max_length=100, blank=True, null=True)
     tipo_especialidad_idtipo_especialidad = models.ForeignKey('TipoEspecialidad', models.DO_NOTHING, db_column='Tipo_Especialidad_idTipo_Especialidad')  # Field name made lowercase.
 
     class Meta:
@@ -203,13 +206,15 @@ class TratamientoMaterial(models.Model):
 
 
 class Usuario(models.Model):
-    idusuario = models.AutoField(db_column='idUsuario', primary_key=True)  # Field name made lowercase.
+    idusuario = models.AutoField(db_column='idUsuario', primary_key=True)
     nombre_usuario = models.CharField(max_length=45)
-    password = models.CharField(max_length=128, blank=True, null=True)
-    last_login = models.DateTimeField(default=now, blank=True, null=True)
-    dentista_iddentista = models.ForeignKey(Dentista, models.DO_NOTHING, db_column='Dentista_idDentista')  # Field name made lowercase.
-    tipo_usuario_idtipo_usuario = models.ForeignKey(TipoUsuario, models.DO_NOTHING, db_column='Tipo_Usuario_idTipo_Usuario')  # Field name made lowercase.
-    asistente_idasistente = models.ForeignKey(Asistente, models.DO_NOTHING, db_column='Asistente_idAsistente')  # Field name made lowercase.
+    password = models.CharField(max_length=255, blank=True, null=True)
+    last_login = models.DateTimeField(blank=True, null=True)
+    intentos_fallidos = models.IntegerField(default=0, blank=True, null=True)
+    tiempo_bloqueo = models.DateTimeField(blank=True, null=True)
+    dentista_iddentista = models.ForeignKey(Dentista, on_delete=models.DO_NOTHING, db_column='Dentista_idDentista', blank=True, null=True)
+    tipo_usuario_idtipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.DO_NOTHING, db_column='Tipo_Usuario_idTipo_Usuario')
+    asistente_idasistente = models.ForeignKey(Asistente, on_delete=models.DO_NOTHING, db_column='Asistente_idAsistente', blank=True, null=True)
     
     
     class Meta:

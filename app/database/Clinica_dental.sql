@@ -90,7 +90,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `clinica_dental`.`cita` (
   `idCita` INT(11) NOT NULL AUTO_INCREMENT,
   `fecha_propuesta` DATETIME NULL DEFAULT NULL,
-  `estado` TINYINT(1) NOT NULL,
+  `estado` TINYINT(1) NULL DEFAULT 1,
   `paciente_idPaciente` INT(11) NOT NULL,
   PRIMARY KEY (`idCita`),
   INDEX `fk_cita_paciente1_idx` (`paciente_idPaciente` ASC) VISIBLE,
@@ -543,6 +543,8 @@ INSERT INTO `clinica_dental`.`tipo_usuario` (`idTipo_Usuario`, `descripcion`, `p
 INSERT INTO `clinica_dental`.`tipo_usuario` (`idTipo_Usuario`, `descripcion`, `permisos`) VALUES (2, 'Asistente', 'inventario, ventas');
 
 COMMIT;
+
+
 
 
 
