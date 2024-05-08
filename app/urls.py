@@ -48,4 +48,8 @@ urlpatterns = [
         
     path('citas', views.citas, name='citas'),     
     path('citas/agregar_citas/', views.agregar_cita, name='agregar_citas'),
+    path('citas/actualizar_cita/<int:idcita>/', views.actualizar_cita, name='actualizar_cita'),
+    path('citas/eliminar_cita/<int:idcita>/', views.eliminar_cita, name='eliminar_cita'),
+
+
 ]

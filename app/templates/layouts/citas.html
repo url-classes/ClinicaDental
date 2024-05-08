@@ -48,6 +48,12 @@
                     <td>{{ cita.idcita }}</td>
                     <td>{{ cita.fecha_propuesta }}</td>
                     <td>{{ cita.paciente_idpaciente.nombre }} {{ cita.paciente_idpaciente.apellido }}</td>
+                    <td>
+                        <a href="{% url 'actualizar_cita' cita.idcita %}" class="edit-btn">Actualizar</a>
+                        <a href="{% url 'eliminar_cita' cita.idcita %}" class="delete-btn">Borrar</a>
+                    </td>
+]
+ 
             {% endfor %}
         </tbody>
     </table>

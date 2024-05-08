@@ -516,3 +516,26 @@ def agregar_cita(request):
     else:
         form = CitasForm()
     return render(request, 'layouts/agregar_citas.html', {'form': form})
+
+def eliminar_cita(request, idcita):
+    # Obtener la instancia de Cita
+    cita = Cita.objects.get(pk=idcita)
+    
+    # Cambiar el estado a 0 en lugar de eliminar el objeto
+    cita.estado = 0
+    cita.save()
+    
+    # Redirigir a la lista de citas
+    return redirect('citas')
+
+def actualizar_cita(request, idcita):
+    if idcita:
+        cita = get_object_or_404(Cita, pk=idcita)
+    else:
+        cita = None
+    form = CitasForm(request.POST or None, instance=cita)
+    if form.is_valid():
+        form.save()
+        return redirect('citas')
+    return render(request, 'layouts/agregar_citas.html', {'form': form})
+
