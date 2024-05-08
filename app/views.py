@@ -491,7 +491,7 @@ def guardar_fecha(request, idtratamientno):
         return render(request, 'layouts/seleccionar_fecha.html', {'idtratamientno': idtratamientno})
     
 def citas(request):
-    citas = Cita.objects.all()  # Fetch all cita objects
+    citas = Cita.objects.filter(estado=1)  # Fetch all cita objects
     citas_data = serialize('json', citas)  # Serialize the queryset to JSON
     #print("Serialized data:", citas_data)
 
