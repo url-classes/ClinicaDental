@@ -3,28 +3,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Calendar of Citas</title>
+    <title>Calendario de Citas</title>
     <link rel="stylesheet" href="{% static 'css/styleCita.css' %}">
 </head>
 <body>
     <h1>Calendario de Citas</h1>
 
 <div id="navigation">
-    <button onclick="changeMonth(-1)">Previous Month</button>
+    <button onclick="changeMonth(-1)">Mes Anterior</button>
     <span id="currentMonthYear"></span>
-    <button onclick="changeMonth(1)">Next Month</button>
+    <button onclick="changeMonth(1)">Mes Siguiente</button>
 </div>
 <div id="calendar"></div>
 
 
     <script src="{% static 'js/scriptCita.js' %}"></script>
+    <!-- Ensure the script below is placed after the calendar creation script in the HTML -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var citasData = '{{ citas_json|safe }}';
-            var citas = JSON.parse(citasData); // Parse JSON data into JavaScript object
-            createCalendar(citas); // Function to build and display the calendar with citas
+            var citasData = '{{ citas_json|safe }}';  // Ensure this is the only content in the line
+            console.log(citasData);  // Check in the browser console what you receive
+            try {
+                var citas = JSON.parse(citasData);
+                createCalendar(citas);
+            } catch (error) {
+                console.error("Error parsing JSON or initializing calendar:", error);
+            }
         });
-    </script>
+        </script>
+        
     <h1>Listado de Citas</h1>
     <button class="boton" onclick="location.href='citas/agregar_citas/';">Agregar Citas</button>
     <table border="1">
