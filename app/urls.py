@@ -13,7 +13,6 @@ urlpatterns = [
     path('paciente/', agregar_paciente, name='agregar_paciente'),
     path('financiero/', views.financiero, name='financiero'),
     path('recursosHumanos/', views.recursosHumanos, name='recursosHumanos'),
-    path('citas/', views.citas, name='citas'),
     path('signup/', views.signup, name='signup'),
     path('login/', views.signin, name='signin'),
     path('factura/<int:idtratamientno>/', views.factura, name='factura'),
@@ -48,5 +47,5 @@ urlpatterns = [
 
         
     path('citas', views.citas, name='citas'),     
-    path('citas/agregar_citas/', views.agregar_citas, name='agregar_citas'),
+    path('citas/agregar_citas/', views.agregar_cita, name='agregar_citas'),
 ]

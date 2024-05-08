@@ -29,6 +29,11 @@ from django.db.models import Count
 import json
 from .models import Paciente
 from .models import Material
+from django.contrib import messages
+from django.core import serializers
+from django.http import JsonResponse
+from django.core.serializers import serialize
+import json
 # Create your views here.
 
 def index(request):
@@ -441,7 +446,7 @@ def agregar_asistente(request):
         form = AsistenteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('listar_asistentes')  # Asegúrate de reemplazar esto con el nombre de tu URL
+            return redirect('listar_asistentes')  
     else:
         form = AsistenteForm()
     return render(request, 'layouts/agregar_asistentes.html', {'form': form})
@@ -486,15 +491,28 @@ def guardar_fecha(request, idtratamientno):
         return render(request, 'layouts/seleccionar_fecha.html', {'idtratamientno': idtratamientno})
     
 def citas(request):
-    citas = Cita.objects.filter(estado=1)
-    return render(request, 'layouts/citas.html', {'asistentes': citas})
+    citas = Cita.objects.all()  # Fetch all cita objects
+    citas_data = serialize('json', citas)  # Serialize the queryset to JSON
+    #print("Serialized data:", citas_data)
 
-def agregar_citas(request):
+    # Create a context dictionary to pass both the queryset and the serialized data
+    context = {
+        'citas': citas,          # Pass the queryset (optional if only needed serialized)
+        'citas_json': citas_data # Serialized JSON data for JavaScript usage
+    }
+
+    # Render the response with the context
+    return render(request, 'layouts/citas.html', context)
+
+def agregar_cita(request):
     if request.method == 'POST':
         form = CitasForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('citas')  # Asegúrate de reemplazar esto con el nombre de tu URL
+            messages.success(request, 'La cita ha sido agregada con éxito.')
+            return redirect('citas')
+        else:
+            messages.error(request, 'Por favor corrige los errores en el formulario.')
     else:
         form = CitasForm()
-    return render(request, 'layouts/agregar_dentistas.html', {'form': form})
+    return render(request, 'layouts/agregar_citas.html', {'form': form})

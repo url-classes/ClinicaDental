@@ -1,33 +1,49 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Citas</title>
+    <title>Calendar of Citas</title>
+    <link rel="stylesheet" href="{% static 'css/styleCita.css' %}">
 </head>
 <body>
-    <h1>Listado de Dentistas</h1>
-    <button class="boton" onclick="location.href='dentistas/agregar_dentista/';">Agregar Citas</button>
+    <h1>Calendario de Citas</h1>
+
+<div id="navigation">
+    <button onclick="changeMonth(-1)">Previous Month</button>
+    <span id="currentMonthYear"></span>
+    <button onclick="changeMonth(1)">Next Month</button>
+</div>
+<div id="calendar"></div>
+
+
+    <script src="{% static 'js/scriptCita.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var citasData = '{{ citas_json|safe }}';
+            var citas = JSON.parse(citasData); // Parse JSON data into JavaScript object
+            createCalendar(citas); // Function to build and display the calendar with citas
+        });
+    </script>
+    <h1>Listado de Citas</h1>
+    <button class="boton" onclick="location.href='citas/agregar_citas/';">Agregar Citas</button>
     <table border="1">
         <thead>
             <tr>
-                <th>ID Paciente</th>
                 <th>ID Citas</th>
                 <th>Fecha Propuesta</th>
-                <th>Estado</th>
-
+                <th>ID Paciente</th>
             </tr>
         </thead>
         <tbody>
             {% for cita in citas %}
                 <tr>
-                    <td>{{ cita.paciente_idpaciente }}</td>
                     <td>{{ cita.idcita }}</td>
                     <td>{{ cita.fecha_propuesta }}</td>
-                    <td>{{ cita.estado }}</td>
+                    <td>{{ cita.paciente_idpaciente.nombre }} {{ cita.paciente_idpaciente.apellido }}</td>
             {% endfor %}
         </tbody>
     </table>
 </body>
 </html>
+

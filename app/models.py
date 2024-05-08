@@ -144,7 +144,7 @@ class Paciente(models.Model):
         db_table = 'paciente'
         
     def __str__(self):
-        return f"{self.idpaciente} {self.nombre} {self.apellido} {self.numero_telefonico} {self.edad} {self.numero_seguro} {self.cita_idcita}"
+        return f"{self.idpaciente} {self.nombre} {self.apellido} {self.numero_telefonico} {self.edad} {self.numero_seguro}"
 
 
 class TipoEspecialidad(models.Model):

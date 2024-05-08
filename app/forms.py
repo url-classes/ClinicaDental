@@ -151,17 +151,20 @@ class PacienteForm(forms.ModelForm):
         }
 
 class CitasForm(forms.ModelForm):
+    paciente_idpaciente = forms.ModelChoiceField(
+        queryset=Paciente.objects.all(), 
+        required=False,
+        label='ID Paciente',  
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     class Meta:
         model = Cita
-        tpaciente_idpaciente = forms.ModelChoiceField(queryset=Paciente.objects.all(), required=False)
-        fields = ['paciente_idpaciente', 'idcita', 'fecha_propuesta', 'estado']
+        fields = ['idcita', 'paciente_idpaciente', 'fecha_propuesta'] 
         labels = {
-            'paciente_idpaciente': 'ID Paciente', 
-            'idcita': 'ID Cita', 
-            'fecha_propuesta': 'Fecha Propuesta', 
-            'estado': 'Estado', 
+            'idcita': 'ID Cita',
+            'fecha_propuesta': 'Fecha Propuesta',
         }
         widgets = {
-            'fecha_propuesta': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la fecha propuesta'}),
-
+            'fecha_propuesta': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la fecha propuesta'})
         }
