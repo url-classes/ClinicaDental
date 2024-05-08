@@ -9,13 +9,12 @@
 <body>
     <h1>Calendario de Citas</h1>
 
-<div id="navigation">
-    <button onclick="changeMonth(-1)">Mes Anterior</button>
-    <span id="currentMonthYear"></span>
-    <button onclick="changeMonth(1)">Mes Siguiente</button>
-</div>
-<div id="calendar"></div>
-
+    <div id="navigation">
+        <button onclick="changeMonth(-1)">Mes Anterior</button>
+        <span id="currentMonthYear"></span>
+        <button onclick="changeMonth(1)">Mes Siguiente</button>
+    </div>
+    <div id="calendar"></div>
 
     <script src="{% static 'js/scriptCita.js' %}"></script>
     <!-- Ensure the script below is placed after the calendar creation script in the HTML -->
@@ -30,8 +29,8 @@
                 console.error("Error parsing JSON or initializing calendar:", error);
             }
         });
-        </script>
-        
+    </script>
+    
     <h1>Listado de Citas</h1>
     <button class="boton" onclick="location.href='citas/agregar_citas/';">Agregar Citas</button>
     <table border="1">
@@ -40,6 +39,7 @@
                 <th>ID Citas</th>
                 <th>Fecha Propuesta</th>
                 <th>ID Paciente</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -52,8 +52,7 @@
                         <a href="{% url 'actualizar_cita' cita.idcita %}" class="edit-btn">Actualizar</a>
                         <a href="{% url 'eliminar_cita' cita.idcita %}" class="delete-btn">Borrar</a>
                     </td>
-]
- 
+                </tr>
             {% endfor %}
         </tbody>
     </table>

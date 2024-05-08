@@ -1,82 +1,77 @@
-/* styleCita.css */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    background-color: #f2f2f2;
+}
+
+h1 {
+    color: #0066cc;
 }
 
 #navigation {
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
 }
 
 #navigation button {
-    margin-right: 5px;
-    padding: 5px 10px;
+    background-color: #66ccff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#currentMonthYear {
-    font-weight: bold;
-    margin: 0 10px;
+#calendar {
+    border: 2px solid #66ccff;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #e6f7ff;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 th, td {
-    border: 1px solid #ccc;
+    border: 1px solid #66ccff;
     padding: 8px;
-    text-align: center;
-    vertical-align: top;
 }
 
 th {
-    background-color: #f4f4f4;
+    background-color: #0066cc;
+    color: white;
 }
 
-.day-number {
-    font-weight: bold;
+tr:nth-child(even) {
+    background-color: #e6f7ff;
 }
 
-.cita-label {
-    background-color: #e8f0fe;
-    margin-top: 5px;
-    padding: 5px;
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #66ccff;
+    margin-right: 5px;
+}
+
+.delete-btn {
+    background-color: #ff6666;
+}
+
+.boton {
+    background-color: #66ccff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
     border-radius: 5px;
-    font-size: 0.85em;
-}
-
-
-td div {
-    min-height: 50px; /* Minimum height for content */
-    overflow-y: auto; /* Allows scrolling within the cell if content overflows */
-}
-.cita-dot {
-    height: 10px;
-    width: 10px;
-    background-color: #007BFF;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.cita-details {
-    margin-top: 5px;
-}
-
-.cita-info {
-    background-color: #f0f0f0;
-    padding: 5px;
-    margin-top: 2px;
-    border-radius: 4px;
-}
-#allCitas {
-    margin-top: 20px;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
-
-pre {
-    white-space: pre-wrap; /* Ensures preformatted text is nicely wrapped */
-    word-wrap: break-word;
+    cursor: pointer;
+    margin-bottom: 20px;
 }
