@@ -7,12 +7,45 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
         }
         form {
             margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
         }
         .errorlist {
             color: red;
+            margin-top: 4px;
         }
     </style>
 </head>
@@ -31,7 +64,7 @@
         {% csrf_token %}
         {% for field in form %}
             <p>
-                {{ field.label_tag }}<br>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label><br>
                 {{ field }}
                 {% if field.help_text %}
                 <small style="color: grey">{{ field.help_text }}</small>
@@ -41,7 +74,7 @@
                 {% endfor %}
             </p>
         {% endfor %}
-        <button type="submit">Guardar</button>
+        <input type="submit" value="Guardar">
     </form>
 </body>
 </html>
