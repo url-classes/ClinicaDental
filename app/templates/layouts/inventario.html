@@ -32,7 +32,6 @@
                     <th>Serie o Modelo</th>
                     <th>Cantidad</th>
                     <th>Precio Individual</th>
-                    <th>Precio Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,7 +42,7 @@
                     <td>{{ material.serie_modelo }}</td>
                     <td>{{ material.cantidad }}</td>
                     <td>{{ material.precio_individual }}</td>
-                    <td>{{ material.precio_individual|multiply:material.cantidad }}</td>
+                
                 </tr>
                 {% endfor %}
             </tbody>
