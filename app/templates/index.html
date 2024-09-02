@@ -74,6 +74,13 @@
         </div>
 
     </div>
+    {% if messages %}
+        {% for m in messages %}
+            <script>
+                alert('{{ m }}');
+            </script>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>
 {% endblock %}

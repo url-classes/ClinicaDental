@@ -45,14 +45,21 @@ from django.conf import settings
 
 # Create your views here.
 
-def index(request):
+def index(request, context = {}):
     title = "Clinica Dental"
     total_pacientes = Paciente.objects.count()
     material = Material.objects.count()
     dentista = Dentista.objects.count()
     asistente = Asistente.objects.count()
     tratamientos = Tratamiento.objects.count()
-    return render(request, 'index.html', {'total_pacientes': total_pacientes, 'material': material, 'dentista': dentista, 'asistente': asistente, 'tratamiento': tratamientos})
+    
+    context['total_pacientes'] = total_pacientes
+    context['material'] = material
+    context['dentista'] = dentista
+    context['asistente'] = asistente
+    context['tratamiento'] = tratamientos
+    #{'total_pacientes': total_pacientes, 'material': material, 'dentista': dentista, 'asistente': asistente, 'tratamiento': tratamientos}
+    return render(request, 'index.html', context)
 
 
 def pacientes(request):
@@ -615,9 +622,13 @@ def db_backup(request):
     file_path = "E:backup_clinicadental.sql"
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 #    file_name = f"clinicadental_backup_{timestamp}.sql"
-
     command = f"mariadb-dump -h{host} -u{usr} -p{password} --add-drop-database -B {database} > {file_path}"
-    subprocess.run(command, shell=True)
+    try:
+        subprocess.run(command, shell=True)
+        messages.success(request,"Backup exitoso")
+    except:
+        messages.error(request, "Error al realizar el backup")
+        return render(request, 'layouts/error.html')
     return redirect('index')
 
 @user_has_permisos(permisos_requeridos=["financiero"])
@@ -628,7 +639,12 @@ def db_restore(request):
     file_path = "E:backup_clinicadental.sql"
 
     command = f"mariadb -h{host} -u{usr} -p{password} < {file_path}"
-    subprocess.run(command, shell=True)
+    try:
+        subprocess.run(command, shell=True)
+        messages.success(request, "Restauracion exitosa")
+    except:
+        messages.error(request, "Error al realizar backup")
+        return render(request, 'layouts/error.html')
     return redirect('index')
 
 def descargar_bitacora(request):
