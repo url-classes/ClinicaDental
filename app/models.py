@@ -216,6 +216,7 @@ class Usuario(models.Model):
     dentista_iddentista = models.ForeignKey(Dentista, on_delete=models.DO_NOTHING, db_column='Dentista_idDentista', blank=True, null=True)
     tipo_usuario_idtipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.DO_NOTHING, db_column='Tipo_Usuario_idTipo_Usuario')
     asistente_idasistente = models.ForeignKey(Asistente, on_delete=models.DO_NOTHING, db_column='Asistente_idAsistente', blank=True, null=True)
+
     
     
     class Meta:

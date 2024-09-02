@@ -4,3 +4,45 @@ Estado: Exitosa
 Fecha de Transaccion: 2024-09-10
 
 ----------------------------------------
+ID de transacción: None
+Número de transacción: 6
+Tipo de transacción: Agregar tratamiento material
+Estado: Exitosa
+Fecha de transacción: 2024-09-02
+Cantidad antes del tratamiento: N/A
+Cantidad después del tratamiento: N/A
+--------------------------
+ID de transacción: None
+Número de transacción: 6
+Tipo de transacción: Agregar tratamiento material
+Estado: Exitosa
+Fecha de transacción: 2024-09-02
+Cantidad antes del tratamiento: N/A
+Cantidad después del tratamiento: N/A
+--------------------------
+Numero de Transaccion: 6
+ID de transacción: 3
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-09-04
+Cantidad antes del tratamiento: N/A
+Cantidad después del tratamiento: N/A
+--------------------------
+Numero de Transaccion: 6
+ID de transacción: 4
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-09-05
+--------------------------
+Numero de Transaccion: 6
+ID de transacción: 5
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-09-02
+--------------------------
+Numero de Transaccion: 6
+ID de transacción: 6
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-09-03
+--------------------------

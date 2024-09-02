@@ -665,21 +665,38 @@ def descargar_bitacora(request):
     
     return response
 
-def registrar_bitacora(numero_transaccion, tipo_transaccion, estado, fecha_transaccion):
-    # Ruta del directorio Documentacion
-    folder_path = os.path.join(settings.BASE_DIR, 'Documentacion')
+def obtener_siguiente_id():
+    file_path = os.path.join(settings.BASE_DIR, 'Documentacion', 'bitacora.txt')
+    if not os.path.exists(file_path):
+        return 1
 
-    # Crear el directorio si no existe
+    count = 0
+    with open(file_path, 'r') as file:
+        for line in file:
+            if line.startswith("ID de transacción:"):
+                count += 1
+    return count + 1
+
+def registrar_bitacora(numero_transaccion, tipo_transaccion, estado, fecha_transaccion, cantidad_antes=None, cantidad_despues=None):
+    folder_path = os.path.join(settings.BASE_DIR, 'Documentacion')
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 
-    # Ruta completa del archivo de bitácora
     archivo_bitacora = os.path.join(folder_path, 'bitacora.txt')
 
-    # Escribir en el archivo de bitácora
+    # Obtener el siguiente ID de transacción
+    id_transaccion = obtener_siguiente_id()
+
+    # Crear una nueva entrada de bitácora
+    nueva_entrada = (
+        f"Numero de Transaccion: {numero_transaccion}\n"
+        f"ID de transacción: {id_transaccion}\n"
+        f"Tipo de Transaccion: {tipo_transaccion}\n"
+        f"Estado: {estado}\n"
+        f"Fecha de Transaccion: {fecha_transaccion}\n"
+        "--------------------------\n"
+    )
+
+    # Agregar la entrada al archivo
     with open(archivo_bitacora, 'a') as file:
-        file.write(f"Numero de Transaccion: {numero_transaccion}\n")
-        file.write(f"Tipo de Transaccion: {tipo_transaccion}\n")
-        file.write(f"Estado: {estado}\n")
-        file.write(f"Fecha de Transaccion: {fecha_transaccion}\n")
-        file.write("\n" + "-"*40 + "\n")
+        file.write(nueva_entrada)
