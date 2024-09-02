@@ -52,4 +52,7 @@ urlpatterns = [
     path('citas/eliminar_cita/<int:idcita>/', views.eliminar_cita, name='eliminar_cita'),
 
     path('error/', views.error, name='error'),
+
+    path('backup', views.db_backup, name="backup"),
+    path('restore', views.db_restore, name="restore"),
 ]

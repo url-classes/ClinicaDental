@@ -35,7 +35,10 @@ from django.http import JsonResponse
 from django.core.serializers import serialize
 import json
 from django.db import transaction
-from django.utils import timezone 
+from django.utils import timezone
+
+import subprocess
+import datetime
 # Create your views here.
 
 def index(request):
@@ -567,3 +570,27 @@ def actualizar_cita(request, idcita):
         return redirect('citas')
     return render(request, 'layouts/agregar_citas.html', {'form': form})
 
+
+def db_backup(request):
+    usr = "root"
+    password = "root"
+    host = "localhost"
+    database = "clinica_dental"
+    file_path = "E:backup_clinicadental.sql"
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+#    file_name = f"clinicadental_backup_{timestamp}.sql"
+
+    command = f"mariadb-dump -h{host} -u{usr} -p{password} --add-drop-database -B {database} > {file_path}"
+    subprocess.run(command, shell=True)
+    return redirect('index')
+
+@user_has_permisos(permisos_requeridos=["financiero"])
+def db_restore(request):
+    usr = "root"
+    password = "root"
+    host = "localhost"
+    file_path = "E:backup_clinicadental.sql"
+
+    command = f"mariadb -h{host} -u{usr} -p{password} < {file_path}"
+    subprocess.run(command, shell=True)
+    return redirect('index')
