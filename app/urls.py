@@ -55,4 +55,6 @@ urlpatterns = [
 
     path('backup', views.db_backup, name="backup"),
     path('restore', views.db_restore, name="restore"),
+    
+    path('descargar_bitacora/', views.descargar_bitacora, name='descargar_bitacora'),
 ]

@@ -384,35 +384,59 @@ def agregar_tratamiento_material(request, idtratamientno):
     if request.method == 'POST':
         form = TratamientoMaterialForm(request.POST)
         if form.is_valid():
-            # Asegurar que el tratamiento existe
             tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
-            fecha_transaccion = request.POST.get("fecha_transaccion")  # Obtener la fecha de transacción una sola vez
+            fecha_transaccion = request.POST.get("fecha_transaccion")
 
-            for material in Material.objects.all():
-                material_seleccionado = form.cleaned_data.get(f'material_seleccionado_{material.idmaterial}', False)
-                cantidad = form.cleaned_data.get(f'cantidad_{material.idmaterial}', 0)
+            try:
+                with transaction.atomic():
+                    for material in Material.objects.all():
+                        material_seleccionado = form.cleaned_data.get(f'material_seleccionado_{material.idmaterial}', False)
+                        cantidad_utilizada = form.cleaned_data.get(f'cantidad_{material.idmaterial}', 0)
 
-                if material_seleccionado and cantidad > 0:
-                    # Usar get_or_create para prevenir IntegrityError por duplicados
-                    tratamiento_material, created = TratamientoMaterial.objects.get_or_create(
-                        tratamiento_idtratamientno=tratamiento, 
-                        material_idmaterial=material,  
-                        defaults={
-                            'cantidad_utilizada': cantidad, 
-                            'fecha_transaccion': fecha_transaccion
-                        }
-                    )
+                        if material_seleccionado and cantidad_utilizada > 0:
+                            # Verificar si hay suficiente material disponible
+                            if material.cantidad < cantidad_utilizada:
+                                raise ValueError(f"No hay suficiente cantidad de material {material.nombre} disponible.")
 
-                    # Si el objeto ya existía, y no fue creado en esta llamada, actualizamos la cantidad y fecha
-                    if not created:
-                        tratamiento_material.cantidad_utilizada = cantidad
-                        tratamiento_material.fecha_transaccion = fecha_transaccion
-                        tratamiento_material.save()
+                            tratamiento_material, created = TratamientoMaterial.objects.get_or_create(
+                                tratamiento_idtratamientno=tratamiento, 
+                                material_idmaterial=material,  
+                                defaults={
+                                    'cantidad_utilizada': cantidad_utilizada, 
+                                    'cantidad_antes': material.cantidad,  # Guardar la cantidad antes de la transacción
+                                    'cantidad_despues': material.cantidad - cantidad_utilizada,  # Calcular la cantidad después
+                                    'fecha_transaccion': fecha_transaccion
+                                }
+                            )
 
-            return redirect('ventas')
+                            # Si el objeto ya existía, actualizar los valores
+                            if not created:
+                                tratamiento_material.cantidad_utilizada = cantidad_utilizada
+                                tratamiento_material.cantidad_antes = material.cantidad
+                                tratamiento_material.cantidad_despues = material.cantidad - cantidad_utilizada
+                                tratamiento_material.fecha_transaccion = fecha_transaccion
+                                tratamiento_material.save()
+
+                            # Actualizar la cantidad en la tabla Material
+                            material.cantidad = tratamiento_material.cantidad_despues
+                            material.save()
+
+                # Si todo fue bien, redirigir a la vista de ventas
+                return redirect('ventas')
+
+            except Exception as e:
+                # Manejar el error y revertir la transacción
+                # Aquí podrías agregar una notificación de error para el usuario si es necesario
+                context = {
+                    'error': 'Ocurrió un error al procesar el tratamiento y actualizar el inventario.',
+                    'detalle_error': str(e),
+                }
+                return render(request, 'layouts/error.html', context)
+        
         else:
-            # Opcional: agregar manejo para formularios no válidos aquí
+            # Manejo opcional de formularios no válidos
             pass
+
     else:
         form = TratamientoMaterialForm()
 
@@ -594,3 +618,6 @@ def db_restore(request):
     command = f"mariadb -h{host} -u{usr} -p{password} < {file_path}"
     subprocess.run(command, shell=True)
     return redirect('index')
+
+def descargar_bitacora(request):
+    pass

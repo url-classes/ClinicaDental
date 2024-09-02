@@ -146,3 +146,30 @@ table tr:nth-child(even) {
     background-color: var(--color-light); /* Cambiar el fondo de las filas pares a blanco */
 }
 
+.header-container {
+    display: flex; /* Utiliza flexbox para alinear el título y el botón */
+    justify-content: space-between; /* Espacia el título y el botón a extremos opuestos */
+    align-items: center; /* Alinea verticalmente el título y el botón */
+    margin-bottom: 10px; /* Espacio debajo del contenedor */
+}
+  
+.btn {
+    padding: 5px 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+  
+.btn-sm {
+    font-size: 12px;
+    padding: 3px 7px;
+}
+  
+.btn-download {
+    background-color: #4CAF50; /* Color verde para el botón de descarga */
+    margin-left: auto; /* Mueve el botón a la derecha */
+}
+  
+

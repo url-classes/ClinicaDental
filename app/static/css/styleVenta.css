@@ -35,6 +35,13 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #ddd; /* Cambia el color de fondo de la fila al pasar el mouse sobre ella */
 }
+
+.btn-group {
+  display: flex; /* Asegura que los botones dentro del grupo se alineen en fila */
+  justify-content: space-between; /* Espacio uniforme entre botones */
+  margin-bottom: 5px; /* Espacio entre las filas de botones */
+}
+
 .btn {
   padding: 5px 10px; /* Ajusta el padding a tu preferencia */
   color: white; /* Texto blanco para todos los botones */
