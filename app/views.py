@@ -39,6 +39,10 @@ from django.utils import timezone
 
 import subprocess
 import datetime
+import os
+from django.conf import settings
+
+
 # Create your views here.
 
 def index(request):
@@ -394,7 +398,6 @@ def agregar_tratamiento_material(request, idtratamientno):
                         cantidad_utilizada = form.cleaned_data.get(f'cantidad_{material.idmaterial}', 0)
 
                         if material_seleccionado and cantidad_utilizada > 0:
-                            # Verificar si hay suficiente material disponible
                             if material.cantidad < cantidad_utilizada:
                                 raise ValueError(f"No hay suficiente cantidad de material {material.nombre} disponible.")
 
@@ -403,13 +406,12 @@ def agregar_tratamiento_material(request, idtratamientno):
                                 material_idmaterial=material,  
                                 defaults={
                                     'cantidad_utilizada': cantidad_utilizada, 
-                                    'cantidad_antes': material.cantidad,  # Guardar la cantidad antes de la transacción
-                                    'cantidad_despues': material.cantidad - cantidad_utilizada,  # Calcular la cantidad después
+                                    'cantidad_antes': material.cantidad,
+                                    'cantidad_despues': material.cantidad - cantidad_utilizada, 
                                     'fecha_transaccion': fecha_transaccion
                                 }
                             )
 
-                            # Si el objeto ya existía, actualizar los valores
                             if not created:
                                 tratamiento_material.cantidad_utilizada = cantidad_utilizada
                                 tratamiento_material.cantidad_antes = material.cantidad
@@ -417,16 +419,27 @@ def agregar_tratamiento_material(request, idtratamientno):
                                 tratamiento_material.fecha_transaccion = fecha_transaccion
                                 tratamiento_material.save()
 
-                            # Actualizar la cantidad en la tabla Material
                             material.cantidad = tratamiento_material.cantidad_despues
                             material.save()
 
-                # Si todo fue bien, redirigir a la vista de ventas
+                # Registrar en la bitácora
+                registrar_bitacora(
+                    numero_transaccion=tratamiento.idtratamientno,
+                    tipo_transaccion='Agregar tratamiento material',
+                    estado='Exitosa',
+                    fecha_transaccion=fecha_transaccion
+                )
+
                 return redirect('ventas')
 
             except Exception as e:
-                # Manejar el error y revertir la transacción
-                # Aquí podrías agregar una notificación de error para el usuario si es necesario
+                registrar_bitacora(
+                    numero_transaccion=tratamiento.idtratamientno,
+                    tipo_transaccion='Agregar tratamiento material',
+                    estado='Fallida',
+                    fecha_transaccion=fecha_transaccion
+                )
+
                 context = {
                     'error': 'Ocurrió un error al procesar el tratamiento y actualizar el inventario.',
                     'detalle_error': str(e),
@@ -434,7 +447,6 @@ def agregar_tratamiento_material(request, idtratamientno):
                 return render(request, 'layouts/error.html', context)
         
         else:
-            # Manejo opcional de formularios no válidos
             pass
 
     else:
@@ -620,4 +632,38 @@ def db_restore(request):
     return redirect('index')
 
 def descargar_bitacora(request):
-    pass
+    # Ruta del archivo de bitácora
+    file_path = os.path.join(settings.BASE_DIR, 'Documentacion', 'bitacora.txt')
+
+    # Intentar abrir el archivo y leer su contenido
+    try:
+        with open(file_path, 'r') as file:
+            bitacora_contenido = file.read()
+    except FileNotFoundError:
+        # Manejar el caso en que el archivo no exista
+        bitacora_contenido = "No se encontró ninguna bitácora."
+
+    # Crear una respuesta HTTP con el contenido del archivo
+    response = HttpResponse(bitacora_contenido, content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename="bitacora.txt"'
+    
+    return response
+
+def registrar_bitacora(numero_transaccion, tipo_transaccion, estado, fecha_transaccion):
+    # Ruta del directorio Documentacion
+    folder_path = os.path.join(settings.BASE_DIR, 'Documentacion')
+
+    # Crear el directorio si no existe
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    # Ruta completa del archivo de bitácora
+    archivo_bitacora = os.path.join(folder_path, 'bitacora.txt')
+
+    # Escribir en el archivo de bitácora
+    with open(archivo_bitacora, 'a') as file:
+        file.write(f"Numero de Transaccion: {numero_transaccion}\n")
+        file.write(f"Tipo de Transaccion: {tipo_transaccion}\n")
+        file.write(f"Estado: {estado}\n")
+        file.write(f"Fecha de Transaccion: {fecha_transaccion}\n")
+        file.write("\n" + "-"*40 + "\n")

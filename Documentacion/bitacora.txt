@@ -1,0 +1,6 @@
+Numero de Transaccion: 6
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-09-10
+
+----------------------------------------
