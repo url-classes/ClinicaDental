@@ -34,6 +34,8 @@ from django.core import serializers
 from django.http import JsonResponse
 from django.core.serializers import serialize
 import json
+from django.db import transaction
+from django.utils import timezone 
 # Create your views here.
 
 def index(request):
@@ -165,28 +167,54 @@ def recursosHumanos(request):
     else:
         return HttpResponseForbidden("No tienes permiso para acceder a esta sección.")
     
+def error(request):
+    return render(request, 'layouts/error.html')
 
 def factura(request, idtratamientno):
     tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
-    total = tratamiento.precio * tratamiento.cantidad_citas
-    pacientes = Paciente.objects.all()  # Obtiene todos los objetos Paciente
-    factura = Factura.objects.filter(tratamiento_idtratamientno=tratamiento).first()
     cita = tratamiento.cita_idcita
     paciente = cita.paciente_idpaciente
-    if factura:
-        total = factura.total
-    else:
-        total = 0  # O algún otro manejo si la factura no existe
-    # Agrega los pacientes al contexto
-    context = {
-        'tratamiento': tratamiento,
-        'total': total,
-        'idtratamientno': idtratamientno,
-        'paciente': paciente,  # Añade los pacientes al contexto
-    }
     
-    return render(request, "layouts/factura.html", context)
-
+    try:
+        with transaction.atomic():
+            # Calcula el total basado en el tratamiento
+            total = tratamiento.precio * tratamiento.cantidad_citas
+            
+            # Busca si ya existe una factura asociada al tratamiento
+            factura = Factura.objects.filter(tratamiento_idtratamientno=tratamiento).first()
+            
+            if not factura:
+                # Si no existe factura se crea
+                factura = Factura.objects.create(
+                    detalle=tratamiento.detalle,  
+                    cantidad_servicios=tratamiento.cantidad_citas,
+                    fecha=timezone.now(),  
+                    total=total,
+                    tratamiento_idtratamientno=tratamiento
+                )
+            else:
+                # Si ya existe se actualiza el total
+                factura.total = total
+                factura.save()
+            
+            # Prepara el contexto para la plantilla
+            context = {
+                'tratamiento': tratamiento,
+                'total': factura.total,
+                'idtratamientno': idtratamientno,
+                'paciente': paciente,
+            }
+        
+        # Renderiza la plantilla con el contexto
+        return render(request, "layouts/factura.html", context)
+    
+    except Exception as e:
+        # Maneja cualquier error que ocurra durante la transacción
+        context = {
+            'error': 'Ocurrió un error al procesar la factura. Por favor, intenta nuevamente.',
+            'detalle_error': str(e),
+        }
+        return render(request, "layouts/error.html", context)
 
 def generar_pdf(request, idtratamientno):
     tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)

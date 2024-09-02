@@ -51,5 +51,5 @@ urlpatterns = [
     path('citas/actualizar_cita/<int:idcita>/', views.actualizar_cita, name='actualizar_cita'),
     path('citas/eliminar_cita/<int:idcita>/', views.eliminar_cita, name='eliminar_cita'),
 
-
+    path('error/', views.error, name='error'),
 ]
