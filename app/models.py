@@ -190,8 +190,9 @@ class Tratamiento(models.Model):
 
 
 class TratamientoMaterial(models.Model):
-    tratamiento_idtratamientno = models.OneToOneField(Tratamiento, models.DO_NOTHING, db_column='Tratamiento_idTratamientno', primary_key=True)  # Field name made lowercase. The composite primary key (Tratamiento_idTratamientno, Material_idMaterial) found, that is not supported. The first column is selected.
-    material_idmaterial = models.ForeignKey(Material, models.DO_NOTHING, db_column='Material_idMaterial')  # Field name made lowercase.
+    id = models.AutoField(primary_key=True) 
+    tratamiento_idtratamientno = models.ForeignKey(Tratamiento, models.DO_NOTHING, db_column='Tratamiento_idTratamientno')  # Se cambia a ForeignKey
+    material_idmaterial = models.ForeignKey(Material, models.DO_NOTHING, db_column='Material_idMaterial')  # Sin cambios
     cantidad_utilizada = models.IntegerField(blank=True, null=True)
     cantidad_antes = models.IntegerField(null=True, blank=True, default=None)
     cantidad_despues = models.IntegerField(null=True, blank=True, default=None)
@@ -200,7 +201,7 @@ class TratamientoMaterial(models.Model):
     class Meta:
         managed = True
         db_table = 'tratamiento_material'
-        unique_together = (('tratamiento_idtratamientno', 'material_idmaterial'),)
+        unique_together = (('tratamiento_idtratamientno', 'material_idmaterial'),)  
         
     def __str__(self):
         return f"{self.tratamiento_idtratamientno} {self.material_idmaterial} {self.cantidad_utilizada}"

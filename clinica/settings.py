@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-osgl=0apa^qu-#x%u%#l8fy1i=c&j1!72v%r6*$cpowya_nhm0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '172.20.10.4']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -86,9 +86,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  # Motor de base de datos para MySQL
         'NAME': 'clinica_dental',  # Nombre de la base de datos
         'USER': 'root',  # Usuario de la base de datos
-        'PASSWORD': 'ovalle82',  # Contraseña del usuario de la base de datos
+        'PASSWORD': 'root',  # Contraseña del usuario de la base de datos
         'HOST': 'localhost',  # Dirección del servidor de base de datos
-        'PORT': '3307',  # Puerto del servidor de base de datos
+        'PORT': '3306',  # Puerto del servidor de base de datos
     }
 }
 

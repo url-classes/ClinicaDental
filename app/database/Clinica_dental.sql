@@ -247,13 +247,14 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `clinica_dental`.`tratamiento_material`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `clinica_dental`.`tratamiento_material` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `Tratamiento_idTratamientno` INT(11) NOT NULL,
   `Material_idMaterial` INT(11) NOT NULL,
   `cantidad_utilizada` INT(11) NULL DEFAULT NULL,
   `cantidad_antes` INT NULL,
   `cantidad_despues` INT NULL,
   `fecha_transaccion` DATETIME NULL,
-  PRIMARY KEY (`Tratamiento_idTratamientno`, `Material_idMaterial`),
+  PRIMARY KEY (`id`),  -- Clave primaria basada en `id`
   INDEX `fk_Tratamiento_has_Material_Material1_idx` (`Material_idMaterial` ASC) VISIBLE,
   INDEX `fk_Tratamiento_has_Material_Tratamiento1_idx` (`Tratamiento_idTratamientno` ASC) VISIBLE,
   CONSTRAINT `fk_Tratamiento_has_Material_Material1`

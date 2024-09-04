@@ -1,48 +1,102 @@
-Numero de Transaccion: 6
+Numero de Transaccion: 1
+ID de transacci髇: 1
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-08-26
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 2
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-08-26
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 3
 Tipo de Transaccion: Agregar tratamiento material
 Estado: Exitosa
-Fecha de Transaccion: 2024-09-10
-
-----------------------------------------
-ID de transacci贸n: None
-N煤mero de transacci贸n: 6
-Tipo de transacci贸n: Agregar tratamiento material
-Estado: Exitosa
-Fecha de transacci贸n: 2024-09-02
-Cantidad antes del tratamiento: N/A
-Cantidad despu茅s del tratamiento: N/A
+Fecha de Transaccion: 2024-08-27
 --------------------------
-ID de transacci贸n: None
-N煤mero de transacci贸n: 6
-Tipo de transacci贸n: Agregar tratamiento material
-Estado: Exitosa
-Fecha de transacci贸n: 2024-09-02
-Cantidad antes del tratamiento: N/A
-Cantidad despu茅s del tratamiento: N/A
+Numero de Transaccion: 1
+ID de transacci髇: 4
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-08-27
 --------------------------
-Numero de Transaccion: 6
-ID de transacci贸n: 3
+Numero de Transaccion: 1
+ID de transacci髇: 5
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-08-26
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 6
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-08-27
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 7
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-08-27
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 8
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-08-28
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 9
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-08-28
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 10
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-08-27
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 11
 Tipo de Transaccion: Agregar tratamiento material
 Estado: Exitosa
 Fecha de Transaccion: 2024-09-04
-Cantidad antes del tratamiento: N/A
-Cantidad despu茅s del tratamiento: N/A
 --------------------------
-Numero de Transaccion: 6
-ID de transacci贸n: 4
+Numero de Transaccion: 1
+ID de transacci髇: 12
 Tipo de Transaccion: Agregar tratamiento material
-Estado: Fallida
-Fecha de Transaccion: 2024-09-05
+Estado: Exitosa
+Fecha de Transaccion: 2024-09-04
 --------------------------
-Numero de Transaccion: 6
-ID de transacci贸n: 5
-Tipo de Transaccion: Agregar tratamiento material
-Estado: Fallida
-Fecha de Transaccion: 2024-09-02
---------------------------
-Numero de Transaccion: 6
-ID de transacci贸n: 6
+Numero de Transaccion: 1
+ID de transacci髇: 13
 Tipo de Transaccion: Agregar tratamiento material
 Estado: Exitosa
 Fecha de Transaccion: 2024-09-03
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 14
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-09-03
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 15
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-09-03
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 16
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-09-04
+--------------------------
+Numero de Transaccion: 1
+ID de transacci髇: 17
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-09-05
 --------------------------

@@ -41,6 +41,7 @@ import subprocess
 import datetime
 import os
 from django.conf import settings
+import logging
 
 
 # Create your views here.
@@ -397,17 +398,18 @@ def agregar_tratamiento_material(request, idtratamientno):
         if form.is_valid():
             tratamiento = get_object_or_404(Tratamiento, pk=idtratamientno)
             fecha_transaccion = request.POST.get("fecha_transaccion")
-
+            logger = logging.getLogger(__name__)
             try:
                 with transaction.atomic():
+                    logger.error("Intentando insertar datos en la tabla TratamientoMaterial.")
                     for material in Material.objects.all():
                         material_seleccionado = form.cleaned_data.get(f'material_seleccionado_{material.idmaterial}', False)
                         cantidad_utilizada = form.cleaned_data.get(f'cantidad_{material.idmaterial}', 0)
 
                         if material_seleccionado and cantidad_utilizada > 0:
                             if material.cantidad < cantidad_utilizada:
-                                raise ValueError(f"No hay suficiente cantidad de material {material.nombre} disponible.")
-
+                                raise ValueError(f"No hay suficiente cantidad de material {material.descripcion} disponible.")
+                            
                             tratamiento_material, created = TratamientoMaterial.objects.get_or_create(
                                 tratamiento_idtratamientno=tratamiento, 
                                 material_idmaterial=material,  
@@ -429,17 +431,18 @@ def agregar_tratamiento_material(request, idtratamientno):
                             material.cantidad = tratamiento_material.cantidad_despues
                             material.save()
 
-                # Registrar en la bitácora
-                registrar_bitacora(
-                    numero_transaccion=tratamiento.idtratamientno,
-                    tipo_transaccion='Agregar tratamiento material',
-                    estado='Exitosa',
-                    fecha_transaccion=fecha_transaccion
-                )
+                    # Registrar en la bitácora como exitosa si no hubo excepción
+                    registrar_bitacora(
+                        numero_transaccion=tratamiento.idtratamientno,
+                        tipo_transaccion='Agregar tratamiento material',
+                        estado='Exitosa',
+                        fecha_transaccion=fecha_transaccion
+                    )
 
                 return redirect('ventas')
 
             except Exception as e:
+                # Registrar en la bitácora como fallida si hubo excepción
                 registrar_bitacora(
                     numero_transaccion=tratamiento.idtratamientno,
                     tipo_transaccion='Agregar tratamiento material',
@@ -451,10 +454,13 @@ def agregar_tratamiento_material(request, idtratamientno):
                     'error': 'Ocurrió un error al procesar el tratamiento y actualizar el inventario.',
                     'detalle_error': str(e),
                 }
+                logger.error(f"Transacción fallida: {str(e)}")
                 return render(request, 'layouts/error.html', context)
         
         else:
-            pass
+            # Manejar el caso donde el formulario no es válido
+            context = {'form': form, 'error': 'Formulario inválido. Por favor, revisa los datos ingresados.'}
+            return render(request, 'layouts/agregar_tratamiento_material.html', context)
 
     else:
         form = TratamientoMaterialForm()
@@ -619,7 +625,7 @@ def db_backup(request):
     password = "root"
     host = "localhost"
     database = "clinica_dental"
-    file_path = "E:backup_clinicadental.sql"
+    file_path = "D:backup_clinicadental.sql"
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 #    file_name = f"clinicadental_backup_{timestamp}.sql"
     command = f"mariadb-dump -h{host} -u{usr} -p{password} --add-drop-database -B {database} > {file_path}"
