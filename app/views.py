@@ -407,29 +407,26 @@ def agregar_tratamiento_material(request, idtratamientno):
                         cantidad_utilizada = form.cleaned_data.get(f'cantidad_{material.idmaterial}', 0)
 
                         if material_seleccionado and cantidad_utilizada > 0:
-                            if material.cantidad < cantidad_utilizada:
-                                raise ValueError(f"No hay suficiente cantidad de material {material.descripcion} disponible.")
-                            
-                            tratamiento_material, created = TratamientoMaterial.objects.get_or_create(
+                            tratamiento_material = TratamientoMaterial.objects.create(
                                 tratamiento_idtratamientno=tratamiento, 
                                 material_idmaterial=material,  
-                                defaults={
-                                    'cantidad_utilizada': cantidad_utilizada, 
-                                    'cantidad_antes': material.cantidad,
-                                    'cantidad_despues': material.cantidad - cantidad_utilizada, 
-                                    'fecha_transaccion': fecha_transaccion
-                                }
+                                cantidad_utilizada=cantidad_utilizada, 
+                                cantidad_antes=material.cantidad,
+                                cantidad_despues=material.cantidad - cantidad_utilizada, 
+                                fecha_transaccion=fecha_transaccion
                             )
 
-                            if not created:
-                                tratamiento_material.cantidad_utilizada = cantidad_utilizada
-                                tratamiento_material.cantidad_antes = material.cantidad
-                                tratamiento_material.cantidad_despues = material.cantidad - cantidad_utilizada
-                                tratamiento_material.fecha_transaccion = fecha_transaccion
-                                tratamiento_material.save()
 
-                            material.cantidad = tratamiento_material.cantidad_despues
-                            material.save()
+                            # if not created:
+                            #     pass
+                            #     tratamiento_material.cantidad_utilizada = cantidad_utilizada
+                            #     tratamiento_material.cantidad_antes = material.cantidad
+                            #     tratamiento_material.cantidad_despues = material.cantidad - cantidad_utilizada
+                            #     tratamiento_material.fecha_transaccion = fecha_transaccion
+                            #     tratamiento_material.save()
+
+                            # material.cantidad = tratamiento_material.cantidad_despues
+                            # material.save()
 
                     # Registrar en la bitácora como exitosa si no hubo excepción
                     registrar_bitacora(
@@ -442,6 +439,9 @@ def agregar_tratamiento_material(request, idtratamientno):
                 return redirect('ventas')
 
             except Exception as e:
+                if 'tratamiento_material' in locals():
+                    tratamiento_material.delete()
+                
                 # Registrar en la bitácora como fallida si hubo excepción
                 registrar_bitacora(
                     numero_transaccion=tratamiento.idtratamientno,

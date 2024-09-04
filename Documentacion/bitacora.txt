@@ -100,3 +100,45 @@ Tipo de Transaccion: Agregar tratamiento material
 Estado: Fallida
 Fecha de Transaccion: 2024-09-05
 --------------------------
+Numero de Transaccion: 1
+ID de transacción: 18
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-09-04
+--------------------------
+Numero de Transaccion: 1
+ID de transacción: 19
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-09-04
+--------------------------
+Numero de Transaccion: 1
+ID de transacción: 20
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-09-04
+--------------------------
+Numero de Transaccion: 1
+ID de transacción: 21
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-09-04
+--------------------------
+Numero de Transaccion: 1
+ID de transacción: 22
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-09-04
+--------------------------
+Numero de Transaccion: 1
+ID de transacción: 23
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2024-09-04
+--------------------------
+Numero de Transaccion: 1
+ID de transacción: 24
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2024-09-04
+--------------------------
