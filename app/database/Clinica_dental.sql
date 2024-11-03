@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`alergia` (
   `idAlergia` INT(11) NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idAlergia`))
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`paciente` (
   `numero_seguro` VARCHAR(45) NULL DEFAULT NULL,
   `ultima_visita` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`idPaciente`))
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`alergia_paciente` (
     REFERENCES `clinica_dental`.`paciente` (`idPaciente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`asistente` (
   `estado` TINYINT(1) NULL,
   `url` VARCHAR(100) NULL,
   PRIMARY KEY (`idAsistente`))
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`cita` (
     REFERENCES `clinica_dental`.`paciente` (`idPaciente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tipo_especialidad` (
   `idTipo_Especialidad` INT(11) NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idTipo_Especialidad`))
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`dentista` (
     REFERENCES `clinica_dental`.`tipo_especialidad` (`idTipo_Especialidad`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tratamiento` (
     REFERENCES `clinica_dental`.`cita` (`idCita`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`dentista_tratamiento` (
     REFERENCES `clinica_dental`.`tratamiento` (`idTratamientno`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`factura` (
     REFERENCES `clinica_dental`.`tratamiento` (`idTratamientno`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`material` (
   `precio_individual` FLOAT NULL DEFAULT NULL,
   `estado` TINYINT(1) NULL,
   PRIMARY KEY (`idMaterial`))
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -238,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tipo_usuario` (
   `descripcion` VARCHAR(45) NULL DEFAULT NULL,
   `permisos` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idTipo_Usuario`))
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`tratamiento_material` (
     REFERENCES `clinica_dental`.`tratamiento` (`idTratamientno`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`usuario` (
     REFERENCES `clinica_dental`.`tipo_usuario` (`idTipo_Usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = NDBCLUSTER
+ENGINE = InnoDB
 AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -544,10 +544,3 @@ INSERT INTO `clinica_dental`.`tipo_usuario` (`idTipo_Usuario`, `descripcion`, `p
 INSERT INTO `clinica_dental`.`tipo_usuario` (`idTipo_Usuario`, `descripcion`, `permisos`) VALUES (2, 'Asistente', 'inventario, ventas');
 
 COMMIT;
-
-
-
-
-
-
-
