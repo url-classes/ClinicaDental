@@ -88,7 +88,7 @@ DATABASES = {
         'USER': 'root',  # Usuario de la base de datos
         'PASSWORD': 'root',  # Contraseña del usuario de la base de datos
         'HOST': 'localhost',  # Dirección del servidor de base de datos
-        'PORT': '3306',  # Puerto del servidor de base de datos
+        'PORT': '3307',  # Puerto del servidor de base de datos
     }
 }
 

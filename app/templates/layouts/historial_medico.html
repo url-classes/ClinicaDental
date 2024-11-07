@@ -1,0 +1,55 @@
+{% block content %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial Medico</title>
+  <a href="{% url 'index' %}" class="back-btn">🏠</a>
+  <link rel="stylesheet" href="{% static 'css/stylePaciente.css' %}">
+</head>
+<body>
+  <header style="background-image: url('{% static 'img/banner4.jpeg' %}');">
+      <h1>Historial Medico Pacientes</h1>
+  </header>
+
+<body>
+  <button class="btn btn-sm btn-crear" onclick="location.href='/paciente/';">Agregar Paciente</button>
+  <button class="btn btn-sm btn-crear" onclick="location.href='/paciente/';">Modificar Paciente</button>
+  <button class="btn btn-sm btn-crear" onclick="location.href='/paciente/';">Eliminar Paciente</button>
+  <table>
+      <thead>
+          <tr>
+              <th>Id Paciente</th>
+              <th>Nombre</th>
+              <th>Fecha Nacimiento</th>
+              <th>Numero Telefonico</th>
+              <th>Correo Electronico</th>
+              <th>Estado Civil</th>
+              <th>Historial Medico</th>
+              <th>Alergias</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% comment %} {% for paciente in pacientes %}
+          <tr>
+              <td>{{ paciente.idpaciente }}</td>
+              <td>{{ paciente.nombre }}</td>
+              <td>{{ paciente.apellido }}</td>
+              <td>{{ paciente.numero_telefonico }}</td>
+              <td>{{ paciente.correo_electronico }}</td>
+              <td>{{ paciente.edad }}</td>
+              <td>{{ paciente.numero_seguro }}</td>
+              <td>{{ paciente.ultima_visita }}</td>
+              <td>
+                <a href="{% url 'actualizar_paciente' paciente.idpaciente %}" class="btn btn-sm btn-primary">Actualizar</a>
+                </td>
+          </tr>
+          {% endfor %} {% endcomment %}
+      </tbody>
+  </table>
+</body>
+</html>
+{% endblock %} 

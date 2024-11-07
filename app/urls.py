@@ -57,4 +57,6 @@ urlpatterns = [
     path('restore', views.db_restore, name="restore"),
     
     path('descargar_bitacora/', views.descargar_bitacora, name='descargar_bitacora'),
+    
+    path('historial_medico/', views.historial_medico, name='historial_medico'),
 ]
