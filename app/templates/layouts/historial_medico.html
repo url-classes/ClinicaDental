@@ -1,55 +1,65 @@
 {% block content %}
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Historial Medico</title>
+  <title>Historial Médico</title>
   <a href="{% url 'index' %}" class="back-btn">🏠</a>
   <link rel="stylesheet" href="{% static 'css/stylePaciente.css' %}">
 </head>
 <body>
   <header style="background-image: url('{% static 'img/banner4.jpeg' %}');">
-      <h1>Historial Medico Pacientes</h1>
+      <h1>Historial Médico Pacientes</h1>
   </header>
 
-<body>
-  <button class="btn btn-sm btn-crear" onclick="location.href='/paciente/';">Agregar Paciente</button>
-  <button class="btn btn-sm btn-crear" onclick="location.href='/paciente/';">Modificar Paciente</button>
-  <button class="btn btn-sm btn-crear" onclick="location.href='/paciente/';">Eliminar Paciente</button>
   <table>
       <thead>
           <tr>
-              <th>Id Paciente</th>
+              <th>ID Paciente</th>
               <th>Nombre</th>
               <th>Fecha Nacimiento</th>
-              <th>Numero Telefonico</th>
-              <th>Correo Electronico</th>
-              <th>Estado Civil</th>
-              <th>Historial Medico</th>
+              <th>Teléfono</th>
+              <th>Email</th>
+              <th>Edad</th>
+              <th>N° Seguro</th>
+              <th>Última Visita</th>
               <th>Alergias</th>
           </tr>
       </thead>
       <tbody>
-          {% comment %} {% for paciente in pacientes %}
-          <tr>
-              <td>{{ paciente.idpaciente }}</td>
-              <td>{{ paciente.nombre }}</td>
-              <td>{{ paciente.apellido }}</td>
-              <td>{{ paciente.numero_telefonico }}</td>
-              <td>{{ paciente.correo_electronico }}</td>
-              <td>{{ paciente.edad }}</td>
-              <td>{{ paciente.numero_seguro }}</td>
-              <td>{{ paciente.ultima_visita }}</td>
-              <td>
-                <a href="{% url 'actualizar_paciente' paciente.idpaciente %}" class="btn btn-sm btn-primary">Actualizar</a>
+        {% for paciente in pacientes %}
+            {% if paciente.ultima_visita %}  <!-- Solo muestra si tiene fecha -->
+            <tr>
+                <td>{{ paciente.idpaciente }}</td>
+                <td>{{ paciente.nombre }} {{ paciente.apellido }}</td>
+                <td>{{ paciente.fecha_nacimiento|date:"d/m/Y" }}</td>
+                <td>{{ paciente.numero_telefonico }}</td>
+                <td>{{ paciente.correo_electronico }}</td>
+                <td>{{ paciente.edad }}</td>
+                <td>{{ paciente.numero_seguro }}</td>
+                <td>{{ paciente.ultima_visita|date:"d/m/Y" }}</td>
+                <td>
+                    {% with alergias=paciente.alergiapaciente_set.all %}
+                        {% if alergias %}
+                            {% for alergia_paciente in alergias %}
+                                {{ alergia_paciente.alergia_idalergia.descripcion }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            Ninguna
+                        {% endif %}
+                    {% endwith %}
                 </td>
-          </tr>
-          {% endfor %} {% endcomment %}
-      </tbody>
+            </tr>
+            {% endif %}
+        {% empty %}
+            <tr>
+                <td colspan="10">No hay pacientes con historial médico (sin fecha de última visita)</td>
+            </tr>
+        {% endfor %}
+    </tbody>
   </table>
 </body>
 </html>
-{% endblock %} 
+{% endblock %}

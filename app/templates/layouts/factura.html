@@ -11,7 +11,7 @@
 <body>
     <form action="{% url 'enviar_factura_email' idtratamientno=idtratamientno %}" method="post">
         {% csrf_token %}
-        <button type="submit">Enviar Factura por Email</button>
+        
     </form>
     <div class="invoice">
         <div class="invoice-header">

@@ -142,3 +142,15 @@ Tipo de Transaccion: Agregar tratamiento material
 Estado: Exitosa
 Fecha de Transaccion: 2024-09-04
 --------------------------
+Numero de Transaccion: 1
+ID de transacción: 25
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Fallida
+Fecha de Transaccion: 2025-05-01
+--------------------------
+Numero de Transaccion: 1
+ID de transacción: 26
+Tipo de Transaccion: Agregar tratamiento material
+Estado: Exitosa
+Fecha de Transaccion: 2025-05-07
+--------------------------

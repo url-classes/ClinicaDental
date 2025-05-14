@@ -707,5 +707,9 @@ def registrar_bitacora(numero_transaccion, tipo_transaccion, estado, fecha_trans
     with open(archivo_bitacora, 'a') as file:
         file.write(nueva_entrada)
         
+
 def historial_medico(request):
-    return render(request, 'layouts/historial_medico.html')
+    pacientes = Paciente.objects.prefetch_related(
+        'alergiapaciente_set__alergia_idalergia'
+    ).all()
+    return render(request, 'layouts/historial_medico.html', {'pacientes': pacientes})
