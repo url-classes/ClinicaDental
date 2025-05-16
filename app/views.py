@@ -373,10 +373,15 @@ def actualizar_material(request, idmaterial):
 
 def buscar_material(request):
     if request.method == 'POST':
-        descripcion = request.POST.get('descripcion', '')
-        material = Material.objects.filter(descripcion=descripcion).first()
-        return render(request, 'layouts/resultado_busqueda.html', {'material': material})
-    return render(request, 'layouts/buscar_material.html')
+        busqueda = request.POST.get('busqueda', '')
+        # Buscar en descripcion, cantidad o precio
+        materiales = Material.objects.filter(
+            Q(descripcion__icontains=busqueda) | 
+            Q(cantidad__icontains=busqueda) |
+            Q(precio_individual__icontains=busqueda)
+        )
+        return render(request, 'layouts/inventario.html', {'materiales': materiales})
+    return redirect('index')
 
 def buscar_paciente(request):
     if request.method == 'POST':

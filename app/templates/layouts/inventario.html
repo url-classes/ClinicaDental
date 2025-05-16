@@ -16,12 +16,16 @@
     </header>
     <body>
         <div class="button-container">
-            <h1>¿Qué desear hacer?</h1>
             <div class="botones">
-                <button class="boton" onclick="location.href='buscar_material/';">Buscar por nombre</button>
-                <button class="boton" onclick="location.href='listaMateriales/';">Ver listado de Materiales</button>
                 <button class="boton" onclick="location.href='agregar_material/';">Agregar nuevo material</button>
             </div>    
+         <div class="search-container">
+    <form method="POST" action="{% url 'buscar_material' %}">
+      {% csrf_token %}
+      <input type="text" name="busqueda" placeholder="Buscar por descripcion, cantidad o precio">
+      <button type="submit" class="btn btn-buscar">Buscar</button>
+    </form>
+  </div>
         </div>
 
         <table>
@@ -32,6 +36,7 @@
                     <th>Serie o Modelo</th>
                     <th>Cantidad</th>
                     <th>Precio Individual</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +47,10 @@
                     <td>{{ material.serie_modelo }}</td>
                     <td>{{ material.cantidad }}</td>
                     <td>{{ material.precio_individual }}</td>
+                    <td>
+                        <a href="{% url 'actualizar_material' material.idmaterial %}" class="btn btn-sm btn-primary">Actualizar</a>
+                        <a href="{% url 'borrar_material' material.idmaterial %}" class="btn btn-sm btn-danger">Borrar</a>
+                    </td>
                 
                 </tr>
                 {% endfor %}
