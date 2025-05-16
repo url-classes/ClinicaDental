@@ -17,17 +17,27 @@
     <h1>Clinica de Especialidades la Paz</h1>
 </header>
 <body >
-    
     <nav>
         <ul class="menu-bar">
+            <!-- Módulos que se muestran siempre -->
             <li><a href="{% url 'pacientes' %}">Pacientes</a></li>
             <li><a href="{% url 'inventario' %}">Inventario</a></li>
             <li><a href="{% url 'ventas' %}">Ventas</a></li>
-            <li><a href="{% url 'recursosHumanos' %}">Recursos Humanos</a></li>
-            <li><a href="{% url 'financiero' %}">Financiero</a></li>
             <li><a href="{% url 'bussines' %}">Bussines Intelligence</a></li>
             <li><a href="{% url 'citas' %}">Citas</a></li>
             <li><a href="{% url 'historial_medico' %}">Historial Medico</a></li>
+            
+            <!-- Módulos condicionales -->
+            {% with permisos=request.user.tipo_usuario_idtipo_usuario.permisos.split %}
+                {% if 'recursos,' in permisos or user.is_superuser %}
+                <li><a href="{% url 'recursosHumanos' %}">Recursos Humanos</a></li>
+                {% endif %}
+                
+                {% if 'financiero' in permisos or user.is_superuser %}
+                <li><a href="{% url 'financiero' %}">Financiero</a></li>
+                {% endif %}
+            {% endwith %}
+            
             <li><a href="{% url 'signin' %}">Salir</a></li>
         </ul>
     </nav>
@@ -35,6 +45,7 @@
     <div class="container mt-5">
         <h2>Manejo de la clinica.</h2>
         <div class="card">
+            <!-- Tarjetas que se muestran siempre -->
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-users"></i> Pacientes Actuales</h5>
                 <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
@@ -47,7 +58,6 @@
                 <a href="{% url 'inventario' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-teeth"></i>Tratamientos.</h5>
                 <p class="card-text">Total de tratamientos: {{ tratamiento }}</p>
@@ -55,25 +65,31 @@
             </div>
 
             <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-users"></i> Recursos Humanos.</h5>
-                <p class="card-text">Dentistas laborando en la clinica: {{dentista}}.</p>
-                <p class="card-text">Asistentes laborando en la clinica: {{asistente}}.</p>
-                <a href="{% url 'recursosHumanos' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-money-bill-alt"></i>Financiero</h5>
-                <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
-                <a href="{% url 'financiero' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-business-time"></i>Bussines Inteligence</h5>
                 <p class="card-text">Bonificaciones. </p>
                 <a href="{% url 'financiero' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
             </div>
-        </div>
+            
+            <!-- Tarjetas condicionales -->
+            {% with permisos=request.user.tipo_usuario_idtipo_usuario.permisos.split %}
+                {% if 'recursos,' in permisos or user.is_superuser %}
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-users"></i> Recursos Humanos.</h5>
+                    <p class="card-text">Dentistas laborando en la clinica: {{dentista}}.</p>
+                    <p class="card-text">Asistentes laborando en la clinica: {{asistente}}.</p>
+                    <a href="{% url 'recursosHumanos' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+                {% endif %}
 
+                {% if 'financiero' in permisos or user.is_superuser %}
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-money-bill-alt"></i>Financiero</h5>
+                    <p class="card-text">Total de pacientes: {{ total_pacientes }}</p>
+                    <a href="{% url 'financiero' %}" class="btn btn-primary">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+                {% endif %}
+            {% endwith %}
+        </div>
     </div>
     {% if messages %}
         {% for m in messages %}
@@ -82,6 +98,8 @@
             </script>
         {% endfor %}
     {% endif %}
+
+    
 </body>
 </html>
 {% endblock %}
