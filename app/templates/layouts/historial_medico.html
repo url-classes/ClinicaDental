@@ -14,16 +14,23 @@
       <h1>Historial Médico Pacientes</h1>
   </header>
 
+  <div class="search-container">
+    <form method="POST" action="{% url 'buscar_historial_medico' %}">
+      {% csrf_token %}
+      <input type="text" name="busqueda" placeholder="Buscar por nombre, apellido, correo electronico, numero seguro, alergias">
+      <button type="submit" class="btn btn-buscar">Buscar</button>
+    </form>
+  </div>
+
   <table>
       <thead>
           <tr>
               <th>ID Paciente</th>
               <th>Nombre</th>
-              <th>Fecha Nacimiento</th>
               <th>Teléfono</th>
               <th>Email</th>
               <th>Edad</th>
-              <th>N° Seguro</th>
+              <th>Numero de Seguro</th>
               <th>Última Visita</th>
               <th>Alergias</th>
           </tr>
@@ -34,7 +41,6 @@
             <tr>
                 <td>{{ paciente.idpaciente }}</td>
                 <td>{{ paciente.nombre }} {{ paciente.apellido }}</td>
-                <td>{{ paciente.fecha_nacimiento|date:"d/m/Y" }}</td>
                 <td>{{ paciente.numero_telefonico }}</td>
                 <td>{{ paciente.correo_electronico }}</td>
                 <td>{{ paciente.edad }}</td>

@@ -16,6 +16,13 @@
   </header>
 
 <body>
+  <div class="search-container">
+    <form method="POST" action="{% url 'buscar_tratamiento' %}">
+      {% csrf_token %}
+      <input type="text" name="busqueda" placeholder="Buscar por detalle, precio o asistente">
+      <button type="submit" class="btn btn-buscar">Buscar</button>
+    </form>
+  </div>
   <button class="btn btn-sm btn-crear" onclick="location.href='/tratamiento/';">Crear Tratamiento</button>
   <table>
       <thead>

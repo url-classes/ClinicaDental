@@ -33,6 +33,13 @@
     </script>
     
     <h1>Listado de Citas</h1>
+    <div class="search-container">
+    <form method="POST" action="{% url 'buscar_cita' %}">
+      {% csrf_token %}
+      <input type="text" name="busqueda" placeholder="Buscar por fecha propuesta o paciente">
+      <button type="submit" class="btn btn-buscar">Buscar</button>
+    </form>
+  </div>
     <button class="boton" onclick="location.href='citas/agregar_citas/';">Agregar Citas</button>
     <table border="1">
         <thead>

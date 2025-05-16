@@ -87,3 +87,29 @@ tr:nth-child(even) {
     border-radius: 5px;
     margin-bottom: 30px;
 }
+
+.search-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    width: 60%;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+}
+
+.btn-buscar {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.btn-buscar:hover {
+    background-color: #45a049;
+}

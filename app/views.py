@@ -36,6 +36,8 @@ from django.core.serializers import serialize
 import json
 from django.db import transaction
 from django.utils import timezone
+from django.db.models import Q
+import datetime
 
 import subprocess
 import datetime
@@ -375,6 +377,104 @@ def buscar_material(request):
         material = Material.objects.filter(descripcion=descripcion).first()
         return render(request, 'layouts/resultado_busqueda.html', {'material': material})
     return render(request, 'layouts/buscar_material.html')
+
+def buscar_paciente(request):
+    if request.method == 'POST':
+        busqueda = request.POST.get('busqueda', '')
+        # Buscar en nombre, apellido o número de seguro
+        pacientes = Paciente.objects.filter(
+            Q(nombre__icontains=busqueda) | 
+            Q(apellido__icontains=busqueda) |
+            Q(numero_seguro__icontains=busqueda)
+        )
+        return render(request, 'layouts/pacientes.html', {'pacientes': pacientes})
+    return redirect('index')
+
+def buscar_tratamiento(request):
+    if request.method == 'POST':
+        busqueda = request.POST.get('busqueda', '').strip()
+        
+        # Buscar en detalle, precio o nombre del asistente (con JOIN)
+        tratamientos = Tratamiento.objects.select_related('asistente_idasistente').filter(
+            Q(detalle__icontains=busqueda) | 
+            Q(precio__icontains=busqueda) |
+            Q(asistente_idasistente__nombre__icontains=busqueda) |
+            Q(asistente_idasistente__apellido__icontains=busqueda)
+        ).distinct()
+        
+        return render(request, 'layouts/ventas.html', {'tratamientos': tratamientos})
+    
+    return redirect('index')
+
+def buscar_cita(request):
+    if request.method == 'POST':
+        busqueda = request.POST.get('busqueda', '').strip()
+        
+        # Inicializar condiciones de búsqueda
+        condiciones = Q()
+        
+        # Buscar por nombre/apellido del paciente
+        condiciones |= Q(paciente_idpaciente__nombre__icontains=busqueda)
+        condiciones |= Q(paciente_idpaciente__apellido__icontains=busqueda)
+        
+        # Intentar parsear como fecha
+        try:
+            fecha_busqueda = datetime.strptime(busqueda, '%Y-%m-%d').date()
+            condiciones |= Q(fecha_propuesta__date=fecha_busqueda)
+        except (ValueError, TypeError):
+            # Si no es fecha válida, buscar como cadena en fecha (por si acaso)
+            condiciones |= Q(fecha_propuesta__icontains=busqueda)
+        
+        # Realizar la consulta con select_related para optimizar
+        citas = Cita.objects.select_related('paciente_idpaciente')\
+                  .filter(condiciones)\
+                  .distinct()\
+                  .order_by('fecha_propuesta')
+        
+        return render(request, 'layouts/citas.html', {'citas': citas})
+    
+    return redirect('index')
+
+def buscar_historial_medico(request):
+    if request.method == 'POST':
+        busqueda = request.POST.get('busqueda', '').strip()
+        
+        condiciones = Q()
+        
+        # Campos básicos del paciente
+        campos_paciente = [
+            'nombre',
+            'apellido',
+            'correo_electronico',
+            'numero_seguro',
+            'numero_telefonico'
+        ]
+        
+        for campo in campos_paciente:
+            condiciones |= Q(**{f'{campo}__icontains': busqueda})
+        
+        # Búsqueda en alergias (usando la relación ManyToMany correctamente)
+        condiciones |= Q(alergiapaciente__alergia_idalergia__descripcion__icontains=busqueda)
+        
+        # Búsqueda por fecha
+        try:
+            fecha_busqueda = datetime.datetime.strptime(busqueda, '%Y-%m-%d').date()
+            condiciones |= Q(ultima_visita__date=fecha_busqueda)
+        except (ValueError, TypeError):
+            pass
+        
+        # Consulta optimizada
+        pacientes = Paciente.objects.prefetch_related('alergiapaciente_set__alergia_idalergia')\
+                      .filter(condiciones)\
+                      .distinct()\
+                      .order_by('apellido', 'nombre')
+        
+        return render(request, 'layouts/historial_medico.html', {
+            'pacientes': pacientes,
+            'termino_busqueda': busqueda
+        })
+    
+    return redirect('index')
 
 
 def lista_materiales(request):
